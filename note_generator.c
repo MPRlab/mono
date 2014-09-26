@@ -1,9 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
-#ifndef WIN32
 #include <unistd.h>
-#endif
 #include <math.h>
 #include <signal.h>
 #include <getopt.h>
@@ -31,22 +29,6 @@ static void signal_handler(int sig)
 	jack_client_close(client);
 	fprintf(stderr, "signal received, exiting ...\n");
 	exit(0);
-}
-
-static void
-usage ()
-{
-	fprintf (stderr, "\n"
-		"usage: jack_metro \n"
-		" [ --frequency OR -f frequency (in Hz) ]\n"
-		" [ --amplitude OR -A maximum amplitude (between 0 and 1) ]\n"
-		" [ --duration OR -D duration (in ms) ]\n"
-		" [ --attack OR -a attack (in percent of duration) ]\n"
-		" [ --decay OR -d decay (in percent of duration) ]\n"
-		" [ --name OR -n jack name for metronome client ]\n"
-		" [ --transport OR -t transport aware ]\n"
-		" --bpm OR -b beats per minute\n"
-		);
 }
 
 static void
@@ -104,22 +86,6 @@ main (int argc, char *argv[])
 	char *bpm_string = "bpm";
 	int verbose = 0;
 	jack_status_t status;
-	const char *options = "f:A:D:a:d:b:n:thv";
-	struct option long_options[] =
-	{
-		{"frequency", 1, 0, 'f'},
-		{"amplitude", 1, 0, 'A'},
-		{"duration", 1, 0, 'D'},
-		{"attack", 1, 0, 'a'},
-		{"decay", 1, 0, 'd'},
-		{"bpm", 1, 0, 'b'},
-		{"name", 1, 0, 'n'},
-		{"transport", 0, 0, 't'},
-		{"help", 0, 0, 'h'},
-		{"verbose", 0, 0, 'v'},
-		{0, 0, 0, 0}
-	};
-	while ((opt = getopt_long (argc, argv, options, long_options, &option_index)) != -1) {
 		switch (opt) {
 			case 'f':
 			if ((freq = atoi (optarg)) <= 0) {
@@ -176,15 +142,11 @@ main (int argc, char *argv[])
 			return -1;
 		}
 	}
-	if (!got_bpm) {
-		fprintf (stderr, "bpm not specified\n");
-		usage ();
-		return -1;
-	}
-/* Initial Jack setup, get sample rate */
+
+	/* Initial Jack setup, get sample rate */
 	if (!client_name) {
 		client_name = (char *) malloc (9 * sizeof (char));
-		strcpy (client_name, "metro");
+		strcpy (client_name, "generator");
 	}
 	if ((client = jack_client_open (client_name, JackNoStartServer, &status)) == 0) {
 		fprintf (stderr, "JACK server not running?\n");
@@ -193,7 +155,7 @@ main (int argc, char *argv[])
 	jack_set_process_callback (client, process, 0);
 	output_port = jack_port_register (client, bpm_string, JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);
 	sr = jack_get_sample_rate (client);
-/* setup wave table parameters */
+	/* setup wave table parameters */
 	wave_length = 60 * sr / bpm;
 	tone_length = sr * dur_arg / 1000;
 	attack_length = tone_length * attack_percent / 100;
@@ -229,25 +191,11 @@ main (int argc, char *argv[])
 			fprintf (stderr, "cannot activate client\n");
 			goto error;
 		}
-/* install a signal handler to properly quits jack client */
-#ifdef WIN32
-		signal(SIGINT, signal_handler);
-		signal(SIGABRT, signal_handler);
-		signal(SIGTERM, signal_handler);
-#else
 		signal(SIGQUIT, signal_handler);
 		signal(SIGTERM, signal_handler);
 		signal(SIGHUP, signal_handler);
 		signal(SIGINT, signal_handler);
-#endif
-/* run until interrupted */
-		while (1) {
-#ifdef WIN32
-			Sleep(1000);
-#else
-			sleep(1);
-#endif
-		};
+		sleep(-1);
 		jack_client_close(client);
 		error:
 		free(amp);
