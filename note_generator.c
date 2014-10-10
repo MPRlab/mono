@@ -16,7 +16,7 @@ jack_port_t *output_port;
 
 unsigned long sr;
 int freq = 880;
-int bpm;
+int bpm = 120;
 
 jack_nframes_t tone_length, wave_length;
 sample_t *wave;
@@ -24,15 +24,9 @@ long offset = 0;
 int transport_aware = 0;
 jack_transport_state_t transport_state;
 
-static void signal_handler(int sig)
-{
-	jack_client_close(client);
-	fprintf(stderr, "signal received, exiting ...\n");
-	exit(0);
-}
+static void signal_handler(int sig) {jack_client_close(client);exit(0);}
 
-static void
-process_silence (jack_nframes_t nframes)
+static void process_silence (jack_nframes_t nframes)
 {
 	sample_t *buffer = (sample_t *) jack_port_get_buffer (output_port, nframes);
 	memset (buffer, 0, sizeof (jack_default_audio_sample_t) * nframes);
@@ -41,8 +35,7 @@ process_silence (jack_nframes_t nframes)
 
 jack_nframes_t last_time;
 jack_time_t last_micro_time;
-static void
-process_audio (jack_nframes_t nframes)
+static void process_audio (jack_nframes_t nframes)
 {
 	sample_t *buffer = (sample_t *) jack_port_get_buffer (output_port, nframes);
 	jack_nframes_t frames_left = nframes;
@@ -57,8 +50,7 @@ process_audio (jack_nframes_t nframes)
 	}
 }
 
-static int
-process (jack_nframes_t nframes, void *arg)
+static int process (jack_nframes_t nframes, void *arg)
 {
 	if (transport_aware) {
 		jack_position_t pos;
@@ -71,8 +63,8 @@ process (jack_nframes_t nframes, void *arg)
 	process_audio (nframes);
 	return 0;
 }
-int
-main (int argc, char *argv[])
+
+int main (int argc, char *argv[])
 {
 	sample_t scale;
 	int i, attack_length, decay_length;

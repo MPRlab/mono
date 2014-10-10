@@ -1,0 +1,6 @@
+client: mpr_processing_client.c
+	gcc -o client mpr_processing_client.c -lpthread -ljack -lm
+	
+
+client_gen: metro.c
+	gcc -o client_gen metro.c -lpthread -ljack -lm
