@@ -11,18 +11,19 @@
 
 #define AMPLITUDE_CONSTANT 1024
 #define FREQUENCY_CONSTANT 0.07
-#define BUFFER_SIZE 1024
-#define ACF_SIZE 512
-#define SAMPLE_FREQUENCY 44100
+#define BUFFER_SIZE 2048
+#define ACF_SIZE 1024
+#define SAMPLE_FREQUENCY 96000
 
 long long acf_results[ACF_SIZE];
+long long buffer[BUFFER_SIZE];
 
 jack_port_t *input_port;
 jack_client_t *client;
 
 jack_default_audio_sample_t *in_buffer;
 jack_nframes_t buffer_index;
-jack_nframes_t buffer_size = 1024;
+jack_nframes_t buffer_size = 2048;
 
 int count = 0;
 long session_count = 0;
@@ -52,16 +53,6 @@ int acf(int lag) {
 	return sum;
 }
 
-// for (i = 0; i < ACF_SIZE; i++) {
-// 		acf_results[i] = acf(i);
-// }
-
-// while (count != -1) {
-// 	count = detect_peak(count+1, ACF_SIZE);
-// 	if (count != -1) {
-// 		printf("Peak at %d Corresponding Frequency: %d\n", count, get_freq_correct(count));
-// 	}
-// }
 
 //Called every time audio is available for processing
 int processAvailable (jack_nframes_t nframes, void *arg) {
@@ -71,13 +62,29 @@ int processAvailable (jack_nframes_t nframes, void *arg) {
 	in = jack_port_get_buffer (input_port, nframes);
 	for (k=0; k<nframes; k++) {
 		in_buffer[buffer_index] = in[k];
+		buffer[buffer_index] = (int)AMPLITUDE_CONSTANT*in[k];
 		if (in[k] != 0) {
+			// printf("%lld\n", buffer[buffer_index]);
 			count++;
 		}
 		buffer_index = (buffer_index + 1) % buffer_size;
 
-	}	
-	printf("Index: %ld Values over zero: %d\n", session_count, count);
+	}
+	int i;
+	int val_count = 0;
+
+	for (i = 0; i < ACF_SIZE; i++) {
+		acf_results[i] = acf(i);
+		// printf("%lld\n", acf_results[i]);
+	}
+	while (val_count != -1) {
+		val_count = detect_peak(val_count+1, ACF_SIZE);
+		if (val_count != -1) {
+			printf("Peak at %d Corresponding Frequency: %d\n", val_count, get_freq(val_count));
+		}
+	}
+	
+	// printf("Index: %ld Values over zero: %d Frames Processed: %d\n", session_count, count, nframes);
 	session_count += 1;
 	return 0;      
 }
