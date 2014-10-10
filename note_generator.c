@@ -9,6 +9,9 @@
 #include <jack/jack.h>
 #include <jack/transport.h>
 
+#define BPM 120 //number of notes per minute to generate
+#define DURATION 1000 //duration in ms
+
 typedef jack_default_audio_sample_t sample_t;
 const double PI = 3.14;
 jack_client_t *client;
@@ -16,7 +19,6 @@ jack_port_t *output_port;
 
 unsigned long sr;
 int freq = 880;
-int bpm;
 
 jack_nframes_t tone_length, wave_length;
 sample_t *wave;
@@ -86,62 +88,6 @@ main (int argc, char *argv[])
 	char *bpm_string = "bpm";
 	int verbose = 0;
 	jack_status_t status;
-		switch (opt) {
-			case 'f':
-			if ((freq = atoi (optarg)) <= 0) {
-				fprintf (stderr, "invalid frequency\n");
-				return -1;
-			}
-			break;
-			case 'A':
-			if (((max_amp = atof (optarg)) <= 0)|| (max_amp > 1)) {
-				fprintf (stderr, "invalid amplitude\n");
-				return -1;
-			}
-			break;
-			case 'D':
-			dur_arg = atoi (optarg);
-			fprintf (stderr, "durarg = %u\n", dur_arg);
-			break;
-			case 'a':
-			if (((attack_percent = atoi (optarg)) < 0) || (attack_percent > 100)) {
-				fprintf (stderr, "invalid attack percent\n");
-				return -1;
-			}
-			break;
-			case 'd':
-			if (((decay_percent = atoi (optarg)) < 0) || (decay_percent > 100)) {
-				fprintf (stderr, "invalid decay percent\n");
-				return -1;
-			}
-			break;
-			case 'b':
-			got_bpm = 1;
-			if ((bpm = atoi (optarg)) < 0) {
-				fprintf (stderr, "invalid bpm\n");
-				return -1;
-			}
-			bpm_string = (char *) malloc ((strlen (optarg) + 5) * sizeof (char));
-			strcpy (bpm_string, optarg);
-			strcat (bpm_string, "_bpm");
-			break;
-			case 'n':
-			client_name = (char *) malloc ((strlen (optarg) + 1) * sizeof (char));
-			strcpy (client_name, optarg);
-			break;
-			case 'v':
-			verbose = 1;
-			break;
-			case 't':
-			transport_aware = 1;
-			break;
-			default:
-			fprintf (stderr, "unknown option %c\n", opt);
-			case 'h':
-			usage ();
-			return -1;
-		}
-	}
 
 	/* Initial Jack setup, get sample rate */
 	if (!client_name) {
@@ -152,10 +98,11 @@ main (int argc, char *argv[])
 		fprintf (stderr, "JACK server not running?\n");
 		return 1;
 	}
+
 	jack_set_process_callback (client, process, 0);
 	output_port = jack_port_register (client, bpm_string, JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);
 	sr = jack_get_sample_rate (client);
-	/* setup wave table parameters */
+	
 	wave_length = 60 * sr / bpm;
 	tone_length = sr * dur_arg / 1000;
 	attack_length = tone_length * attack_percent / 100;
