@@ -1,0 +1,6 @@
+Peak at 90 Corresponding Frequency: 490
+Peak at 180 Corresponding Frequency: 245
+Peak at 270 Corresponding Frequency: 163
+Peak at 359 Corresponding Frequency: 122
+Peak at 449 Corresponding Frequency: 98
+Peak at 511 Corresponding Frequency: 86
