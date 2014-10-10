@@ -4,8 +4,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include <inttypes.h>
+#include <math.h>
+
 
 #include <jack/jack.h>
+
+#define AMPLITUDE_CONSTANT 1024
+#define FREQUENCY_CONSTANT 0.07
+#define BUFFER_SIZE 1024
+#define ACF_SIZE 512
+#define SAMPLE_FREQUENCY 44100
+
+long long acf_results[ACF_SIZE];
 
 jack_port_t *input_port;
 jack_client_t *client;
@@ -16,6 +26,43 @@ jack_nframes_t buffer_size = 1024;
 
 int count = 0;
 long session_count = 0;
+
+
+int detect_peak(int start, int end) {
+	int i;
+	for (i = start+1; i < end-1; i++ )
+	{
+		if (acf_results[i] > 0 && acf_results[i-1] < acf_results[i] && acf_results[i] > acf_results[i+1]) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+int get_freq(peak) {
+	return SAMPLE_FREQUENCY / peak;
+}
+
+int acf(int lag) {
+	int i;
+	long long sum = 0;
+	for (i = 0; i < BUFFER_SIZE/2; i ++) {
+		sum += buffer[i]*buffer[i+lag];
+	}
+	return sum;
+}
+
+// for (i = 0; i < ACF_SIZE; i++) {
+// 		acf_results[i] = acf(i);
+// }
+
+// while (count != -1) {
+// 	count = detect_peak(count+1, ACF_SIZE);
+// 	if (count != -1) {
+// 		printf("Peak at %d Corresponding Frequency: %d\n", count, get_freq_correct(count));
+// 	}
+// }
+
 //Called every time audio is available for processing
 int processAvailable (jack_nframes_t nframes, void *arg) {
 	jack_default_audio_sample_t *in;
