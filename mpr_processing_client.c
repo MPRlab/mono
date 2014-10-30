@@ -5,8 +5,7 @@
 #include <string.h>
 #include <inttypes.h>
 #include <math.h>
-
-
+#include <time.h>
 #include <jack/jack.h>
 
 #define AMPLITUDE_CONSTANT 1024
@@ -26,8 +25,8 @@ jack_nframes_t buffer_index;
 jack_nframes_t buffer_size = 2048;
 
 int count = 0;
-long session_count = 0;
 
+struct timespec start_time;
 
 int detect_peak(int start, int end) {
 	int i;
@@ -53,12 +52,13 @@ int acf(int lag) {
 	return sum;
 }
 
-
 //Called every time audio is available for processing
 int processAvailable (jack_nframes_t nframes, void *arg) {
 	jack_default_audio_sample_t *in;
+	static char onset_flag = 0x00;
 	int k;
-
+	int i;
+	
 	in = jack_port_get_buffer (input_port, nframes);
 	for (k=0; k<nframes; k++) {
 		in_buffer[buffer_index] = in[k];
@@ -70,22 +70,41 @@ int processAvailable (jack_nframes_t nframes, void *arg) {
 		buffer_index = (buffer_index + 1) % buffer_size;
 
 	}
-	int i;
-	int val_count = 0;
-
+	
 	for (i = 0; i < ACF_SIZE; i++) {
 		acf_results[i] = acf(i);
-		// printf("%lld\n", acf_results[i]);
 	}
-	while (val_count != -1) {
-		val_count = detect_peak(val_count+1, ACF_SIZE);
-		if (val_count != -1) {
-			printf("Peak at %d Corresponding Frequency: %d\n", val_count, get_freq(val_count));
+
+	int peak = detect_peak(1, ACF_SIZE);
+	int freq = 0;
+	
+	if (peak != -1) {
+		freq = get_freq(peak);
+	}
+
+	struct timespec result;
+
+	clock_gettime(CLOCK_REALTIME, &result);
+	time_t seconds = result.tv_sec - start_time.tv_sec;
+	long nano_seconds = result.tv_nsec - start_time.tv_nsec;
+	if (nano_seconds < 0) {
+		seconds--;
+		nano_seconds += 1000000000;
+	}
+	if (freq != 0) {
+		if (!onset_flag) {
+			onset_flag = 0x01;
+			printf("Frequency: %d began at time: %lld s %ld ns\n", freq, (long long) seconds, nano_seconds);
 		}
 	}
-	
-	// printf("Index: %ld Values over zero: %d Frames Processed: %d\n", session_count, count, nframes);
-	session_count += 1;
+
+	if (freq == 0) {
+		if (onset_flag) {
+			onset_flag = 0x00;
+			printf("Frequency: %d ended at time: %lld s %ld ns\n", freq, (long long) seconds, nano_seconds);
+		}
+	}
+
 	return 0;      
 }
 
@@ -101,6 +120,8 @@ int main (int argc, char *argv[]) {
 	if (in_buffer == NULL) { exit(1); }
 
 	memset(in_buffer, 0, buffer_size * sizeof(jack_default_audio_sample_t));
+
+	clock_gettime(CLOCK_REALTIME, &start_time);
 
 	client = jack_client_open (client_name, JackNoStartServer, &status);
 	
