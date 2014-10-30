@@ -1,7 +1,24 @@
-all: client client_gen
+all: audio_processing shared_memory message_passing
 
-client: mpr_processing_client.c
-	gcc -o client mpr_processing_client.c -lpthread -ljack -lm
+audio_processing: client client_gen
+
+shared_memory: parent child
+
+message_passing: server client_mp
+
+
+client: AudioAnalysis/mpr_processing_client.c
+	gcc -o analysis_ap AudioAnalysis/mpr_processing_client.c -lpthread -ljack -lm
 	
-client_gen: note_generator.c
-	gcc -o client_gen note_generator.c -lpthread -ljack -lm
+client_gen: AudioAnalysis/note_generator.c
+	gcc -o tone_gen_ap AudioAnalysis/note_generator.c -lpthread -ljack -lm
+
+parent: SharedMemoryTest/test1.cpp
+	g++ SharedMemoryTest/test1.cpp -o parent_sm -lpthread -lrt
+
+child: SharedMemoryTest/test2.cpp
+	g++ SharedMemoryTest/test2.cpp -o child_sm -lpthread -lrt
+
+server: 
+
+client:
