@@ -51,8 +51,8 @@ int main(int argc, char *argv[])
         perror("ERROR writing to socket");
         exit(1);
     }*/
-    int i;
-    for (i = 0; i < 20; i ++) {
+    
+    while (1) {
         bzero(buffer,256);
         n = read(sockfd,buffer,256);
     
@@ -60,8 +60,28 @@ int main(int argc, char *argv[])
             perror("ERROR reading from socket");
             exit(1);
         }
+        int freq = 0;
+        freq += buffer[0];
+        freq += buffer[1] << 8;
+
+        long long seconds = 0;
+        seconds += buffer[2];
+        seconds += buffer[3] << 8;
+        seconds += buffer[4] << 16;
+        seconds += buffer[5] << 24;
+        seconds += buffer[6] << 32;
+        seconds += buffer[7] << 40;
+        seconds += buffer[8] << 48;
+        seconds += buffer[9] << 56;
+
+        long nano_seconds = 0;
+        nano_seconds += buffer[10];
+        nano_seconds += buffer[11] << 8;
+        nano_seconds += buffer[12] << 16;
+        nano_seconds += buffer[13] << 24;
         
-        printf("%s",buffer);
+        printf("Frequency: %d began at time: %lld s %ld ns\n", freq, seconds, nano_seconds);
+
 
     }
     return 0;
