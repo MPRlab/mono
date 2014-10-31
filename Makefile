@@ -19,6 +19,8 @@ parent: SharedMemoryTest/test1.cpp
 child: SharedMemoryTest/test2.cpp
 	g++ SharedMemoryTest/test2.cpp -o child_sm -lpthread -lrt
 
-server: 
+server: MessagePassing/server.c 
+	gcc -o server_mp MessagePassing/server.c
 
-client:
+client_mp: MessagePassing/client.c
+	gcc -o client_mp MessagePassing/client.c
