@@ -66,19 +66,19 @@ int main(int argc, char *argv[])
 
         long long seconds = 0;
         seconds += buffer[2];
-        seconds += buffer[3] << 8;
-        seconds += buffer[4] << 16;
-        seconds += buffer[5] << 24;
-        seconds += buffer[6] << 32;
-        seconds += buffer[7] << 40;
-        seconds += buffer[8] << 48;
-        seconds += buffer[9] << 56;
+        seconds += ((long long) buffer[3]) << 8;
+        seconds += ((long long) buffer[4]) << 16;
+        seconds += ((long long) buffer[5]) << 24;
+        seconds += ((long long) buffer[6]) << 32;
+        seconds += ((long long) buffer[7]) << 40;
+        seconds += ((long long) buffer[8]) << 48;
+        seconds += ((long long) buffer[9]) << 56;
 
         long nano_seconds = 0;
         nano_seconds += buffer[10];
-        nano_seconds += buffer[11] << 8;
-        nano_seconds += buffer[12] << 16;
-        nano_seconds += buffer[13] << 24;
+        nano_seconds += ((long) buffer[11]) << 8;
+        nano_seconds += ((long) buffer[12]) << 16;
+        nano_seconds += ((long) buffer[13]) << 24;
         
         printf("Frequency: %d began at time: %lld s %ld ns\n", freq, seconds, nano_seconds);
 

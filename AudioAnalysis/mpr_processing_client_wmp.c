@@ -21,8 +21,8 @@
 #define IN_BUFFER_SIZE 256
 #define OUT_BUFFER_SIZE 256
 
-char * out_buffer[OUT_BUFFER_SIZE];
-char * in_buffer[IN_BUFFER_SIZE];
+char out_buffer[OUT_BUFFER_SIZE];
+char in_buffer_ipc[IN_BUFFER_SIZE];
 
 int server_socket_fd, client_socket_fd;
 
@@ -181,7 +181,7 @@ int main (int argc, char *argv[]) {
 	jack_status_t status;
 
 	if (argc != 2) {
-		prtinf("Must Specify Port Number!\n");
+		printf("Must Specify Port Number!\n");
 		exit(1);
 	}
 
@@ -215,7 +215,7 @@ int main (int argc, char *argv[]) {
 	sleep (-1); //run forever
 	jack_client_close (client); //if sleep causes a problem
 
-	shutdown(message_fd, SHUT_RDWR);
+	shutdown(client_socket_fd, SHUT_RDWR);
     shutdown(server_socket_fd, SHUT_RDWR);
    
 	exit (1);

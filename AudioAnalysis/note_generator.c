@@ -68,7 +68,7 @@ static int process (jack_nframes_t nframes, void *arg)
 
 int main (int argc, char *argv[])
 {
-	sample_t scale;
+	/*sample_t scale;
 	int i, attack_length, decay_length;
 	double *amp;
 	double max_amp = 0.5;
@@ -81,7 +81,7 @@ int main (int argc, char *argv[])
 	int verbose = 0;
 	jack_status_t status;
 
-	/* Initial Jack setup, get sample rate */
+	 Initial Jack setup, get sample rate 
 	if (!client_name) {
 		client_name = (char *) malloc (9 * sizeof (char));
 		strcpy (client_name, "generator");
@@ -108,7 +108,7 @@ int main (int argc, char *argv[])
 			fprintf (stderr, "invalid attack/decay\n");
 			return -1;
 		}
-/* Build the wave table */
+ Build the wave table 
 		wave = (sample_t *) malloc (wave_length * sizeof(sample_t));
 		amp = (double *) malloc (tone_length * sizeof(double));
 		for (i = 0; i < attack_length; i++) {
@@ -139,5 +139,5 @@ int main (int argc, char *argv[])
 		error:
 		free(amp);
 		free(wave);
-		exit (0);
+		exit (0);*/
 	}
