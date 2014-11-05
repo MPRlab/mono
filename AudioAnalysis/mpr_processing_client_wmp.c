@@ -21,8 +21,11 @@
 #define IN_BUFFER_SIZE 256
 #define OUT_BUFFER_SIZE 256
 
-char out_buffer[OUT_BUFFER_SIZE];
-char in_buffer_ipc[IN_BUFFER_SIZE];
+#define LONG_BMASK 0x00000000000000FF
+#define INT_BMASK  0x000000FF
+
+unsigned char out_buffer[OUT_BUFFER_SIZE];
+unsigned char in_buffer_ipc[IN_BUFFER_SIZE];
 
 int server_socket_fd, client_socket_fd;
 
@@ -142,21 +145,22 @@ int processAvailable (jack_nframes_t nframes, void *arg) {
 	if (freq != 0) {
 		if (!onset_flag) {
 			onset_flag = 0x01;
-			out_buffer[0] = freq;
-			out_buffer[1] = freq >> 8;
-			out_buffer[2] = (long long) seconds;
-			out_buffer[3] = (long long) seconds >> 8;
-			out_buffer[4] = (long long) seconds >> 16;
-			out_buffer[5] = (long long) seconds >> 24;
-			out_buffer[6] = (long long) seconds >> 32;
-			out_buffer[7] = (long long) seconds >> 40;
-			out_buffer[8] = (long long) seconds >> 48;
-			out_buffer[9] = (long long) seconds >> 56;
-			out_buffer[10] = nano_seconds;
-			out_buffer[11] = nano_seconds >> 8;
-			out_buffer[12] = nano_seconds >> 16;
-			out_buffer[13] = nano_seconds >> 24;
-			//printf("Frequency: %d began at time: %lld s %ld ns\n", freq, (long long) seconds, nano_seconds);
+			out_buffer[0] = (unsigned char) (freq & INT_BMASK);
+			out_buffer[1] = (unsigned char) ((freq >> 8) & INT_BMASK);
+			out_buffer[2] = (unsigned char) ((long) seconds & LONG_BMASK);
+			out_buffer[3] = (unsigned char) ((long) (seconds >> 8) & LONG_BMASK);
+			out_buffer[4] = (unsigned char) ((long) (seconds >> 16) & LONG_BMASK);
+			out_buffer[5] = (unsigned char) ((long) (seconds >> 24) & LONG_BMASK);
+			out_buffer[6] = (unsigned char) ((long) (seconds >> 32) & LONG_BMASK);
+			out_buffer[7] = (unsigned char) ((long) (seconds >> 40) & LONG_BMASK);
+			out_buffer[8] = (unsigned char) ((long) (seconds >> 48) & LONG_BMASK);
+			out_buffer[9] = (unsigned char) ((long) (seconds >> 56) & LONG_BMASK);
+	
+			out_buffer[10] = (unsigned char) (nano_seconds & LONG_BMASK);
+			out_buffer[11] = (unsigned char) ((nano_seconds >> 8) & LONG_BMASK);
+			out_buffer[12] = (unsigned char) ((nano_seconds >> 16) & LONG_BMASK);
+			out_buffer[13] = (unsigned char) ((nano_seconds >> 24) & LONG_BMASK);
+			printf("Frequency: %d began at time: %ld s %ld ns\n", freq, (long) seconds, nano_seconds);
 			write_message(out_buffer, client_socket_fd);
 		}
 	}
