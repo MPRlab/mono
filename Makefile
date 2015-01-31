@@ -27,4 +27,4 @@ client_mp: MessagePassing/client.c
 	gcc -o client_mp MessagePassing/client.c
 
 server_ap: AudioAnalysis/mpr_processing_client_wmp.c
-	gcc -o server_aa AudioAnalysis/mpr_processing_client_wmp.c -lpthread -ljack -lm
+	gcc -o server_ap AudioAnalysis/mpr_processing_client_wmp.c -lpthread -ljack -lm
