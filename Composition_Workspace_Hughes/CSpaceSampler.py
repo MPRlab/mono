@@ -24,6 +24,14 @@ class VoiceGenerator:
     def get_new_duration(self):
         pass
 
+    @abstractmethod
+    def get_duration_score(self, duration):
+        pass
+
+    @abstractmethod
+    def get_pitch_score(self, pitch):
+        pass
+
 
 class CSpaceSampler:
     """

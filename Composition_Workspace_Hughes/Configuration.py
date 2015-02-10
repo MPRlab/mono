@@ -23,3 +23,6 @@ class Configuration:
 
     def get_all_coordinates(self):
         return self.durations + self.voices
+
+    def get_voices(self):
+        return self.voices
