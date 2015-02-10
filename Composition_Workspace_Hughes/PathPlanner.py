@@ -1,13 +1,43 @@
 __author__ = 'nathan'
 
+import random
+
 
 class PathPlanner:
     """
     This class uses a weighted brownian motion to generate interesting paths between the start and stop of a phrase
     """
-    def __init__(self):
-        pass
+    def __init__(self, prm):
+        self.prm = prm
 
     def generate_path(self, start, end):
         path = []
+        neighbors = self.prm.neighbors(start)
+        vector = self._get_weighted_vector(neighbors)
+        to_explore = self._choose_neighbor(vector)
+        path.append(to_explore)
+        while to_explore != end:
+            neighbors = self.prm.neighbors(to_explore)
+            vector = self._get_weighted_vector(neighbors)
+            to_explore = self._choose_neighbor(vector)
+            path.append(to_explore)
         return path
+
+    @staticmethod
+    def _choose_neighbor(vector):
+        guess = random.random()
+        count = 0
+        for value in vector:
+            if guess < value:
+                return count
+            count += 1
+        return -1  # something would go really wrong if it got here
+
+    @staticmethod
+    def _get_weighted_vector(neighbors):
+        vector = []
+        step = 0
+        for i in range(0, len(neighbors)):
+            step += 1./len(neighbors)
+            vector.append(step)
+        return vector
