@@ -1,9 +1,9 @@
 __author__ = 'nathan'
 
-from CSpaceSampler import VoiceGenerator, CSpaceSampler
-from CollisionChecker import CollisionChecker
-from PathPlanner import PathPlanner
-from PathExporter import PathExporter
+from CSpaceLibrary.CollisionChecker import CollisionChecker
+from CSpaceLibrary.CSpaceSampler import VoiceGenerator, CSpaceSampler
+from CSpaceLibrary.PathPlanner import PathPlanner
+from CSpaceLibrary.PathExporter import PathExporter
 import random
 import numpy as np
 
@@ -25,7 +25,7 @@ class SimpleVoiceGenerator(VoiceGenerator):
     def get_pitch_score(self, pitch):
         distance = abs(self.pitch_mean - pitch)
         std_variations = distance / self.pitch_variance
-        return np.clip(1./std_variations, 0, 1)
+        return np.clip(1 - std_variations, 0, 1)
 
     def get_new_duration(self):
         return np.clip(int(random.normalvariate(self.duration_mean, self.duration_variance)), self.min_pitch,
@@ -34,7 +34,7 @@ class SimpleVoiceGenerator(VoiceGenerator):
     def get_duration_score(self, duration):
         distance = abs(self.duration_mean - duration)
         std_variations = distance / self.duration_variance
-        return np.clip(1./std_variations, 0, 1)
+        return np.clip(1 - std_variations, 0, 1)
 
     def get_new_pitch(self):
         return np.clip(int(random.normalvariate(self.pitch_mean, self.pitch_variance)), self.min_duration,
@@ -51,6 +51,7 @@ collision_checker = CollisionChecker(generators, [0.5, 0.5], 0.5)
 roadmap_builder = CSpaceSampler(generators, collision_checker)
 prm = roadmap_builder.build_prm(10, 100)
 planner = PathPlanner(prm)
-path = planner.generate_path(prm.nodes(random.randrange(len(prm))), prm.nodes(random.randrange(len(prm))))
+print prm.nodes()
+path = planner.generate_path(random.choice(prm.nodes()), random.choice(prm.nodes()))
 exporter = PathExporter()
 exporter.export_path(path, "testing.org")

@@ -1,7 +1,6 @@
 __author__ = 'nathan'
 
-from CSpaceSampler import VoiceGenerator
-from Configuration import Configuration
+from .Configuration import Configuration
 import numpy as np
 import random
 
@@ -10,9 +9,6 @@ import random
 class PitchChecker:
 
     def __init__(self, generators):
-        for generator in generators:
-            if not isinstance(generator, VoiceGenerator):
-                raise ValueError("Not a valid generator")
         self.generators = generators
 
     @staticmethod
@@ -24,7 +20,7 @@ class PitchChecker:
         return 0.
 
     def check_pitch(self, configuration):
-        pitches = configuration.get_pitch()
+        pitches = configuration.pitches
         pitch_score = 0
         for i in range(0, len(pitches)):
             pitch_score += self.check_inside_range(pitches[i], self.generators[i])
@@ -37,9 +33,6 @@ class PitchChecker:
 class DurationChecker:
 
     def __init__(self, generators):
-        for generator in generators:
-            if not isinstance(generator, VoiceGenerator):
-                raise ValueError("Not a valid generator")
         self.generators = generators
 
     @staticmethod
@@ -55,13 +48,13 @@ class DurationChecker:
         return variance
 
     def check_duration(self, configuration):
-        durations = configuration.get_duration()
+        durations = configuration.durations
         duration_score = 0
         for i in range(0, len(durations)):
             duration_score += self.check_inside_range(durations[i], self.generators[i])
-        durations /= float(len(durations))
-        durations += self.check_variance(durations)
-        return np.clip(durations, 0, 1)
+        duration_score /= float(len(durations))
+        duration_score += self.check_variance(durations)
+        return np.clip(duration_score, 0, 1)
 
 
 class CollisionChecker:

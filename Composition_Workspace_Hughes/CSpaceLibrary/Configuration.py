@@ -22,6 +22,8 @@ class Configuration:
         return self.durations[voice]
 
     def get_all_coordinates(self):
+        print self.durations
+        print self.voices
         return self.durations + self.voices
 
     def get_voices(self):

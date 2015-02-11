@@ -1,9 +1,8 @@
 __author__ = 'nathan'
 
 import networkx as nx
-from Configuration import Configuration
-from CollisionChecker import CollisionChecker
 from abc import ABCMeta, abstractmethod
+from .Configuration import Configuration
 
 
 class VoiceGenerator:
@@ -43,9 +42,6 @@ class CSpaceSampler:
             if not isinstance(generator, VoiceGenerator):
                 raise ValueError("Not a valid voice generator")
         self.collision_checker = collision_checker
-        if not isinstance(collision_checker, CollisionChecker):
-            raise ValueError("Not a valid Collision Checker")
-        pass
 
     def _make_new_configuration(self):
         pitches = []
@@ -61,8 +57,10 @@ class CSpaceSampler:
             sample_configuration = self._make_new_configuration()
             while not self.collision_checker.is_valid(sample_configuration):
                 sample_configuration = self._make_new_configuration()
+            prm.add_node(sample_configuration)
             for node in prm.nodes():
-                if (self.collision_checker.distance(node, sample_configuration) < radius and
-                        self.collision_checker.path(sample_configuration, node)):
-                    prm.add_edge(sample_configuration, node)
+                if node != sample_configuration:
+                    if (self.collision_checker.distance(node, sample_configuration) < radius and
+                            self.collision_checker.path(sample_configuration, node)):
+                        prm.add_edge(sample_configuration, node)
         return prm
