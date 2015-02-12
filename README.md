@@ -55,3 +55,6 @@ Languages: C, C++, Python
 Dependencies: Jackd (audio analysis), boost (everything), ipython and numpy and scipy (some experimental audio analysis)
 
 The dependencies is not an exhaustive list.  If a program doesn't run, it's probably missing a dependency.
+=======
+# MPR-lab
+
