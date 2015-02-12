@@ -1,6 +1,8 @@
 MPR_WORKSPACE
 =============
 
+This repository, for the most part, is licensed under GPL V3.0.  This includes any code inside ipython notebooks.  A copy of the GPL V3.0 is available in the file license.txt
+
 This repository is intended to store all code development for the Music Perception and Robotics Lab at WPI.
 
 Currently, it is divided into several different directories:
