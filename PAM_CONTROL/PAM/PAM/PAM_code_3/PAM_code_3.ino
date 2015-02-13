@@ -1,0 +1,184 @@
+//created by Scott Barton May 29-30 2013
+
+#include <Shifter.h>
+#include <MIDI.h>
+#include <StepperDriver.h>
+#include <SoftwareSerial.h>
+
+#define SER_Pin 2 //SER_IN
+#define RCLK_Pin 4 //L_CLOCK
+#define SRCLK_Pin 3 //CLOCK
+#define NUM_REGISTERS 3 //how many registers are in the chain
+
+SoftwareSerial mySerial(6, 7);
+
+const int debugPin = 14;
+const int openString = 73;
+int tangentMapping[] = {0, 1, 2, 3, 4, 5, 6, 7, 15, 14, 13, 12, 11, 10, 9, 8, 16, 17, 18, 19, 20, 21, 22, 23};
+int PAM_channel = 1; //MIDI channel for PAM
+int PAM_picker = 17; //control change number to turn the picker on and off
+int PAM_damper = 14; //control change number to turn the damper on and off
+boolean PAM_picker_on = false;
+const int stepsPerRevolution = 200; // change this to fit the number of steps per revolution for your motor
+int stepperStatus = 1;
+int pickerStepPin = 17;
+int pickerDirectionPin = 19;
+
+
+//initaize shifter using the Shifter library
+Shifter shifter(SER_Pin, RCLK_Pin, SRCLK_Pin, NUM_REGISTERS); 
+StepperDriver stepper; //initialize for one stepper
+
+
+void setup(){
+  pinMode(debugPin, OUTPUT);
+  MIDI.begin(PAM_channel);
+  MIDI.setHandleNoteOn(handle_NoteOn);
+  MIDI.setHandleNoteOff(handle_NoteOff);
+  MIDI.setHandleControlChange(handle_ControlChange); 
+  stepper.setStep(stepsPerRevolution, 8, 7);
+  stepper.setSpeed(190);
+  stepper.step(50);
+  shifter.clear(); //set all pins on the shift register chain to LOW
+  shifter.write(); //send changes to the chain and display them
+  
+  pinMode(6, INPUT);
+  pinMode(7, OUTPUT);
+  mySerial.begin(9600);
+  pinMode(14, OUTPUT);
+  pinMode(15, OUTPUT);
+}
+
+void stepperDirection(){
+  //shifter.setPin(pickerDirectionPin, 0);
+  //shifter.write();
+}
+
+void tangentOnOff (byte tangentNum, byte tangentVelocity) {
+  if (tangentNum >= 0 && tangentNum < 16 && tangentVelocity > 0) {
+    shifter.setPin(tangentMapping[prevTan], LOW);
+    shifter.write();
+    shifter.setPin(tangentMapping[tangentNum], HIGH);
+    shifter.write();
+    prevTan = tangentNum;
+  }
+  if (tangentVelocity == 0) {
+    shifter.setPin(tangentMapping[tangentNum], LOW);
+    shifter.write();
+  }
+  if (tangentNum == 17 && tangentVelocity > 0) {
+    shifter.setPin(tangentMapping[tangentNum], HIGH);
+    shifter.write();
+  }
+  if (tangentNum < 0 || tangentNum > 23) {
+    for (int i = 0; i < 22; i++) {
+      shifter.setPin(i, LOW);
+      shifter.write();
+    }
+  }
+}
+
+
+void handle_NoteOn (byte channel, byte note, byte velocity) {
+  int tangentOn = note - openString;
+  if (tangentOn >= 0 && tangentOn < 16 && velocity > 0) {
+    shifter.setPin(tangentMapping[tangentOn], HIGH);
+    shifter.write();
+    if (PAM_picker_on == true) {
+      stepperStatus = 1;  
+    }
+    else {
+      stepperStatus = 0;
+    }
+  }
+  if (tangentOn == 18) { //turn the picker on with a NoteOn message
+    stepperStatus = 1;
+  }
+  if (tangentOn == 17 && velocity > 0) {  //turn the damper on with a NoteOn message
+    shifter.setPin(17, HIGH);
+    shifter.write();
+  }
+  if (velocity == 0) {
+    shifter.setPin(tangentMapping[tangentOn], LOW);
+    shifter.write();
+  }
+}
+
+void handle_NoteOff (byte channel, byte note, byte velocity) {
+  int tangentOff = note - openString;
+  if (tangentOff >= 0 && tangentOff < 18) { 
+  shifter.setPin(tangentMapping[tangentOff], LOW);
+  shifter.write();
+  }
+}
+  
+void handle_ControlChange (byte channel, byte number, byte value) {
+  if (number == PAM_picker && value == 127) {
+    PAM_picker_on = true;
+  }
+  if (number == PAM_picker && value == 0) {
+    PAM_picker_on = false;
+  }
+  if (number == PAM_damper && value == 127) {
+    shifter.setPin(17, HIGH);
+    shifter.write();
+  }
+  if (number = PAM_damper && value == 0) {
+    shifter.setPin(17, LOW);
+    shifter.write();
+  }
+  if (number == 110 && value == 0) {
+    for (int i=0; i < 24; i++) {
+      shifter.setPin(i, LOW);
+      shifter.write();
+    }
+  }   
+}
+
+void readSerial() {
+  /*
+  //Test Protocol
+  if (mySerial.available() > 0) {
+    byte input = mySerial.read();
+    
+    byte noteNumber = input >> 1;
+    byte MIDINoteNumber = byte(noteNumber + 72);
+    
+    bool noteOn = false;
+    if ((input & 0x01) == 1 ) {
+      noteOn = true;
+    }
+    
+    if (noteOn) {
+      handle_NoteOn(0x01, MIDINoteNumber, byte(127));
+      
+      mySerial.print("Turning note ");
+      mySerial.print(noteNumber);
+      mySerial.printls(" on.");
+    } else {
+      handle_NoteOff (0x01, MIDINoteNumber, byte(127));
+      
+      mySerial.print("Turning note ");
+      mySerial.print(noteNumber);
+      mySerial.printls(" off.");
+    }
+  }*/
+  
+  //Two-Byte Protocol
+  if(Serial.available() > 1) {
+    tangentNum = Serial.read();
+    tangentVelocity = Serial.read();
+    tangentOnOff(tangentNum, tangentVelocity);
+  }
+}
+
+void loop() {
+  MIDI.read();
+  readSerial();
+  /*
+  if (stepperStatus == 1 && stepper.update() == 1) {
+    stepper.step(50);
+    stepperStatus = 0;
+  }
+  */
+}
