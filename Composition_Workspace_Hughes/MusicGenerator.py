@@ -1,8 +1,8 @@
 """
-	Copyright Nathan Hughes 2015
+    Copyright Nathan Hughes 2015
 
-    This file is part of code developed for the Music Perception and Robotics 
-	Labrotory at Worcester Polytechnic Institute.
+    This file is part of code developed for the Music Perception and Robotics
+    Labratory at Worcester Polytechnic Institute.
 
     This file is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -48,8 +48,8 @@ class SimpleVoiceGenerator(VoiceGenerator):
         return np.clip(1 - std_variations, 0, 1)
 
     def get_new_duration(self):
-        return np.clip(int(random.normalvariate(self.duration_mean, self.duration_variance)), self.min_pitch,
-                       self.max_pitch)
+        return np.clip(int(random.normalvariate(self.duration_mean, self.duration_variance)), self.min_duration,
+                       self.max_duration)
 
     def get_duration_score(self, duration):
         distance = abs(self.duration_mean - duration)
@@ -57,8 +57,8 @@ class SimpleVoiceGenerator(VoiceGenerator):
         return np.clip(1 - std_variations, 0, 1)
 
     def get_new_pitch(self):
-        return np.clip(int(random.normalvariate(self.pitch_mean, self.pitch_variance)), self.min_duration,
-                       self.max_duration)
+        return np.clip(int(random.normalvariate(self.pitch_mean, self.pitch_variance)), self.min_pitch,
+                       self.max_pitch)
 
 
 """
@@ -67,11 +67,11 @@ Main file to generate a composition
 voice1_generator = SimpleVoiceGenerator(40, 8, 4, 2, 0, 61, 1, 16)
 voice2_generator = SimpleVoiceGenerator(25, 15, 8, 2, 0, 61, 1, 16)
 generators = [voice1_generator, voice2_generator]
-collision_checker = CollisionChecker(generators, [0.5, 0.5], 0.5)
+collision_checker = CollisionChecker(generators, [1, 1], 1)
 roadmap_builder = CSpaceSampler(generators, collision_checker)
-prm = roadmap_builder.build_prm(10, 100)
+prm = roadmap_builder.build_prm(1000, 2)
+
 planner = PathPlanner(prm)
-print prm.nodes()
 path = planner.generate_path(random.choice(prm.nodes()), random.choice(prm.nodes()))
 exporter = PathExporter()
 exporter.export_path(path, "testing.org")

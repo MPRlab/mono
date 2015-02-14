@@ -1,5 +1,5 @@
 """
-	Copyright Nathan Hughes 2015
+    Copyright Nathan Hughes 2015
 
     This file is part of code developed for the Music Perception and Robotics 
 	Labrotory at Worcester Polytechnic Institute.
@@ -18,8 +18,6 @@
     somewhere in this repository.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-
-
 __author__ = 'nathan'
 
 import random
@@ -36,12 +34,18 @@ class PathPlanner:
         path = []
         neighbors = self.prm.neighbors(start)
         vector = self._get_weighted_vector(neighbors)
-        to_explore = self._choose_neighbor(vector)
+        to_explore_index = self._choose_neighbor(vector)
+        if to_explore_index == -1:
+            raise ValueError("Isolated Node!")
+        to_explore = neighbors[to_explore_index]
         path.append(to_explore)
         while to_explore != end:
             neighbors = self.prm.neighbors(to_explore)
             vector = self._get_weighted_vector(neighbors)
-            to_explore = self._choose_neighbor(vector)
+            to_explore_index = self._choose_neighbor(vector)
+            if to_explore == -1:
+                raise ValueError("Isolated Node!")
+            to_explore = neighbors[to_explore_index]
             path.append(to_explore)
         return path
 
