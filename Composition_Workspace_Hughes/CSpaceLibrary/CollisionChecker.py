@@ -1,5 +1,5 @@
 """
-	Copyright Nathan Hughes 2015
+    Copyright Nathan Hughes 2015
 
     This file is part of code developed for the Music Perception and Robotics 
 	Labrotory at Worcester Polytechnic Institute.
@@ -17,7 +17,6 @@
     You should have received a copy of the GNU General Public License
     somewhere in this repository.  If not, see <http://www.gnu.org/licenses/>.
 """
-
 
 
 __author__ = 'nathan'
@@ -48,6 +47,7 @@ class PitchChecker:
             pitch_score += self.check_inside_range(pitches[i], self.generators[i])
         pitch_score /= float(len(pitches))
         pitch_score += self.check_harmonics(pitches)
+        print "\tPitch Score:", pitch_score
         return np.clip(pitch_score, 0, 1)
 
 
@@ -76,6 +76,7 @@ class DurationChecker:
             duration_score += self.check_inside_range(durations[i], self.generators[i])
         duration_score /= float(len(durations))
         duration_score += self.check_variance(durations)
+        print "\tDuration Score:", duration_score
         return np.clip(duration_score, 0, 1)
 
 
@@ -99,7 +100,9 @@ class CollisionChecker:
         score += self.weights[1] * self.duration_checker.check_duration(q)
         score = np.clip(score, 0, 1)
         guess = random.random()
-        if score < guess:
+        print "\t" + "-"*40
+        print "\tTotal Score:", score, " Probability:", guess
+        if guess > score:
             return False
         else:
             return True
@@ -110,7 +113,7 @@ class CollisionChecker:
         coordinates2 = q2.get_all_coordinates()
         distance_sum = 0.
         for i in range(0, len(coordinates1)):
-            distance_sum += (coordinates1 + coordinates2)**2
+            distance_sum += (coordinates1[i] + coordinates2[i])**2
         return distance_sum**0.5
 
     def path(self, q1, q2):
@@ -121,13 +124,30 @@ class CollisionChecker:
         vector = end - start
         unit_vector = vector / distance
         distance_to_check = self.tolerance
+        print "*"*80
+        print "Starting Collision Checking: "
+        print "\tStart:", q1
+        print "\tEnd:", q2
+        print ""
+        print "Number of steps to check: ", steps
+        print ""
+
         for i in range(steps):
             coordinates_to_check = start + unit_vector * distance_to_check
             configuration_to_check = Configuration(q1.get_voices(),
                                                    coordinates_to_check[:q1.get_voices()],
                                                    coordinates_to_check[q1.get_voices():])
+            print "Step", str(i) + ")", configuration_to_check
             if not self.is_valid(configuration_to_check):
+                print ""
+                print "Ending Collision Checking"
+                print "Status: Failed"
+                print "*"*80
                 return False
             distance_to_check += self.tolerance
+        print ""
+        print "Ending Collision Checking"
+        print "Status: Succeeded"
+        print "*"*80
         return True
 
