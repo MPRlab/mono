@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-# CS4341 Project 4 
 # Main file
-# By Paulo Carvalho and Alex Bennett
+# By Paulo Carvalho 
 
 from Parser import Parser
 from World import World
