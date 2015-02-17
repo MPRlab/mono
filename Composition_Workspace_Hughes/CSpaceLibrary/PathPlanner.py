@@ -2,7 +2,7 @@
     Copyright Nathan Hughes 2015
 
     This file is part of code developed for the Music Perception and Robotics 
-	Labrotory at Worcester Polytechnic Institute.
+    Laboratory at Worcester Polytechnic Institute.
 
     This file is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

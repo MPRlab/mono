@@ -2,7 +2,7 @@
     Copyright Nathan Hughes 2015
 
     This file is part of code developed for the Music Perception and Robotics 
-	Labrotory at Worcester Polytechnic Institute.
+    Laboratory at Worcester Polytechnic Institute.
 
     This file is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,78 +26,6 @@ import numpy as np
 import random
 
 
-# TODO Figure out mapping between harmonics and score, and harmonic rules
-class PitchChecker:
-
-    def __init__(self, generators):
-        self.generators = generators
-        self.verbose = False
-
-    @staticmethod
-    def check_inside_range(pitch, generator):
-        return generator.get_pitch_score(pitch)
-
-    @staticmethod
-    def check_harmonics(pitches):
-        return 0.
-
-    def check_pitch(self, configuration):
-        pitches = configuration.pitches
-        pitch_score = 0
-        for i in range(0, len(pitches)):
-            pitch_score += self.check_inside_range(pitches[i], self.generators[i])
-        pitch_score /= float(len(pitches))
-        pitch_score += self.check_harmonics(pitches)
-        if self.verbose:
-            print "\tPitch Score:", pitch_score
-        return np.clip(pitch_score, 0, 1)
-
-    def enable_verbose(self):
-        self.verbose = True
-
-    def disable_verbose(self):
-        self.verbose = False
-
-
-
-
-# TODO Figure out the mapping from variance to score
-class DurationChecker:
-
-    def __init__(self, generators):
-        self.generators = generators
-        self.verbose = False
-
-    @staticmethod
-    def check_inside_range(duration, generator):
-        return generator.get_duration_score(duration)
-
-    def check_variance(self, durations):
-        variance = np.var(durations)
-        return self.variance_mapping(variance)
-
-    @staticmethod
-    def variance_mapping(variance):
-        return variance
-
-    def check_duration(self, configuration):
-        durations = configuration.durations
-        duration_score = 0
-        for i in range(0, len(durations)):
-            duration_score += self.check_inside_range(durations[i], self.generators[i])
-        duration_score /= float(len(durations))
-        duration_score += self.check_variance(durations)
-        if self.verbose:
-            print "\tDuration Score:", duration_score
-        return np.clip(duration_score, 0, 1)
-
-    def enable_verbose(self):
-        self.verbose = True
-
-    def disable_verbose(self):
-        self.verbose = False
-
-
 class CollisionChecker:
     """
     This class defines the configuration space of the composition by creating a probabilistic model for whether a
@@ -106,9 +34,9 @@ class CollisionChecker:
     between voices, whether a pitch fits within the key of the voice, and whether the duration fits within the assumed
     duration of the given voice.
     """
-    def __init__(self, generators, weights, tolerance):
-        self.duration_checker = DurationChecker(generators)
-        self.pitch_checker = PitchChecker(generators)
+    def __init__(self, pitch_checker, duration_checker, weights, tolerance):
+        self.pitch_checker = pitch_checker
+        self.duration_checker = duration_checker
         self.weights = weights
         self.tolerance = tolerance
         self.verbose = False
@@ -180,4 +108,3 @@ class CollisionChecker:
 
     def disable_verbose(self):
         self.verbose = False
-
