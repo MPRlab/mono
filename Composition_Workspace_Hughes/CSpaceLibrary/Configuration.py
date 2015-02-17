@@ -49,10 +49,12 @@ class Configuration:
         return self.voices
 
     def __repr__(self):
-        return "Voices: " + str(self.voices) + " Notes: " + str(self.pitches) + " Durations: " + str(self.durations)
+        return "Voices: " + str(self.voices) + " Notes: " + str(self.pitches) + " Durations: " + str(self.durations)\
+               + "\n"
 
     def __str__(self):
-        return "Voices: " + str(self.voices) + " Notes: " + str(self.pitches) + " Durations: " + str(self.durations)
+        return "Voices: " + str(self.voices) + " Notes: " + str(self.pitches) + " Durations: " + str(self.durations)\
+               + "\n"
 
     def __eq__(self, other):
         if isinstance(other, Configuration):

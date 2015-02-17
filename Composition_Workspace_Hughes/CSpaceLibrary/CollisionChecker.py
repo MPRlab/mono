@@ -57,50 +57,51 @@ class CollisionChecker:
 
     @staticmethod
     def distance(q1, q2):
-        coordinates1 = q1.get_all_coordinates()
-        coordinates2 = q2.get_all_coordinates()
-        distance_sum = 0.
-        for i in range(0, len(coordinates1)):
-            distance_sum += (coordinates1[i] + coordinates2[i])**2
-        return distance_sum**0.5
+        # coordinates1 = q1.get_all_coordinates()
+        # coordinates2 = q2.get_all_coordinates()
+        # distance_sum = 0.
+        # for i in range(0, len(coordinates1)):
+        #     distance_sum += (coordinates1[i] + coordinates2[i])**2
+        # return distance_sum**0.5
+        return 0
 
     def path(self, q1, q2):
-        distance = self.distance(q1, q2)
-        steps = int(distance / self.tolerance)
-        start = np.array(q1.get_all_coordinates())
-        end = np.array(q2.get_all_coordinates())
-        vector = end - start
-        unit_vector = vector / distance
-        distance_to_check = self.tolerance
-        if self.verbose:
-            print "*"*80
-            print "Starting Collision Checking: "
-            print "\tStart:", q1
-            print "\tEnd:", q2
-            print ""
-            print "Number of steps to check: ", steps
-            print ""
-
-        for i in range(steps):
-            coordinates_to_check = start + unit_vector * distance_to_check
-            configuration_to_check = Configuration(q1.get_voices(),
-                                                   coordinates_to_check[:q1.get_voices()],
-                                                   coordinates_to_check[q1.get_voices():])
-            if self.verbose:
-                print "Step", str(i) + ")", configuration_to_check
-            if not self.is_valid(configuration_to_check):
-                if self.verbose:
-                    print ""
-                    print "Ending Collision Checking"
-                    print "Status: Failed"
-                    print "*"*80
-                return False
-            distance_to_check += self.tolerance
-        if self.verbose:
-            print ""
-            print "Ending Collision Checking"
-            print "Status: Succeeded"
-            print "*"*80
+        # distance = self.distance(q1, q2)
+        # steps = int(distance / self.tolerance)
+        # start = np.array(q1.get_all_coordinates())
+        # end = np.array(q2.get_all_coordinates())
+        # vector = end - start
+        # unit_vector = vector / distance
+        # distance_to_check = self.tolerance
+        # if self.verbose:
+        #     print "*"*80
+        #     print "Starting Collision Checking: "
+        #     print "\tStart:", q1
+        #     print "\tEnd:", q2
+        #     print ""
+        #     print "Number of steps to check: ", steps
+        #     print ""
+        #
+        # for i in range(steps):
+        #     coordinates_to_check = start + unit_vector * distance_to_check
+        #     configuration_to_check = Configuration(q1.get_voices(),
+        #                                            coordinates_to_check[:q1.get_voices()],
+        #                                            coordinates_to_check[q1.get_voices():])
+        #     if self.verbose:
+        #         print "Step", str(i) + ")", configuration_to_check
+        #     if not self.is_valid(configuration_to_check):
+        #         if self.verbose:
+        #             print ""
+        #             print "Ending Collision Checking"
+        #             print "Status: Failed"
+        #             print "*"*80
+        #         return False
+        #     distance_to_check += self.tolerance
+        # if self.verbose:
+        #     print ""
+        #     print "Ending Collision Checking"
+        #     print "Status: Succeeded"
+        #     print "*"*80
         return True
 
     def enable_verbose(self):
