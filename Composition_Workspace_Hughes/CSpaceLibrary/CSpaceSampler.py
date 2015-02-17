@@ -1,8 +1,8 @@
 """
-	Copyright Nathan Hughes 2015
+    Copyright Nathan Hughes 2015
 
     This file is part of code developed for the Music Perception and Robotics 
-	Labrotory at Worcester Polytechnic Institute.
+    Laboratory at Worcester Polytechnic Institute.
 
     This file is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,60 +18,51 @@
     somewhere in this repository.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-
-
 __author__ = 'nathan'
 
 import networkx as nx
-from abc import ABCMeta, abstractmethod
+from .VoiceGenerator import VoiceGenerator
+from .ConfigurationGenerator import ConfigurationGenerator
 from .Configuration import Configuration
-
-
-class VoiceGenerator:
-    """
-    This class is an abstract base class (abc) for the different possible voice generators (i.e. sampling methods of the
-    configuration space)
-    """
-    __meta_class__ = ABCMeta
-
-    def __init__(self):
-        pass
-
-    @abstractmethod
-    def get_new_pitch(self):
-        pass
-
-    @abstractmethod
-    def get_new_duration(self):
-        pass
-
-    @abstractmethod
-    def get_duration_score(self, duration):
-        pass
-
-    @abstractmethod
-    def get_pitch_score(self, pitch):
-        pass
 
 
 class CSpaceSampler:
     """
     This class uses a collision checker to build up a graph that represents the configuration space
     """
-    def __init__(self, generators, collision_checker):
-        self.generators = generators
-        for generator in generators:
-            if not isinstance(generator, VoiceGenerator):
-                raise ValueError("Not a valid voice generator")
+    def __init__(self, voice_generators, configuration_generator, collision_checker):
+        if voice_generators:
+            self.generators = voice_generators
+            for generator in voice_generators:
+                if not isinstance(generator, VoiceGenerator):
+                    raise ValueError("Not a valid voice generator")
+            self.voice_flag = True
+        else:
+            if isinstance(configuration_generator, ConfigurationGenerator):
+                self.generator = configuration_generator
+            else:
+                raise ValueError("Not a valid configuration generator")
+            self.voice_flag = False
         self.collision_checker = collision_checker
 
+    @classmethod
+    def from_voice_generators(cls, voice_generators, collision_checker):
+        return cls(voice_generators, None, collision_checker)
+
+    @classmethod
+    def from_configuration_generator(cls, configuration_generator, collision_checker):
+        return cls(None, configuration_generator, collision_checker)
+
     def _make_new_configuration(self):
-        pitches = []
-        durations = []
-        for generator in self.generators:
-            pitches.append(generator.get_new_pitch())
-            durations.append(generator.get_new_duration())
-        return Configuration(len(self.generators), pitches, durations)
+        if self.voice_flag:
+            pitches = []
+            durations = []
+            for generator in self.generators:
+                pitches.append(generator.get_new_pitch())
+                durations.append(generator.get_new_duration())
+            return Configuration(len(self.generators), pitches, durations)
+        else:
+            return self.generator.get_new_configuration()
 
     def build_prm(self, radius, samples):
         prm = nx.Graph()  # TODO look into directed graph

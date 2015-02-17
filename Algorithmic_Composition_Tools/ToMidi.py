@@ -1,7 +1,7 @@
 __author__ = 'nathan'
 
 """
-	Copyright Nathan Hughes 2015
+    Copyright Nathan Hughes 2015
 
     This file is part of code developed for the Music Perception and Robotics 
 	Labrotory at Worcester Polytechnic Institute.

@@ -1,8 +1,8 @@
-"""
+/*
     Copyright Nathan Hughes 2015
 
     This file is part of code developed for the Music Perception and Robotics 
-    Laboratory at Worcester Polytechnic Institute.
+    Labrotory at Worcester Polytechnic Institute.
 
     This file is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,28 +16,29 @@
 
     You should have received a copy of the GNU General Public License
     somewhere in this repository.  If not, see <http://www.gnu.org/licenses/>.
-"""
+*/
 
 
-__author__ = 'nathan'
+#ifndef PRIORITY_NODE_H
+#define PRIORITY_NODE_H
+
+class PriorityNode {
+        long time_till_off;
+        PriorityNode * right_child;
+        PriorityNode * left_child;
+        int * associated_notes;
+        int num_associated_notes;
+    public:
+        PriorityNode(long duration, int assoc_notes[], int num_notes);
+        void AddNode(PriorityNode * toAdd);
+        PriorityNode * RemoveNode(PriorityNode * toRemove);
+        void UpdateNode(long time_elapsed);
+        void PrintTree();
+        PriorityNode * GetMinimum();
+        int IsDone();
+        int * GetNotes();
+        int GetNumNotes();
+};
 
 
-class PathExporter:
-
-    def __init__(self):
-        pass
-
-    @staticmethod
-    def export_path(path, filename):
-        with open(filename, 'w') as f:
-            time = 0
-            for configuration in path:
-                line = "T: %d " % time
-                max_duration = 0
-                for i in range(configuration.get_voices()):
-                    line += "|%d %d " % (configuration.get_pitch(i), configuration.get_duration(i))
-                    if configuration.get_duration(i) > max_duration:
-                        max_duration = configuration.get_duration(i)
-                line += "\n"
-                f.write(line)
-                time += max_duration
+#endif
