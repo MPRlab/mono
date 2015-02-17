@@ -28,4 +28,13 @@ class DurationRuleChecker:
         self.weights = weights
 
     def check_duration_set(self, duration_set):
-        pass
+        repeats = 0
+        count = 0
+        for i in range(0, len(duration_set)-1):
+            if duration_set[i] == duration_set[i+1]:
+                count += 1
+            else:
+                count = 0
+            if count >= self.threshold:
+                repeats += 1
+        return 1 - repeats * self.weights[0]
