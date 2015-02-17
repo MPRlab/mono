@@ -23,35 +23,8 @@
 __author__ = 'nathan'
 
 import networkx as nx
-from abc import ABCMeta, abstractmethod
+from .VoiceGenerators import VoiceGenerator
 from .Configuration import Configuration
-
-
-class VoiceGenerator:
-    """
-    This class is an abstract base class (abc) for the different possible voice generators (i.e. sampling methods of the
-    configuration space)
-    """
-    __meta_class__ = ABCMeta
-
-    def __init__(self):
-        pass
-
-    @abstractmethod
-    def get_new_pitch(self):
-        pass
-
-    @abstractmethod
-    def get_new_duration(self):
-        pass
-
-    @abstractmethod
-    def get_duration_score(self, duration):
-        pass
-
-    @abstractmethod
-    def get_pitch_score(self, pitch):
-        pass
 
 
 class CSpaceSampler:
