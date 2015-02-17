@@ -2,7 +2,7 @@
     Copyright Nathan Hughes 2015
 
     This file is part of code developed for the Music Perception and Robotics
-    Labratory at Worcester Polytechnic Institute.
+    Laboratory at Worcester Polytechnic Institute.
 
     This file is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ from CSpaceLibrary.CollisionChecker import CollisionChecker
 from CSpaceLibrary.CSpaceSampler import CSpaceSampler
 from CSpaceLibrary.PathPlanner import PathPlanner
 from CSpaceLibrary.PathExporter import PathExporter
-from CSpaceLibrary.VoiceGenerators import SimpleVoiceGenerator
+from CSpaceLibrary.SimpleVoiceGenerator import SimpleVoiceGenerator
 import random
 
 
