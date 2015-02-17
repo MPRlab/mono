@@ -31,6 +31,7 @@ class PitchChecker:
 
     def __init__(self, generators):
         self.generators = generators
+        self.verbose = False
 
     @staticmethod
     def check_inside_range(pitch, generator):
@@ -47,8 +48,17 @@ class PitchChecker:
             pitch_score += self.check_inside_range(pitches[i], self.generators[i])
         pitch_score /= float(len(pitches))
         pitch_score += self.check_harmonics(pitches)
-        print "\tPitch Score:", pitch_score
+        if self.verbose:
+            print "\tPitch Score:", pitch_score
         return np.clip(pitch_score, 0, 1)
+
+    def enable_verbose(self):
+        self.verbose = True
+
+    def disable_verbose(self):
+        self.verbose = False
+
+
 
 
 # TODO Figure out the mapping from variance to score
@@ -56,6 +66,7 @@ class DurationChecker:
 
     def __init__(self, generators):
         self.generators = generators
+        self.verbose = False
 
     @staticmethod
     def check_inside_range(duration, generator):
@@ -76,8 +87,15 @@ class DurationChecker:
             duration_score += self.check_inside_range(durations[i], self.generators[i])
         duration_score /= float(len(durations))
         duration_score += self.check_variance(durations)
-        print "\tDuration Score:", duration_score
+        if self.verbose:
+            print "\tDuration Score:", duration_score
         return np.clip(duration_score, 0, 1)
+
+    def enable_verbose(self):
+        self.verbose = True
+
+    def disable_verbose(self):
+        self.verbose = False
 
 
 class CollisionChecker:
@@ -93,6 +111,7 @@ class CollisionChecker:
         self.pitch_checker = PitchChecker(generators)
         self.weights = weights
         self.tolerance = tolerance
+        self.verbose = False
 
     def is_valid(self, q):
         score = 0.
@@ -100,8 +119,9 @@ class CollisionChecker:
         score += self.weights[1] * self.duration_checker.check_duration(q)
         score = np.clip(score, 0, 1)
         guess = random.random()
-        print "\t" + "-"*40
-        print "\tTotal Score:", score, " Probability:", guess
+        if self.verbose:
+            print "\t" + "-"*40
+            print "\tTotal Score:", score, " Probability:", guess
         if guess > score:
             return False
         else:
@@ -124,30 +144,40 @@ class CollisionChecker:
         vector = end - start
         unit_vector = vector / distance
         distance_to_check = self.tolerance
-        print "*"*80
-        print "Starting Collision Checking: "
-        print "\tStart:", q1
-        print "\tEnd:", q2
-        print ""
-        print "Number of steps to check: ", steps
-        print ""
+        if self.verbose:
+            print "*"*80
+            print "Starting Collision Checking: "
+            print "\tStart:", q1
+            print "\tEnd:", q2
+            print ""
+            print "Number of steps to check: ", steps
+            print ""
 
         for i in range(steps):
             coordinates_to_check = start + unit_vector * distance_to_check
             configuration_to_check = Configuration(q1.get_voices(),
                                                    coordinates_to_check[:q1.get_voices()],
                                                    coordinates_to_check[q1.get_voices():])
-            print "Step", str(i) + ")", configuration_to_check
+            if self.verbose:
+                print "Step", str(i) + ")", configuration_to_check
             if not self.is_valid(configuration_to_check):
-                print ""
-                print "Ending Collision Checking"
-                print "Status: Failed"
-                print "*"*80
+                if self.verbose:
+                    print ""
+                    print "Ending Collision Checking"
+                    print "Status: Failed"
+                    print "*"*80
                 return False
             distance_to_check += self.tolerance
-        print ""
-        print "Ending Collision Checking"
-        print "Status: Succeeded"
-        print "*"*80
+        if self.verbose:
+            print ""
+            print "Ending Collision Checking"
+            print "Status: Succeeded"
+            print "*"*80
         return True
+
+    def enable_verbose(self):
+        self.verbose = True
+
+    def disable_verbose(self):
+        self.verbose = False
 
