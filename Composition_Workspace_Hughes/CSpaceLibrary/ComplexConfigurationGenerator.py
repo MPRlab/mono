@@ -30,7 +30,8 @@ import numpy as np
 
 class ComplexConfigurationGenerator(ConfigurationGenerator):
 
-    def __init__(self, d_means, d_variances, p_means, p_variances, n_means, n_variances, r_probabilities):
+    def __init__(self, d_means, d_variances, p_means, p_variances, n_means, n_variances, r_probabilities,
+                 pitch_rule_checker, duration_rule_checker):
         ConfigurationGenerator.__init__(self)
         self.d_means = d_means
         self.d_variances = d_variances
@@ -40,21 +41,28 @@ class ComplexConfigurationGenerator(ConfigurationGenerator):
         self.n_variances = n_variances
         self.r_probabilities = r_probabilities
         self.voices = len(self.d_means)
+        self.pitch_rule_checker = pitch_rule_checker
+        self.duration_rule_checker = duration_rule_checker
 
     def get_pitch_score(self, configuration):
         pitches = configuration.get_all_coordinates()[configuration.get_voices():]
         score = 0
         voice_score = 0
         for pitch_set in pitches:
-            voice_score = 1  # self._rule_checker(pitch_set)
+            voice_score = self.pitch_rule_checker.check_pitch_set(pitch_set)
         score += voice_score
         return score / len(pitches)
 
     def get_duration_score(self, configuration):
-        return 1
+        durations = configuration.get_all_coordinates()[:configuration.get_voices()]
+        score = 0
+        voice_score = 0
+        for duration_set in durations:
+            voice_score = self.duration_rule_checker.check_duration_set(duration_set)
+        score += voice_score
+        return score / len(durations)
 
     def _perform_smoothing(self, q):
-
         durations = q.get_all_coordinates()[q.get_voices():]
         pitches = q.get_all_coordinates()[:q.get_voices()]
         duration_totals = []

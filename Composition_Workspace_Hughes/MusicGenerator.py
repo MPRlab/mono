@@ -27,6 +27,8 @@ from CSpaceLibrary.PathExporter import PathExporter
 from CSpaceLibrary.DurationChecker import DurationChecker
 from CSpaceLibrary.PitchChecker import PitchChecker
 from CSpaceLibrary.ComplexConfigurationGenerator import ComplexConfigurationGenerator
+from CSpaceLibrary.PitchRuleChecker import PitchRuleChecker
+from CSpaceLibrary.DurationRuleChecker import DurationRuleChecker
 import random
 
 
@@ -40,12 +42,16 @@ p_variances = [1, 1]
 n_means = [2, 5]
 n_variances = [1, 1]
 r_probabilities = [0.2, 0.1]
-
+pitch_rule_checker = PitchRuleChecker(5, [0.05, 0.05, 0.05, 0.05])
+duration_rule_checker = DurationRuleChecker(3, [0.05])
 generator = ComplexConfigurationGenerator(d_means, d_variances, p_means, p_variances, n_means, n_variances,
-                                          r_probabilities)
+                                          r_probabilities, pitch_rule_checker, duration_rule_checker)
 pitch_checker = PitchChecker.from_configuration_generator(generator)
 duration_checker = DurationChecker.from_configuration_generator(generator)
 collision_checker = CollisionChecker(pitch_checker, duration_checker, [1, 1], 1)
+collision_checker.enable_verbose()
+pitch_checker.enable_verbose()
+duration_checker.enable_verbose()
 roadmap_builder = CSpaceSampler.from_configuration_generator(generator, collision_checker)
 prm = roadmap_builder.build_prm(5, 10)
 print prm.nodes()

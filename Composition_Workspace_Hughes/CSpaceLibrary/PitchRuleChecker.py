@@ -32,20 +32,31 @@ class PitchRuleChecker:
         largest_skip = 0
         skip_history = []
         skip_directions = []
-        for i in range(0, len(pitch_set)-1):
-            skip = abs(pitch_set[i+1]-pitch_set[i]) - 1
-            if skip < 0:
-                skip = 0
-            total_skips += skip
-            if skip > largest_skip:
-                largest_skip = skip
-            skip_history.append(skip)
-            if pitch_set[i+1] > pitch_set[i]:
-                skip_directions.append(1)
-            elif pitch_set[i+1] < pitch_set[i]:
-                skip_directions.append(-1)
+        prev = 0
+        next = 1
+        while next < len(pitch_set):
+            if pitch_set[prev] == -1:
+                prev += 1
+                next += 1
+            elif pitch_set[next] == -1:
+                next += 1
             else:
-                skip_directions.append(0)
+                skip = abs(pitch_set[next]-pitch_set[prev]) - 1
+                if skip < 0:
+                    skip = 0
+                total_skips += skip
+                if skip > largest_skip:
+                    largest_skip = skip
+                skip_history.append(skip)
+                if pitch_set[next] > pitch_set[prev]:
+                    skip_directions.append(1)
+                elif pitch_set[next] < pitch_set[prev]:
+                    skip_directions.append(-1)
+                else:
+                    skip_directions.append(0)
+                prev = next
+                next += 1
+
         directional_violations = 0
         triad_violations = 0
         for i in range(0, len(skip_history) -1):
@@ -61,6 +72,9 @@ class PitchRuleChecker:
                     if skip_history[i+1] == 4:
                         pass
                     else:
-                        triad_violations[i+1] += 1
+                        triad_violations += 1
+        print pitch_set
+        print ("Skips:", total_skips, "Largest Skip:", largest_skip, "Directional Violations:", directional_violations,
+               "Triad Violations:", triad_violations)
         return (1 - total_skips*self.weights[0] - largest_skip*self.weights[1] -
                 directional_violations * self.weights[2] - triad_violations * self.weights[3])
