@@ -24,29 +24,40 @@ from CSpaceLibrary.CollisionChecker import CollisionChecker
 from CSpaceLibrary.CSpaceSampler import CSpaceSampler
 from CSpaceLibrary.PathPlanner import PathPlanner
 from CSpaceLibrary.PathExporter import PathExporter
-from CSpaceLibrary.SimpleVoiceGenerator import SimpleVoiceGenerator
+from CSpaceLibrary.DurationChecker import DurationChecker
+from CSpaceLibrary.PitchChecker import PitchChecker
+from CSpaceLibrary.ComplexConfigurationGenerator import ComplexConfigurationGenerator
 import random
 
 
 """
 Main file to generate a composition
 """
-voice1_generator = SimpleVoiceGenerator(40, 8, 4, 2, 0, 61, 1, 16)
-voice2_generator = SimpleVoiceGenerator(25, 15, 8, 2, 0, 61, 1, 16)
-generators = [voice1_generator, voice2_generator]
-collision_checker = CollisionChecker(generators, [1, 1], 1)
-roadmap_builder = CSpaceSampler(generators, collision_checker)
-prm = roadmap_builder.build_prm(100, 100)
-print prm.edges()
-planner = PathPlanner(prm)
-path = []
-edge_ratio = 0.1
-while len(prm.edges()) > edge_ratio*len(prm.nodes()):
-    try:
-        path = planner.generate_path(random.choice(prm.nodes()), random.choice(prm.nodes()))
-        break
-    except ValueError:
-        pass
+d_means = [10, 3]
+d_variances = [2, 5]
+p_means = [50, 30]
+p_variances = [1, 1]
+n_means = [2, 5]
+n_variances = [1, 1]
+r_probabilities = [0.2, 0.1]
 
-exporter = PathExporter()
-exporter.export_path(path, "testing.org")
+generator = ComplexConfigurationGenerator(d_means, d_variances, p_means, p_variances, n_means, n_variances,
+                                          r_probabilities)
+pitch_checker = PitchChecker.from_configuration_generator(generator)
+duration_checker = DurationChecker.from_configuration_generator(generator)
+collision_checker = CollisionChecker(pitch_checker, duration_checker, [1, 1], 1)
+roadmap_builder = CSpaceSampler.from_configuration_generator(generator, collision_checker)
+prm = roadmap_builder.build_prm(5, 10)
+print prm.nodes()
+# planner = PathPlanner(prm)
+# path = []
+# edge_ratio = 0.1
+# while len(prm.edges()) > edge_ratio*len(prm.nodes()):
+#     try:
+#         path = planner.generate_path(random.choice(prm.nodes()), random.choice(prm.nodes()))
+#         break
+#     except ValueError:
+#         pass
+#
+# exporter = PathExporter()
+# exporter.export_path(path, "testing.org")
