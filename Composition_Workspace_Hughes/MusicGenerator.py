@@ -1,8 +1,8 @@
 """
-	Copyright Nathan Hughes 2015
+    Copyright Nathan Hughes 2015
 
-    This file is part of code developed for the Music Perception and Robotics 
-	Labrotory at Worcester Polytechnic Institute.
+    This file is part of code developed for the Music Perception and Robotics
+    Laboratory at Worcester Polytechnic Institute.
 
     This file is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,57 +21,49 @@
 __author__ = 'nathan'
 
 from CSpaceLibrary.CollisionChecker import CollisionChecker
-from CSpaceLibrary.CSpaceSampler import VoiceGenerator, CSpaceSampler
+from CSpaceLibrary.CSpaceSampler import CSpaceSampler
 from CSpaceLibrary.PathPlanner import PathPlanner
 from CSpaceLibrary.PathExporter import PathExporter
+from CSpaceLibrary.DurationChecker import DurationChecker
+from CSpaceLibrary.PitchChecker import PitchChecker
+from CSpaceLibrary.ComplexConfigurationGenerator import ComplexConfigurationGenerator
+from CSpaceLibrary.PitchRuleChecker import PitchRuleChecker
+from CSpaceLibrary.DurationRuleChecker import DurationRuleChecker
 import random
-import numpy as np
-
-
-class SimpleVoiceGenerator(VoiceGenerator):
-
-    def __init__(self, pitch_mean, pitch_variance, duration_mean, duration_variance, min_pitch, max_pitch,
-                 min_duration, max_duration):
-        VoiceGenerator.__init__(self)
-        self.pitch_mean = pitch_mean
-        self.pitch_variance = pitch_variance
-        self.duration_mean = duration_mean
-        self.duration_variance = duration_variance
-        self.min_pitch = min_pitch
-        self.min_duration = min_duration
-        self.max_pitch = max_pitch
-        self.max_duration = max_duration
-
-    def get_pitch_score(self, pitch):
-        distance = abs(self.pitch_mean - pitch)
-        std_variations = distance / self.pitch_variance
-        return np.clip(1 - std_variations, 0, 1)
-
-    def get_new_duration(self):
-        return np.clip(int(random.normalvariate(self.duration_mean, self.duration_variance)), self.min_pitch,
-                       self.max_pitch)
-
-    def get_duration_score(self, duration):
-        distance = abs(self.duration_mean - duration)
-        std_variations = distance / self.duration_variance
-        return np.clip(1 - std_variations, 0, 1)
-
-    def get_new_pitch(self):
-        return np.clip(int(random.normalvariate(self.pitch_mean, self.pitch_variance)), self.min_duration,
-                       self.max_duration)
 
 
 """
 Main file to generate a composition
 """
-voice1_generator = SimpleVoiceGenerator(40, 8, 4, 2, 0, 61, 1, 16)
-voice2_generator = SimpleVoiceGenerator(25, 15, 8, 2, 0, 61, 1, 16)
-generators = [voice1_generator, voice2_generator]
-collision_checker = CollisionChecker(generators, [0.5, 0.5], 0.5)
-roadmap_builder = CSpaceSampler(generators, collision_checker)
-prm = roadmap_builder.build_prm(10, 100)
-planner = PathPlanner(prm)
+d_means = [10, 3]
+d_variances = [2, 5]
+p_means = [50, 30]
+p_variances = [1, 1]
+n_means = [2, 5]
+n_variances = [1, 1]
+r_probabilities = [0.2, 0.1]
+pitch_rule_checker = PitchRuleChecker(5, [0.05, 0.05, 0.05, 0.05])
+duration_rule_checker = DurationRuleChecker(3, [0.05])
+generator = ComplexConfigurationGenerator(d_means, d_variances, p_means, p_variances, n_means, n_variances,
+                                          r_probabilities, pitch_rule_checker, duration_rule_checker)
+pitch_checker = PitchChecker.from_configuration_generator(generator)
+duration_checker = DurationChecker.from_configuration_generator(generator)
+collision_checker = CollisionChecker(pitch_checker, duration_checker, [1, 1], 1)
+collision_checker.enable_verbose()
+pitch_checker.enable_verbose()
+duration_checker.enable_verbose()
+roadmap_builder = CSpaceSampler.from_configuration_generator(generator, collision_checker)
+prm = roadmap_builder.build_prm(5, 10)
 print prm.nodes()
-path = planner.generate_path(random.choice(prm.nodes()), random.choice(prm.nodes()))
-exporter = PathExporter()
-exporter.export_path(path, "testing.org")
+# planner = PathPlanner(prm)
+# path = []
+# edge_ratio = 0.1
+# while len(prm.edges()) > edge_ratio*len(prm.nodes()):
+#     try:
+#         path = planner.generate_path(random.choice(prm.nodes()), random.choice(prm.nodes()))
+#         break
+#     except ValueError:
+#         pass
+#
+# exporter = PathExporter()
+# exporter.export_path(path, "testing.org")

@@ -1,7 +1,7 @@
 """
     Copyright Nathan Hughes 2015
 
-    This file is part of code developed for the Music Perception and Robotics 
+    This file is part of code developed for the Music Perception and Robotics
     Laboratory at Worcester Polytechnic Institute.
 
     This file is free software: you can redistribute it and/or modify
@@ -18,26 +18,23 @@
     somewhere in this repository.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-
 __author__ = 'nathan'
 
 
-class PathExporter:
+class DurationRuleChecker:
 
-    def __init__(self):
-        pass
+    def __init__(self, repeat_threshold, weights):
+        self.threshold = repeat_threshold
+        self.weights = weights
 
-    @staticmethod
-    def export_path(path, filename):
-        with open(filename, 'w') as f:
-            time = 0
-            for configuration in path:
-                line = "T: %d " % time
-                max_duration = 0
-                for i in range(configuration.get_voices()):
-                    line += "|%d %d " % (configuration.get_pitch(i), configuration.get_duration(i))
-                    if configuration.get_duration(i) > max_duration:
-                        max_duration = configuration.get_duration(i)
-                line += "\n"
-                f.write(line)
-                time += max_duration
+    def check_duration_set(self, duration_set):
+        repeats = 0
+        count = 0
+        for i in range(0, len(duration_set)-1):
+            if duration_set[i] == duration_set[i+1]:
+                count += 1
+            else:
+                count = 0
+            if count >= self.threshold:
+                repeats += 1
+        return 1 - repeats * self.weights[0]

@@ -1,7 +1,7 @@
 """
     Copyright Nathan Hughes 2015
 
-    This file is part of code developed for the Music Perception and Robotics 
+    This file is part of code developed for the Music Perception and Robotics
     Laboratory at Worcester Polytechnic Institute.
 
     This file is free software: you can redistribute it and/or modify
@@ -22,22 +22,27 @@
 __author__ = 'nathan'
 
 
-class PathExporter:
+from abc import ABCMeta, abstractmethod
+
+
+class ConfigurationGenerator():
+    """
+    This class is an abstract base class (abc) for the different possible voice generators (i.e. sampling methods of the
+    configuration space)
+    """
+    __meta_class__ = ABCMeta
 
     def __init__(self):
         pass
 
-    @staticmethod
-    def export_path(path, filename):
-        with open(filename, 'w') as f:
-            time = 0
-            for configuration in path:
-                line = "T: %d " % time
-                max_duration = 0
-                for i in range(configuration.get_voices()):
-                    line += "|%d %d " % (configuration.get_pitch(i), configuration.get_duration(i))
-                    if configuration.get_duration(i) > max_duration:
-                        max_duration = configuration.get_duration(i)
-                line += "\n"
-                f.write(line)
-                time += max_duration
+    @abstractmethod
+    def get_new_configuration(self):
+        pass
+
+    @abstractmethod
+    def get_duration_score(self, configuration):
+        pass
+
+    @abstractmethod
+    def get_pitch_score(self, configuration):
+        pass

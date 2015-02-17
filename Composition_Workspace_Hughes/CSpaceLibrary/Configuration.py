@@ -1,8 +1,8 @@
 """
-	Copyright Nathan Hughes 2015
+    Copyright Nathan Hughes 2015
 
     This file is part of code developed for the Music Perception and Robotics 
-	Labrotory at Worcester Polytechnic Institute.
+    Laboratory at Worcester Polytechnic Institute.
 
     This file is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,9 +43,26 @@ class Configuration:
         return self.durations[voice]
 
     def get_all_coordinates(self):
-        print self.durations
-        print self.voices
-        return self.durations + self.voices
+        return self.pitches + self.durations
 
     def get_voices(self):
         return self.voices
+
+    def __repr__(self):
+        return "Voices: " + str(self.voices) + " Notes: " + str(self.pitches) + " Durations: " + str(self.durations)\
+               + "\n"
+
+    def __str__(self):
+        return "Voices: " + str(self.voices) + " Notes: " + str(self.pitches) + " Durations: " + str(self.durations)\
+               + "\n"
+
+    def __eq__(self, other):
+        if isinstance(other, Configuration):
+            if self.voices == other.voices:
+                if self.pitches == other.pitches:
+                    if self.durations == other.durations:
+                        return True
+        return False
+
+    def __hash__(self):
+        return hash(self.__str__())
