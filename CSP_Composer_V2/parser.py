@@ -21,20 +21,51 @@ class Parser:
 				
 				elif line[0] == '#####': # Validity Constraint
 					if len(line) == 2:
-						self.valid = [line[1],float('infinity')]
+						self.valid = [int(line[1]),float('infinity')]
 					elif len(line) == 3:
-						self.valid = [line[1],line[2]]
+						self.valid = [int(line[1]),int(line[2])]
 
 				elif line[0] == '1': # Note Limit constraints
 					self.noteLimitParser(line)
+
+				elif line[0] == '2': # Consecutive Note Constraint
+					self.consecutiveNoteLimit(line)
+
+				elif line[0] == '3': # Register Jump Limit
+					self.registerJumpLimit(line)
+
+				elif line[0] == '4': # Ary Exclusion Constraint
+					self.aryExclusion(line)
+
+				elif line[0] == '5': # Ary Inclusion Constraint
+					self.aryInclusion(line)
+
+				elif line[0] == '6':
+					pass
+
+				elif line[0] == '7': # Consideration Constraint
+					self.considerationConstraint(line)
+
+				elif line[0] == '8': # Pattern Constraint
+					self.patternConstraint(line)
+
+				# Constraint 9 is computed before elif sequence!
+
+				elif line[0] == '10': # Completion Constraint
+					self.completionConstraint(line)
+
+				elif line[0] == '11': # Silence Probability
+					self.silenceProbability(line)
+
+				elif line[0] == '12': # Note Duration Probability
+					self.noteDurationProbability(line)
 
 
 	# Parses a line containing the note limit constraint
 	def noteLimitParser(self, line):
 		try:
 			line = map(int, line)
-			c.addNoteLimit([line[1], line[2]], self.valid)
-			print c.noteLimit.limit
+			self.c.addNoteLimit([line[1], line[2]], self.valid)
 		except:
 			print 'Line: ' + str(line) + ' is broken.'
 			print 'Add note limit constraint ignored.'
@@ -42,7 +73,108 @@ class Parser:
 	# Parses a line containing a consecutive note limit
 	def consecutiveNoteLimit(self, line):
 		try:
-			c.addConsecNoteLimit(line[1], self.valid)
+			line = map(int, line)
+			self.c.addConsecNoteLimit(line[1], self.valid)
 		except:
 			print 'Line: ' + str(line) + ' is broken.'
 			print 'Add consecutive note limit constraint ignored.'
+
+	# Parses a line containing a register jump limit
+	def registerJumpLimit(self, line):
+		try:
+			line = map(int, line)
+			self.c.addRegisterJumpLimit(line[1], self.valid)
+		except:
+			print 'Line: ' + str(line) + ' is broken.'
+			print 'Add register limit constraint ignored.'
+
+	# Parses a line containing an ary Exclusion constraint
+	def aryExclusion(self, line):
+		try:
+			self.c.addAryExclusion(line[1:len(line)], self.valid)
+		except:
+			print 'Line: ' + str(line) + ' is broken.'
+			print 'Constraint ignored!'
+
+	# Parses a line containing an ary Inclusion constraint
+	def aryInclusion(self, line):
+		try:
+			self.c.addAryInclusion(line[1:len(line)], self.valid)
+		except:
+			print 'Line: ' + str(line) + ' is broken.'
+			print 'Constraint ignored!'
+
+
+	##### ADD CONSTRAINT 6 HERE!!!!
+
+	# Parses a line containing a consideration constraint
+	def considerationConstraint(self, line):
+		default = 5
+		try:
+			self.c.addConsiderationConstraint(int(line[1]), self.valid)
+		except:
+			self.c.addConsiderationConstraint(default, self.valid)
+			print 'Line: ' + str(line) + ' is broken.'
+			print 'Constraint set to: ' + str(default)
+
+	# Parses a line containing a pattern constraint
+	def patternConstraint(self, line):
+		pattern = []
+		toPlay = []
+		switch = True
+
+		try:
+			for p in line[1:len(line)]:
+				if p == '|':
+					switch = True
+				elif switch == False:
+					pattern += p
+				else:
+					toPlay += p
+
+			self.c.addPatternConstraint(pattern, toPlay, self.valid)
+		except:
+			print 'Line: ' + str(line) + ' is broken.'
+			print 'Constraint ignored!'
+
+	# Parses a line containing the song completion constraint
+	def completionConstraint(self, line):
+		default = 150
+		try:
+			self.c.addCompletionConstraint(int(line[1]), self.valid)
+		except:
+			self.c.addCompletionConstraint(default, self.valid)
+			print 'Line: ' + str(line) + ' is broken.'
+			print 'Constraint set to: ' + str(default)
+
+	# Parses a line containing a silence probability
+	def silenceProbability(self, line):
+		default = 50
+		try:
+			self.c.addSilenceProbability(int(line[1]), self.valid)
+		except:
+			self.c.addSilenceProbability(default, self.valid)
+			print 'Line: ' + str(line) + ' is broken.'
+			print 'Constraint set to: ' + str(default)
+
+	# Parses a line containing the note duration probability
+	def noteDurationProbability(self, line):
+		default = [1,100,1000]
+		try:
+			line = map(int, line)
+			self.c.addNoteDurationProbability([line[0],line[1],line[2]], self.valid)
+		except:
+			self.c.addNoteDurationProbability(default, valid)
+			print 'Line: ' + str(line) + ' is broken.'
+			print 'Constraint set to: ' + str(default)
+
+
+
+
+
+
+
+
+
+
+

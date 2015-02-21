@@ -16,3 +16,9 @@ comp = Composer()
 
 # Parse input 
 p = Parser(c.inputFileName, comp)
+
+print comp.durationProbability.get(100)
+print comp.durationProbability.get(100)
+print comp.durationProbability.get(100)
+print comp.durationProbability.get(100)
+print comp.durationProbability.get(100)

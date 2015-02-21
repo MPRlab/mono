@@ -38,10 +38,10 @@ types:
 		in between its current register and desired regiter.
 		No jumps allowed!
 
-	4) Unary Exclusion Constraint: A given set of notes, cannot
+	4) Ary Exclusion Constraint: A given set of notes, cannot
 	be played together. Ex: A B C cannot be played simultaneously
 
-	5) Unary Inclusion Constraint: A given pair of notes, can 
+	5) Ary Inclusion Constraint: A given pair of notes, can 
 	only be played together.
 
 	6) Set Beginning of Piece Constraint: Manually sets a certain
@@ -54,24 +54,22 @@ types:
 	play a given set of notes next.
 		Ex: If A B C has just been played, play D
 
-	9) "Valid for" Constraint: Sets the lifetime of a certain section 
-	of the constraint file.
+	9) "Valid for" Constraint: Sets the lifetime of a certain
+	section of the constraint file.
 
-	10) Completion Constraint: A song is deemed complete once it has 
-	reached a certain number of notes.
+	10) Completion Constraint: A song is deemed complete once it
+	has reached a certain number of notes.
 
 	11) Rhythm: Silence Probability: Sets the probability of a given
 	time stamp containing a silence.
 
 	12) Rhythm: Note Duration Probability: Sets the probability 
 	distribution for note durations.
-		Should be an integer that selects from a given set of
-		probability distributions. Ex: 1 is a uniform distribution.
+		Should be a set of integers that selects from a given set of
+		probability distributions. Ex: 1 10 100 is a uniform
+		distribution from 10 to 100.
 
-	13) Rhythm: Minimum Note Duration: If a note of duration less than
-	the set minimum is generated. Retries generation.
-
-	14) Number of Registers Constraint: Number of registers in the 
+	13) Number of Registers Constraint: Number of registers in the 
 	instrument where the song will be played.
 
 The File format should follow exacly:
@@ -94,7 +92,7 @@ The File format should follow exacly:
 # Pattern Constraint
 8 A B C | D
 # Number of Registers Constraint
-14 3
+13 3
 
 
 
