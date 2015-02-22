@@ -36,18 +36,33 @@ class aryADT:
 
 	# Adds the given constraint to the constraint list
 	def add(self, constraint, valid):
-		self.constraint += [[valid, constraint]]
+		for item in self.constraint:
+			if valid == item[0]:
+				item[1].append(constraint)
+				return True
+		self.constraint += [[valid, [constraint]]]
 
 	# Returns true if there are NO conflicts for Exclusion
-	def checkE(self, currentSet, timestamp):
-		for c in get(timestamp):
-			for cur in currentSet:
-				if cur in c:
-					return cur
-		return []
+	def checkE(self, note, currentSet, timestamp):
+		constraint = self.get(timestamp)
+
+		for con in constraint:
+			if note.note in con:
+				for curNote in currentSet:
+					if curNote.note in con:
+						return False
+
+		return True
+
+
+
+
 
 	# Returns the raw constraint at the given time
 	def get(self, timestamp):
+		if len(self.constraint) == 0:
+			return []
+
 		if len(self.constraint) == 1:
 			return self.constraint[0][1]
 
@@ -122,14 +137,6 @@ class patADT:
 
 			if count >= n:
 				tempList += both[1]
-
-			if timestamp == 150:
-				print timestamp
-				print tstamp
-				print n
-				print 'j: ' + str(j)
-				print 'count: ' + str(count)
-				print '******'
 
 		return tempList
 

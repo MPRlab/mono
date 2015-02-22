@@ -5,6 +5,10 @@
 2 3
 # Regsiter Jump Limit Constraint
 3 1
+# Ary Exclusion Constraint
+4 G Gs
+4 G E
+4 A Fs
 # Set beginning of Piece Constraint
 # Organized by: Contraint TimestampIndex Note Register Duration
 6 0 A 1 100
