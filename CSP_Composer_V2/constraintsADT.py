@@ -123,6 +123,14 @@ class patADT:
 			if count >= n:
 				tempList += both[1]
 
+			if timestamp == 150:
+				print timestamp
+				print tstamp
+				print n
+				print 'j: ' + str(j)
+				print 'count: ' + str(count)
+				print '******'
+
 		return tempList
 
 				
