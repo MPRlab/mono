@@ -102,6 +102,14 @@ class Composer:
 		if finalPitch and finalRegister:
 			noteList += [noteADT(finalPitch, finalRegister, finalDuration)]
 
+
+		# "Forward Checking" Add required notes
+		# 1) Pattern Matching
+		temp = self.pattern.match(self.composition, timestamp)
+		if len(temp) != 0:
+			temp = [noteADT(a) for a in temp] # TODO! Make appropriate choice of REGISTER and DURATION!
+			noteList += temp
+
 		return noteList
 
 
@@ -111,7 +119,8 @@ class Composer:
 
 	# Checks all constraints
 	def checkAllForPitch(self, note, timestamp):
-		return self.checkMaxNoteLimit(timestamp) and self.checkConsecutiveLimit(note, timestamp)
+		return self.checkMaxNoteLimit(timestamp) and self.checkConsecutiveLimit(note, timestamp) \
+				and self.checkCurrentPlaying(note, timestamp)
 
 
 	# Returns the number of spaces available in a given timestamp
@@ -123,8 +132,7 @@ class Composer:
 	# constraint
 	def checkConsecutiveLimit(self, note, timestamp):
 		n = self.consecutiveNoteLimit.get(timestamp)
-		return self.composition.countConsecutiveNote(note, timestamp, n) < \
-		 			self.consecutiveNoteLimit.get(timestamp)
+		return self.composition.countConsecutiveNote(note, timestamp, n) < n
 
 	# Returns true if a given register does not violate the register 
 	# jump limit.
@@ -135,6 +143,11 @@ class Composer:
 	# ary exclusion constraint
 	def checkAryExclusion(self, note, timestamp):
 		return True
+
+	# Return true if the given note is NOT currently playing
+	def checkCurrentPlaying(self, note, timestamp):
+		n = self.consecutiveNoteLimit.get(timestamp)
+		return note not in self.composition.getN(n, timestamp) 
 
 	##################################################
 	############### Helper Methods ###################

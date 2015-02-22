@@ -100,7 +100,43 @@ class patADT:
 
 	# Adds the given pattern to the pattern list
 	def add(self, pattern, toPlay, valid):
-		self.pattern += [[valid, pattern, toPlay]]
+		for item in self.pattern:
+			if valid == item[0]:
+				item[1].append([pattern, toPlay])
+				return True
+		self.pattern += [[valid, [[pattern, toPlay]]]]
+
+	# Returns notes to be added if a pattern match is found
+	def match(self, c, timestamp):
+		tempList = []
+		stepSize = c.stepSize
+		
+		for both in self.get(timestamp):
+			count = 0
+			n = len(both[0])
+			for tstamp in range(timestamp-n*stepSize, timestamp, stepSize):
+				j = (tstamp - (timestamp - n*stepSize)) / stepSize
+				if both[0][j] in [a.note for a in c.getN(n,timestamp)]:
+					count += 1
+
+			if count >= n:
+				tempList += both[1]
+
+		return tempList
+
+				
+
+	# Returns the raw constraint at the given time
+	def get(self, timestamp):
+		if len(self.pattern) == 1:
+			return self.pattern[0][1]
+
+		else:
+			for temp in self.pattern[1:len(self.pattern)]:
+				if timestamp in range(temp[0][0], temp[0][1]):
+					return temp[1:len(self.pattern[0])]
+
+		return self.pattern[0][1]
 
 
 # Maintains the song
@@ -120,11 +156,12 @@ class songADT:
 	# n previous time slots are considered.
 	def getN(self, n, timestamp):
 		tempList = []
-		for i in range(timestamp, timestamp-n*stepSize, -stepSize):
+		for i in range(timestamp, timestamp-n*self.stepSize, -self.stepSize):
 			if i >= 0:
 				for note in self.song[i]:
-					if note.duration > timestamp-i:
-						tempList += note
+					if isinstance(note, noteADT):
+						if note.duration > timestamp-i:
+							tempList += [note]
 
 		return tempList
 
@@ -156,17 +193,17 @@ class songADT:
 	# Consecutive note count
 	def countConsecutiveNote(self, note, tstamp, n):
 		occurences = 0
-		for i in range(tstamp, tstamp-n*self.stepSize, -self.stepSize):
+		for i in range(tstamp-n*self.stepSize, tstamp, self.stepSize):
 			if i >= 0:
-				for n in self.song[i]:
-					if note.note == n.note:
-						occurences += 1
-		return occurences
+				for nt in self.song[i]:
+					if isinstance(nt, noteADT):
+						if note.note == nt.note:
+							occurences += 1
+		return occurences 
 
 	# Returns as an ordered list
 	def orderedList(self):
 		return sorted(self.song.items(), key=operator.itemgetter(0))
-
 
 # Maintains a note
 class noteADT:
@@ -179,6 +216,8 @@ class noteADT:
 	def __str__(self):
 		return str(self.note) + ' ' + str(self.register) + ' ' + str(self.duration)
 
+	def __eq__(self, other):
+		return self.note == other.note and self.register == other.register
 
 
 
