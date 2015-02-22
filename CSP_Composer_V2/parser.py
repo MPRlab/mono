@@ -134,8 +134,8 @@ class Parser:
 		try:
 			for p in line[1:len(line)]:
 				if p == '|':
-					switch = True
-				elif switch == False:
+					switch = False
+				elif switch == True:
 					pattern += p
 				else:
 					toPlay += p
