@@ -2,7 +2,7 @@
 
 class Solver:
 	# Constructor
-	def __init__(self, threshold):
+	def __init__(self, threshold=100):
 		self.iteTreshold = threshold
 
 	# Solver
@@ -19,6 +19,7 @@ class Solver:
 						c.composition.add(note, timeStamp)
 
 				if c.isComplete():
+					print "Algorithm completed successfully!"
 					return c
 			ite += 1
 

@@ -9,6 +9,9 @@ from composer import *
 from parser import *
 from solver import *
 from writer import *
+import random as rdm
+
+rdm.seed(1) ## TODO!!
 
 # Read user input arguments
 c = Config()
@@ -23,7 +26,6 @@ comp.setUp()
 # Run the Solver
 sol = Solver(100)
 solution = sol.solve(comp)
-print "Finished processing..."
 
 # Write Result to file
 w = Writer(c.outputFileName, comp)

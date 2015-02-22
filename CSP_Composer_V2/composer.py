@@ -98,7 +98,6 @@ class Composer:
 					temp = [noteADT(a, tempRegister, tempDuration) for a in temp] 
 					noteList += temp
 
-
 		### IF NO NOTE IS REQUIRED, CHOOSE A VALID NOTE
 		if not noteList:
 			tempNoteList = []
@@ -135,7 +134,8 @@ class Composer:
 	# Checks all constraints
 	def checkAll(self, note, timestamp):
 		return self.checkMaxNoteLimit(timestamp) and self.checkConsecutiveLimit(note, timestamp) \
-			and self.checkCurrentPlaying(note, timestamp) and self.composition.checkFutureConflict(note, timestamp)
+			and self.checkCurrentPlaying(note, timestamp) and self.composition.checkFutureConflict(note, timestamp) \
+			and self.checkAryExclusion(note, timestamp)
 
 
 	# Returns the number of spaces available in a given timestamp
@@ -157,7 +157,8 @@ class Composer:
 	# Returns true if a given note does not violate the 
 	# ary exclusion constraint
 	def checkAryExclusion(self, note, timestamp):
-		return True
+		notesPlaying = self.composition.getN(self.consideration.get(timestamp), timestamp)
+		return self.aryExclusion.checkE(note, notesPlaying, timestamp)
 
 	# Return true if the given note is NOT currently playing
 	def checkCurrentPlaying(self, note, timestamp):
