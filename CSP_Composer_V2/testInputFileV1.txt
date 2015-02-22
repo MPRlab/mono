@@ -9,6 +9,8 @@
 4 G Gs
 4 G E
 4 A Fs
+# Ary Inclusion Constraint
+5 E As
 # Set beginning of Piece Constraint
 # Organized by: Contraint TimestampIndex Note Register Duration
 6 0 A 1 100
@@ -21,7 +23,7 @@
 8 A B C | D
 8 G F G | E
 # Completion Constraint
-10 400
+10 800
 # Number of Registers Constraint
 13 3
 # Time Constraints

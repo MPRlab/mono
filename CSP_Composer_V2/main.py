@@ -24,7 +24,7 @@ p = Parser(c.inputFileName, comp)
 comp.setUp()  
 
 # Run the Solver
-sol = Solver(100)
+sol = Solver(10)
 solution = sol.solve(comp)
 
 # Write Result to file
