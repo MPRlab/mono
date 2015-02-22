@@ -72,6 +72,9 @@ types:
 	13) Number of Registers Constraint: Number of registers in the 
 	instrument where the song will be played.
 
+	14) Time parameters of the song. Ex: 300 50, creates a song that
+	is 5 min long and has time divisions of 50 ms.
+
 The File format should follow exacly:
 
 ##### 
@@ -91,8 +94,12 @@ The File format should follow exacly:
 7 3
 # Pattern Constraint
 8 A B C | D
+# Completion Constraint
+10 100
 # Number of Registers Constraint
 13 3
+# Time Constraints
+14 10 50
 
 
 
