@@ -8,8 +8,8 @@ class Composer:
 	composition = None
 
 	# List of Possible Notes
-	notePool = ['A', 'As', 'B', 'C', 'Cs', 'D', 'Ds', 'E', 'F',\
-				'Fs', 'G', 'Gs']
+	notePool = ["A", "As", "B", "C", "Cs", "D", "Ds", "E", "F",\
+				"Fs", "G", "Gs"]
 
 	# Constructor
 	def __init__(self):
@@ -86,41 +86,56 @@ class Composer:
 	def selectNote(self, timestamp):
 		noteList = []
 
-		# Choose Note (Pitch)
-		finalPitch = 0
-		for pitch in self.notePool:
-			if self.checkAllForPitch(noteADT(pitch), timestamp):
-				finalPitch = pitch
-
-		# Choose Register
-		finalRegister = 1
-
-		# Choose Duration
-		finalDuration = self.durationProbability.get(timestamp)
-
-		# Add First note to list
-		if finalPitch and finalRegister:
-			noteList += [noteADT(finalPitch, finalRegister, finalDuration)]
-
-
+		### CHOOSE COMPLEMENTARY NOTE
 		# "Forward Checking" Add required notes
 		# 1) Pattern Matching
 		temp = self.pattern.match(self.composition, timestamp)
 		if len(temp) != 0:
-			temp = [noteADT(a) for a in temp] # TODO! Make appropriate choice of REGISTER and DURATION!
-			noteList += temp
+			for n in temp:
+				if self.checkCurrentPlaying(noteADT(n), timestamp):
+					tempDuration = self.durationProbability.get(timestamp)
+					tempRegister = self.selectRegister(timestamp)
+					temp = [noteADT(a, tempRegister, tempDuration) for a in temp] 
+					noteList += temp
 
-		return noteList
 
+		### IF NO NOTE IS REQUIRED, CHOOSE A VALID NOTE
+		if not noteList:
+			tempNoteList = []
+			# Choose Duration and Register
+			tempDuration = self.durationProbability.get(timestamp)
+			tempRegister = self.selectRegister(timestamp)
+
+			# Choose Note (Pitch)
+			for pitch in self.notePool:
+				tempNote = noteADT(pitch, tempRegister, tempDuration)
+				if self.checkAll(tempNote, timestamp):
+					tempNoteList += [tempNote]
+
+			noteList = self.noteSelector(tempNoteList, timestamp)
+
+		if noteList:
+			return noteList
+		return []
+
+	# Select Register
+	def selectRegister(self, timestamp):
+		return 1 # TODO!!! 
+
+	# Selects a note from a list of valid notes
+	def noteSelector(self, noteList, timestamp):
+		if noteList:
+			return [noteList[0]]
+		return []
 
 	##################################################
 	############# Constraint Checks ##################
 	##################################################
 
 	# Checks all constraints
-	def checkAllForPitch(self, note, timestamp):
+	def checkAll(self, note, timestamp):
 		return self.checkMaxNoteLimit(timestamp) and self.checkConsecutiveLimit(note, timestamp) \
-				and self.checkCurrentPlaying(note, timestamp)
+			and self.checkCurrentPlaying(note, timestamp) and self.composition.checkFutureConflict(note, timestamp)
 
 
 	# Returns the number of spaces available in a given timestamp
@@ -146,7 +161,7 @@ class Composer:
 
 	# Return true if the given note is NOT currently playing
 	def checkCurrentPlaying(self, note, timestamp):
-		n = self.consecutiveNoteLimit.get(timestamp)
+		n = self.consideration.get(timestamp)
 		return note not in self.composition.getN(n, timestamp) 
 
 	##################################################

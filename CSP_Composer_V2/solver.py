@@ -1,18 +1,16 @@
 # Makes the assignments on the world in order to create a song
 
 class Solver:
-	# Declare Variables
-	comp = None
-
 	# Constructor
-	def __init__(self):
-		pass
+	def __init__(self, threshold):
+		self.iteTreshold = threshold
 
 	# Solver
 	def solve(self, c):
 
 		# Attempt to Satisfy other Constraints
-		while 1:
+		ite = 0
+		while ite < self.iteTreshold:
 			for timeStamp in c.composition.keys():
 				noteList = c.selectNote(timeStamp)
 
@@ -20,6 +18,10 @@ class Solver:
 					for note in noteList:
 						c.composition.add(note, timeStamp)
 
-			if c.isComplete():
-				return c
+				if c.isComplete():
+					return c
+			ite += 1
+
+		print "Algorithm has reached maximum number of iterations..."
+		return c
 
