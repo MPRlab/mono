@@ -15,5 +15,9 @@
 7 3
 # Pattern Constraint
 8 A B C | D
+# Completion Constraint
+10 100
 # Number of Registers Constraint
-14 3
+13 3
+# Time Constraints
+14 10 50
