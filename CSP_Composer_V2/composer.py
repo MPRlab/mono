@@ -130,7 +130,14 @@ class Composer:
 
 	# Select Register
 	def selectRegister(self, timestamp):
-		return 1 # TODO!!! 
+		# Create register list from notes being currently played
+		n = self.consideration.get(timestamp)
+		notes = self.composition.getN(n, timestamp)
+		reg = [note.duration for note in notes]
+
+		print reg
+
+		return 1
 
 	# Selects a note from a list of valid notes
 	def noteSelector(self, noteList, timestamp):
