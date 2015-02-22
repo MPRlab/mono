@@ -98,6 +98,17 @@ class Composer:
 					temp = [noteADT(a, tempRegister, tempDuration) for a in temp] 
 					noteList += temp
 
+		# 2) Ary Inclusion Constraint
+		currentSet = self.composition.getN(self.consideration.get(timestamp), timestamp)
+		temp = self.aryInclusion.getInclusion(currentSet, timestamp)
+		if len(temp) != 0:
+			for n in temp:
+				if self.checkCurrentPlaying(noteADT(n), timestamp):
+					tempDuration = self.durationProbability.get(timestamp)
+					tempRegister = self.selectRegister(timestamp)
+					temp = [noteADT(a, tempRegister, tempDuration) for a in temp] 
+					noteList += temp
+
 		### IF NO NOTE IS REQUIRED, CHOOSE A VALID NOTE
 		if not noteList:
 			tempNoteList = []

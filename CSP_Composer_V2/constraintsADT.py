@@ -55,6 +55,27 @@ class aryADT:
 		return True
 
 
+	# Returns the notes that have to been played simultaneously
+	# given the current notes in set. Ex: If A B C have to be
+	# played together, and A B have beeb played, return C
+	def getInclusion(self, currentSet, timestamp):
+		constraint = self.get(timestamp)
+
+		validConstraint = False
+
+		for con in constraint:
+			for curNote in currentSet:
+				if curNote.note in con:
+					validConstraint = True
+				if validConstraint:
+					newList = []
+					for cNote in con:
+						if cNote != curNote.note:
+							newList += [cNote]
+					return newList
+
+		return []
+
 
 
 
