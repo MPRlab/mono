@@ -115,9 +115,10 @@ class patADT:
 			count = 0
 			n = len(both[0])
 			for tstamp in range(timestamp-n*stepSize, timestamp, stepSize):
-				j = (tstamp - (timestamp - n*stepSize)) / stepSize
-				if both[0][j] in [a.note for a in c.getN(n,timestamp)]:
-					count += 1
+				if tstamp >= 0:
+					j = (tstamp - (timestamp - n*stepSize)) / stepSize
+					if both[0][j] in [a.note for a in c.getN(n,timestamp)]:
+						count += 1
 
 			if count >= n:
 				tempList += both[1]
@@ -165,6 +166,20 @@ class songADT:
 
 		return tempList
 
+	# Returns TRUE if the addition of a given note does not
+	# lead to a conflict of "same note".
+	def checkFutureConflict(self, nt, timestamp):
+		tempList = []
+		n = nt.duration
+		for i in range(timestamp, timestamp+n, self.stepSize):
+			if i <= max(self.song):
+				for note in self.song[i]:
+					if isinstance(note, noteADT):
+						if note == nt:
+							return False
+
+		return True
+
 	# Adds the given note to the specified time slot
 	def add(self, note, timestamp):
 		self.song[timestamp] += [note]
@@ -175,7 +190,7 @@ class songADT:
 
 	# Returns a list of all time indexes
 	def keys(self):
-		return self.song.keys()
+		return sorted(self.song.keys())
 
 	# Returns the number of notes in the song
 	def countNotes(self):
@@ -212,6 +227,12 @@ class noteADT:
 		self.duration = duration
 		self.note = note
 		self.register = register
+
+	def setRegister(self, register):
+		self.register = register
+
+	def setDuration(self, duration):
+		self.duration = duration
 
 	def __str__(self):
 		return str(self.note) + ' ' + str(self.register) + ' ' + str(self.duration)

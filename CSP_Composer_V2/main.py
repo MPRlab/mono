@@ -21,7 +21,7 @@ p = Parser(c.inputFileName, comp)
 comp.setUp()  
 
 # Run the Solver
-sol = Solver()
+sol = Solver(100)
 solution = sol.solve(comp)
 print "Finished processing..."
 
