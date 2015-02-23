@@ -27,4 +27,4 @@
 # Number of Registers Constraint
 13 3
 # Time Constraints
-14 10 50
+14 100 250

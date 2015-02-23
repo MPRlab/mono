@@ -2,6 +2,7 @@
 # and current state of the composition.
 
 from constraintsADT import *
+import random
 
 class Composer:
 	# Time Indexes
@@ -133,11 +134,27 @@ class Composer:
 		# Create register list from notes being currently played
 		n = self.consideration.get(timestamp)
 		notes = self.composition.getN(n, timestamp)
-		reg = [note.duration for note in notes]
+		reg = [note.register for note in notes]
+		reg = list(set(reg)) # Remove duplicates
 
-		print reg
+		# Add range based on jump constraint
+		rangeReg = []
+		jump = self.jumpLimit.get(timestamp)
+		maxReg = self.numRegister.get(timestamp)
+		for r in reg:
+			rangeReg.append(r)
+			temp = r+jump
+			if temp <= maxReg:
+				rangeReg.append(temp)
+			temp = r-jump
+			if temp > 0:
+				rangeReg.append(temp)
 
-		return 1
+		# Notice that duplicates are NOT removed! That increases
+		# the chances of remainin within the current register...
+		if not rangeReg: # If Empty
+			return 1
+		return random.choice(rangeReg)
 
 	# Selects a note from a list of valid notes
 	def noteSelector(self, noteList, timestamp):

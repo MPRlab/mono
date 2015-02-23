@@ -15,15 +15,25 @@ class Writer:
 		# Create ordered list from ADT
 		tempList = self.c.composition.orderedList()
 
+		# Dictionary of notes
+		notePool = {"A":1, "As":2, "B":3, "C":4, "Cs":5, "D":6, "Ds":7,\
+		 		"E":8, "F":9, "Fs":10, "G":11, "Gs":12}
+
 		# Write to file
+		dTime = 0
+		previousTime = 0
 		for item in tempList:
-			time = str(item[0])
 			for note in item[1]:
+				time = item[0]
+				dTime = time - previousTime
+				previousTime = time
 				if isinstance(note, noteADT):
 					pitch = str(note.note)
 					dur = str(note.duration)
-					reg = str(note.register)
-					self.f.write(time + ' ')
-					self.f.write(pitch + ' ')
-					self.f.write(reg + ' ')
+					reg = note.register
+					pitch = int(notePool[pitch]) # Convert to Number
+					pitch *= reg
+					self.f.write(str(dTime) + ' ')
+					self.f.write(str(time) + ' ')
+					self.f.write(str(pitch) + ' ')
 					self.f.write(dur + '\n')
