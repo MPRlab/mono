@@ -1,0 +1,34 @@
+##### 
+# Note Limit Constraints
+1 0 3 
+# Consecutive Notes Constraints
+2 3
+# Regsiter Jump Limit Constraint
+3 4
+# Ary Exclusion Constraint
+4 G Gs
+4 G E
+4 A Fs
+4 B D
+# Ary Inclusion Constraint
+5 E As
+# Set beginning of Piece Constraint
+# Organized by: Contraint TimestampIndex Note Register Duration
+6 0 B 3 100
+6 1 Gs 3 300
+6 2 C 4 500 
+6 2 A 5 500
+# Consideration Constraint
+7 10
+# Pattern Constraint
+8 A B C | D
+8 G F G | E
+# Completion Constraint
+10 2000
+# Number of Registers Constraint
+13 6
+# Time Constraints
+14 100 250
+##### 100 300
+# Note Limit Constraints
+1 0 10
