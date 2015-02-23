@@ -1,0 +1,17 @@
+{
+	"righthand" : [ 2, "true" ],
+	"lefthand" : [ 2, "true" ],
+	"rightelbow" : [ 2, "true" ],
+	"leftelbow" : [ 2, "true" ],
+	"rightfoot" : [ 2, "true" ],
+	"leftfoot" : [ 2, "true" ],
+	"rightknee" : [ 2, "true" ],
+	"leftknee" : [ 2, "true" ],
+	"head" : [ 2, "true" ],
+	"torso" : [ 2, "true" ],
+	"leftshoulder" : [ 2, "true" ],
+	"rightshoulder" : [ 2, "true" ],
+	"lefthip" : [ 2, "true" ],
+	"righthip" : [ 2, "true" ],
+	"closesthand" : [ 2, "true" ]
+}
