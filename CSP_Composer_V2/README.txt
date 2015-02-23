@@ -60,8 +60,8 @@ types:
 	10) Completion Constraint: A song is deemed complete once it
 	has reached a certain number of notes.
 
-	11) Rhythm: Silence Probability: Sets the probability of a given
-	time stamp containing a silence.
+	11) Rhythm: Silence Probability: Sets the probability of a
+	given time stamp containing a silence.
 
 	12) Rhythm: Note Duration Probability: Sets the probability 
 	distribution for note durations.
