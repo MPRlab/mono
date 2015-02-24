@@ -1,6 +1,8 @@
+##############################################
+##############################################
 ##### 
 # Note Limit Constraints
-1 0 3 
+1 0 5
 # Consecutive Notes Constraints
 2 3
 # Regsiter Jump Limit Constraint
@@ -25,10 +27,28 @@
 8 G F G | E
 # Completion Constraint
 10 2000
+# Silence Probability
+11 50
+# Note Duration Constraint 
+12 1 500 2000
 # Number of Registers Constraint
-13 6
+13 4
 # Time Constraints
-14 100 250
-##### 100 300
+14 300 250
+##############################################
+##############################################
+##### 100 1000 
 # Note Limit Constraints
 1 0 10
+##############################################
+##############################################
+##### 1500 5000
+# Note Limit Constraints
+1 0 2
+# Note Duration Constraint 
+12 1 200 500
+##############################################
+##############################################
+##### 5000 20000
+# Silence Probability
+11 70

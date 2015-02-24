@@ -110,6 +110,15 @@ class Composer:
 					temp = [noteADT(a, tempRegister, tempDuration) for a in temp] 
 					noteList += temp
 
+		### ADD SILENCE
+		# If no note has been added run dice for addition of silence
+		# Note that silence is only added to locations where no note
+		# has been assigned.
+		tempP = random.randint(0,100)
+		if tempP > self.silenceProbability.get(timestamp):
+			if len(noteList) and not self.composition.countNotesInTime(timestamp):
+				return []
+
 		### IF NO NOTE IS REQUIRED, CHOOSE A VALID NOTE
 		if not noteList:
 			tempNoteList = []

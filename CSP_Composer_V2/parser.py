@@ -170,9 +170,9 @@ class Parser:
 		default = [1,100,1000]
 		try:
 			line = map(int, line)
-			self.c.addNoteDurationProbability([line[0],line[1],line[2]], self.valid)
+			self.c.addDurationProbability([line[1],line[2],line[3]], self.valid)
 		except:
-			self.c.addNoteDurationProbability(default, valid)
+			self.c.addDurationProbability(default, valid)
 			print 'Line: ' + str(line) + ' is broken.'
 			print 'Constraint set to: ' + str(default)
 

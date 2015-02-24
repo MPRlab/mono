@@ -32,8 +32,8 @@ class Writer:
 					dur = str(note.duration)
 					reg = note.register
 					pitch = int(notePool[pitch]) # Convert to Number
-					pitch *= reg
+					pitch += reg*12
 					self.f.write(str(dTime) + ' ')
 					self.f.write(str(time) + ' ')
-					self.f.write(str(pitch) + ' ')
+					self.f.write(str(pitch+29) + ' ')
 					self.f.write(dur + '\n')

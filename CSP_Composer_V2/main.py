@@ -9,12 +9,18 @@ from composer import *
 from parser import *
 from solver import *
 from writer import *
+from logger import *
 import random as rdm
 
 rdm.seed(1) ## TODO!!
 
 # Read user input arguments
 c = Config()
+
+# Create Logger Object
+l = None
+if c.logFileName != None:
+	l = Logger(c.logFileName)
 
 # Create composer object
 comp = Composer()
@@ -24,7 +30,7 @@ p = Parser(c.inputFileName, comp)
 comp.setUp()  
 
 # Run the Solver
-sol = Solver(10)
+sol = Solver(c.numIterations, l)
 solution = sol.solve(comp)
 
 # Write Result to file

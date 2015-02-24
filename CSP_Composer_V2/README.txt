@@ -65,15 +65,15 @@ types:
 
 	12) Rhythm: Note Duration Probability: Sets the probability 
 	distribution for note durations.
-		Should be a set of integers that selects from a given set of
-		probability distributions. Ex: 1 10 100 is a uniform
-		distribution from 10 to 100.
+		Should be a set of integers that selects from a given
+		set of probability distributions. Ex: 1 10 100 is a
+		uniform distribution from 10 to 100.
 
-	13) Number of Registers Constraint: Number of registers in the 
-	instrument where the song will be played.
+	13) Number of Registers Constraint: Number of registers in
+	the instrument where the song will be played.
 
-	14) Time parameters of the song. Ex: 300 50, creates a song that
-	is 5 min long and has time divisions of 50 ms.
+	14) Time parameters of the song. Ex: 300 50, creates a song
+	that is 5 min long and has time divisions of 50 ms.
 
 The File format should follow exacly:
 
