@@ -1,0 +1,55 @@
+Kinect Max Interface Readme
+By Andrew Walter
+
+---------------------------------------
+------------ Installation -------------
+---------------------------------------
+
+Installation:
+ - Windows:
+
+Installation on Windows is kind of a pain, and, if using Windows 8, must be done after rebooting into unsigned driver mode.
+
+Download either: 
+OpenNI_NITE_Installer-win32-0.27.zip or 
+OpenNI_NITE_Installer-win64-0.27.zip 
+from (https://code.google.com/p/simple-openni/downloads/list?can=1&q=&colspec=Filename+Summary+Uploaded+ReleaseDate+Size+DownloadCount)
+
+Note: I chose the 64 bit version (win64), but the 32 bit version should work fine as well. 
+If you choose the 32 bit version, just replace any instances of "64" in these instructions with "32"
+
+Unzip that file into a temporary directory.
+
+Install the 4 files in that directory in this order:
+openni-win64-1.5.4.0-dev.msi
+sensor-win64-5.1.2.1-redist.msi
+SensorKinect092-Bin-Win64-v5.1.2.1.msi
+nite-win64-1.5.2.21-dev.msi
+
+After installing all of these packages, reboot your computer.
+
+Next, plug the Kinect into your computer. Windows should find and install the correct drivers automatically.
+
+If a new device installation window comes up, select the option that says "Browse my computer for drivers" and
+browse to the "C:\Program Files\PrimeSense\SensorKinect\Driver" folder. Windows should then set the Kinect up with 
+the correct drivers.
+
+If the Kinect still doesn't work, you should open Device Manager (open the Control Panel, click System and Security, 
+and click Device Manager under System) and look for a strange entry. [TODO - will elaborate later] Right click on
+that entry and select "Update Drivers". When the window comes up, select "Browse my computer for drivers" and
+browse to the "C:\Program Files\PrimeSense\SensorKinect\Driver" folder. Windows should then set the Kinect up with 
+the correct drivers.
+
+Finally, download Synapse for Windows from (http://synapsekinect.tumblr.com/post/6305020721/download)
+and run their installer. If you encounter problems, there are installation instructions 
+here (http://synapsekinect.tumblr.com/post/6698860570/windows-install-instructions). Just 
+start from Step 6, since you've already completed the earlier steps.
+
+- OS X: 
+
+Installation on OS X is significantly easier.
+
+Download Synapse for Mac from (http://synapsekinect.tumblr.com/post/6305020721/download)
+Unzip the application file to whatever folder you want to run it from (the Applications folder is a good option).
+Plug in your Kinect and run the Synapse application.
+
