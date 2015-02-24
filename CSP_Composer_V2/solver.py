@@ -2,8 +2,9 @@
 
 class Solver:
 	# Constructor
-	def __init__(self, threshold=100):
+	def __init__(self, threshold=10, logger=None):
 		self.iteTreshold = threshold
+		self.logger = logger
 
 	# Solver
 	def solve(self, c):
@@ -20,8 +21,13 @@ class Solver:
 
 				if c.isComplete():
 					print "Algorithm completed successfully!"
+					if self.logger != None:
+						self.logger.logCompletion(c, ite)
 					return c
 			ite += 1
+
+			if self.logger != None:
+				self.logger.logIteration(c, ite)
 
 		print "Algorithm has reached maximum number of iterations..."
 		return c

@@ -6,7 +6,7 @@
 #define STEP 10
 #define EN 8
 
-#define NUM_STEP 1300
+#define NUM_STEP 1000
 #define STEP_DELAY 1
 #define RECOIL_DELAY 3000
 

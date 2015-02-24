@@ -256,6 +256,14 @@ class songADT:
 	def orderedList(self):
 		return sorted(self.song.items(), key=operator.itemgetter(0))
 
+	# Count Silences in the current composition
+	def countSilence(self):
+		count = 0
+		for val in self.song.values():
+			if val == []:
+				count += 1
+		return count
+
 # Maintains a note
 class noteADT:
 
