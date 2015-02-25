@@ -14,7 +14,7 @@ peek at the initial priority.  While smallest priority has elapsed, pop event of
 
 
 
-
+int MappingBase = 70;
 int drumMapping[] = {54, 53, 52, 51, 58, 57, 56, 55};
 byte drumNum;
 byte drumVel;
