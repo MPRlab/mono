@@ -107,8 +107,7 @@ class Composer:
 				if self.checkCurrentPlaying(noteADT(n), timestamp):
 					tempDuration = self.durationProbability.get(timestamp)
 					tempRegister = self.selectRegister(timestamp)
-					temp = [noteADT(a, tempRegister, tempDuration) for a in temp] 
-					noteList += temp
+					noteList += [noteADT(n, tempRegister, tempDuration)]
 
 		### ADD SILENCE
 		# If no note has been added run dice for addition of silence

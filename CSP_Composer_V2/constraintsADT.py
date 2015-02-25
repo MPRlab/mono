@@ -199,7 +199,6 @@ class songADT:
 					if isinstance(note, noteADT):
 						if note.duration > timestamp-i:
 							tempList += [note]
-
 		return tempList
 
 	# Returns TRUE if the addition of a given note does not
