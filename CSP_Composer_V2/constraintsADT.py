@@ -272,6 +272,17 @@ class songADT:
 				regList += [nt.register]
 		return list(set(regList))
 
+	# Count Registers. Returns a dictionary with the occurence
+	# of each register.
+	def countRegisters(self):
+		tempDict = {key:0 for key in self.enumerateRegisters()}
+
+		for value in self.song.values():
+			for nt in value:
+				tempDict[nt.register] += 1
+
+		return tempDict
+
 # Maintains a note
 class noteADT:
 
