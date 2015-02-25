@@ -168,7 +168,7 @@ class Composer:
 	# Selects a note from a list of valid notes
 	def noteSelector(self, noteList, timestamp):
 		if noteList:
-			return [noteList[0]]
+			return [random.choice(noteList)]
 		return []
 
 	##################################################

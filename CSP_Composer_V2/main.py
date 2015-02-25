@@ -12,7 +12,7 @@ from writer import *
 from logger import *
 import random as rdm
 
-rdm.seed(1) ## TODO!!
+rdm.seed(2) ## TODO!!
 
 # Read user input arguments
 c = Config()

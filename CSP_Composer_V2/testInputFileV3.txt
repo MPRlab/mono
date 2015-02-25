@@ -11,7 +11,6 @@
 4 G Gs
 4 G E
 4 A Fs
-4 B D
 # Ary Inclusion Constraint
 5 E As
 # Set beginning of Piece Constraint
@@ -21,12 +20,12 @@
 6 2 C 4 500 
 6 2 A 5 500
 # Consideration Constraint
-7 10
+7 30
 # Pattern Constraint
 8 A B C | D
 8 G F G | E
 # Completion Constraint
-10 2000
+10 5000
 # Silence Probability
 11 50
 # Note Duration Constraint 
@@ -34,7 +33,7 @@
 # Number of Registers Constraint
 13 4
 # Time Constraints
-14 300 200
+14 300 150
 ##############################################
 ##############################################
 ##### 100 1000 
@@ -54,6 +53,8 @@
 11 70
 # Register Jump Limit Constraint
 3 0
+# Ary Exclusion Constraint
+4 G C
 ##############################################
 ##############################################
 ##### 21000 22000
@@ -61,8 +62,8 @@
 11 100
 ##############################################
 ##############################################
-##### 21000 22000
+##### 50000 200000
 # Silence Probability
-11 0
+11 20
 # Note Duration Constraint 
-12 1 100 250
+12 1 2000 3000
