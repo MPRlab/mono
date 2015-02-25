@@ -264,6 +264,14 @@ class songADT:
 				count += 1
 		return count
 
+	# Enumerate the registers currently used in the composition
+	def enumerateRegisters(self):
+		regList = []
+		for value in self.song.values():
+			for nt in value:
+				regList += [nt.register]
+		return list(set(regList))
+
 # Maintains a note
 class noteADT:
 
