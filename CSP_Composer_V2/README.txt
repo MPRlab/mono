@@ -75,6 +75,11 @@ types:
 	14) Time parameters of the song. Ex: 300 50, creates a song
 	that is 5 min long and has time divisions of 50 ms.
 
+	15) Probability Seed: Determines the seed to be used in the
+	random number generators. Guarantees that a given input file
+	always generates the same output. Note that this attribute 
+	is ubiquitous to the file.
+
 The File format should follow exacly:
 
 ##### 
