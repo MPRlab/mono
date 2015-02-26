@@ -96,8 +96,8 @@ class Composer:
 				if self.checkCurrentPlaying(noteADT(n), timestamp):
 					tempDuration = self.durationProbability.get(timestamp)
 					tempRegister = self.selectRegister(timestamp)
-					temp = [noteADT(a, tempRegister, tempDuration) for a in temp] 
-					noteList += temp
+					tempNote = [noteADT(a, tempRegister, tempDuration) for a in temp] 
+					noteList += tempNote
 
 		# 2) Ary Inclusion Constraint
 		currentSet = self.composition.getN(self.consideration.get(timestamp), timestamp)
@@ -151,12 +151,9 @@ class Composer:
 		maxReg = self.numRegister.get(timestamp)
 		for r in reg:
 			rangeReg.append(r)
-			temp = r+jump
-			if temp <= maxReg:
-				rangeReg.append(temp)
-			temp = r-jump
-			if temp > 0:
-				rangeReg.append(temp)
+			tempLow = r if r < 0 else 0
+			tempHigh = r if r > maxReg else maxReg
+			rangeReg += range(tempLow, tempHigh)
 
 		# Notice that duplicates are NOT removed! That increases
 		# the chances of remainin within the current register...

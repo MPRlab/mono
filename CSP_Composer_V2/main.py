@@ -20,7 +20,7 @@ c = Config()
 # Create Logger Object
 l = None
 if c.logFileName != None:
-	l = Logger(c.logFileName)
+	l = Logger(c.logFileName, c.verbose)
 
 # Create composer object
 comp = Composer()

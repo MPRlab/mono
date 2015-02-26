@@ -8,6 +8,7 @@ class Config:
 	outputFileName = None
 	logFileName = None
 	numIterations = 5
+	verbose = False
 
 	def __init__(self):
 		# If two arguments are provided assume input and output file
@@ -33,10 +34,14 @@ class Config:
 				self.numIterations = int(numIterations)
 				iteIsNext = False
 			
-			if arg == '-l': # Enable Logging and Next argument is file
+			elif arg == '-l': # Enable Logging and Next argument is file
 				logIsNext = True
 			elif logIsNext:
 				self.logFileName = arg
 				logIsNext = False
+
+			elif arg == '-v': # Enable Reporting (verbose mode)
+				self.verbose = True
+			
 
 
