@@ -8,7 +8,6 @@
 # Regsiter Jump Limit Constraint
 3 4
 # Ary Exclusion Constraint
-4 G Gs
 4 G E
 4 A Fs
 # Ary Inclusion Constraint
@@ -40,7 +39,7 @@
 # Completion Constraint
 10 4000
 # Silence Probability
-11 60
+11 65
 # Note Duration Constraint 
 12 1 300 3000
 # Number of Registers Constraint
@@ -51,9 +50,11 @@
 15 42
 ##############################################
 ##############################################
-##### 100 1000 
+##### 1000 5000
 # Note Limit Constraints
-1 0 10
+1 0 4
+# Note Duration Constraint (GAUSSIAN!)
+12 2 1200 500
 ##############################################
 ##############################################
 ##### 1500 7000

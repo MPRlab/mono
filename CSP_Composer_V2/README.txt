@@ -85,31 +85,77 @@ types:
 
 The File format should follow exacly:
 
+##############################################
+##############################################
 ##### 
 # Note Limit Constraints
-1 0 3 
+1 0 5
 # Consecutive Notes Constraints
 2 3
 # Regsiter Jump Limit Constraint
-3 1
+3 4
+# Ary Exclusion Constraint
+4 G Gs
+4 G E
+4 A Fs
+# Ary Inclusion Constraint
+5 E As
 # Set beginning of Piece Constraint
 # Organized by: Contraint TimestampIndex Note Register Duration
-6 0 A 1 100
-6 1 B 1 300
-6 2 C 1 500 
-6 2 A 1 500
+6 0 A 3 1000
+6 0 B 3 1000
+6 0 C 3 1000
+6 1 Gs 3 300
+6 2 C 4 500 
+6 2 A 5 500
+6 3 As 5 500
+6 4 B 2 500
+6 5 C 2 500
+6 6 Cs 2 500
+6 7 D 2 500
+6 8 Ds 2 500
+6 9 E 2 500
+6 10 F 2 500
+6 11 Fs 2 500
+6 12 G 2 500
+6 13 Gs 2 500
 # Consideration Constraint
-7 3
+7 20
 # Pattern Constraint
 8 A B C | D
+8 G F G | E
 # Completion Constraint
-10 100
+10 4000
+# Silence Probability
+11 60
+# Note Duration Constraint 
+12 1 300 3000
 # Number of Registers Constraint
-13 3
+13 5
 # Time Constraints
-14 10 50
+14 300 150
+# Probability Seed
+15 42
+##############################################
+##############################################
+##### 100 1000 
+# Note Limit Constraints
+1 0 10
+##############################################
+##############################################
+##### 1500 7000
+# Note Limit Constraints
+1 0 2
+# Note Duration Constraint 
+12 1 200 500
+# Ary Inclusion Constraint
+5 A B C D E F G
 
+##########################################################
+############ SECTION 3: OUTPUT FILE FORMAT ###############
+##########################################################
 
+TO BE WRITTEN...
 
 
 

@@ -112,7 +112,6 @@ class pADT:
 			return int(rdm.uniform(probability[1], probability[2]))
 
 		if probability[0] == 2: # Gaussian Distribution
-			print "IM HERE"
 			return int(rdm.gauss(probability[1], probability[2]))
 
 		return int(rdm.uniform(probability[1], probability[2]))
