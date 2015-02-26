@@ -20,7 +20,7 @@
 6 2 C 4 500 
 6 2 A 5 500
 # Consideration Constraint
-7 30
+7 20
 # Pattern Constraint
 8 A B C | D
 8 G F G | E

@@ -68,6 +68,9 @@ class Parser:
 				elif line[0] == '14': # Time parameters of song
 					self.timeParameters(line)
 
+				elif line[0] == '15': # Probability Seed
+					self.probabilitySeed(line)
+
 
 	# Parses a line containing the note limit constraint
 	def noteLimitParser(self, line):
@@ -201,6 +204,14 @@ class Parser:
 		try:
 			tempNote = noteADT(line[2], int(line[3]), int(line[4]))
 			self.c.initialNotes += [[int(line[1]), tempNote]]
+		except:
+			print 'Line: ' + str(line) + ' is broken.'
+			print 'Constraint ignored!'
+
+	# Parses the probability seed constraint
+	def probabilitySeed(self, line):
+		try:
+			self.c.pSeed = int(line[1])
 		except:
 			print 'Line: ' + str(line) + ' is broken.'
 			print 'Constraint ignored!'

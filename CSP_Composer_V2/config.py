@@ -42,6 +42,7 @@ class Config:
 
 			elif arg == '-v': # Enable Reporting (verbose mode)
 				self.verbose = True
+
 			
 
 

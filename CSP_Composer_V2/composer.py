@@ -28,6 +28,7 @@ class Composer:
 		self.timeParameters = lADT()
 		self.numRegister = lADT()
 		self.initialNotes = [] # List of [timestamp, noteADT]
+		self.pSeed = None
 
 	##################################################
 	############### ADDER METHODS ####################
@@ -67,6 +68,9 @@ class Composer:
 
 	def addTimeParameters(self, par):
 		self.timeParameters.add(par)
+
+	def addProbabilitySeed(self, p, valid):
+		self.pSeed.add(p, valid)
 
 	##################################################
 	############# ALGORITHM RELATED ##################
@@ -217,6 +221,10 @@ class Composer:
 
 		for note in self.initialNotes:
 			self.composition.add(note[1],note[0]*timeParameters[1])
+
+		# Set the probability seed if defined
+		if self.pSeed != None:
+			random.seed(self.pSeed)
 
 
 
