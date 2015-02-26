@@ -68,6 +68,9 @@ types:
 		Should be a set of integers that selects from a given
 		set of probability distributions. Ex: 1 10 100 is a
 		uniform distribution from 10 to 100.
+		Options include:
+			1 min max - uniform distribution
+			2 mu sigma - gauss distribution
 
 	13) Number of Registers Constraint: Number of registers in
 	the instrument where the song will be played.
