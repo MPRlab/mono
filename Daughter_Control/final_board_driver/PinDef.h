@@ -45,6 +45,7 @@
 #define DRVS A12
 #define DRV_FAULT 49,48,47,46,45,44,A11 // DRV1,...,DRV6,DRVS
 #define DRV_ENBL 12,11,10,9,8,7,6 // DRV1,...,DRV6,DRVS
+#define NUM_SOLENOIDS 25
 
 /* Other Pins */
 #define LED_OK 42
@@ -63,5 +64,16 @@
 #define STEPPER_MOVE 0x40
 #define STEPPER_MODE 0x41
 
+/* Stepper Mode identifiers */
+#define ALWAYS_ENABLED 0x00
+#define ENABLED_WHILE_MOVING 0x01
+
+/* Stepper Motor Speed */
+#define STEPPER_DELAY 10
+
+/* Status Messages */
+#define ACKNOWLEDGEMENT 0xFD
+#define CHECKSUM_ERROR 0x00
+// more statuses go here
 
 #endif

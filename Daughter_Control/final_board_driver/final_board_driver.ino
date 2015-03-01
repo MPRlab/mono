@@ -1,5 +1,6 @@
-#include <PinDef.h>
+#include "PinDef.h"
 #include <Wire.h>
+
 /*
 	Copyright Nathan Hughes 2015
               Paulo Cavahlo 2015
@@ -21,14 +22,22 @@
     somewhere in this repository.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-int pinSolOn[] = {DRV1, DRV2, DRV3, DRV4, DRV5, DRV6, DRVS};
-int pinSolEnbl[] = {DRV_ENBL}; // Active LOW
-int pinSolFault[] = {DRV_FAULT}; // Fault when LOW
+byte pinSolOn[] = {DRV1, DRV2, DRV3, DRV4, DRV5, DRV6, DRVS};
+byte pinSolEnbl[] = {DRV_ENBL}; // Active LOW
+byte pinSolFault[] = {DRV_FAULT}; // Fault when LOW
 
-int iSolOn = -1; // Keeps track of which solenoid was last toggled
-int iStep = 1; // Keeps track of the step for the stepper motor
+byte BEGIN_FLAG = 0x00;
+byte FRAME_ID = 0x00;
+byte LENGTH = 0x00;
+byte INCOMING = 0x00;
+byte MESSAGE_COUNT = 0x00;
+byte CHECKSUM_VALUE = 0x00;
+byte STEPPER_MODE_FLAG = ALWAYS_ENABLED;
+byte message_bytes[NUM_SOLENOIDS];
 
-void step(int stepNum){
+int step_position = 0;
+
+void step(byte stepNum){
 	/* Set Stepper Driver to Given Full Step */
 	switch (stepNum){
 		case 1: 
@@ -43,13 +52,13 @@ void step(int stepNum){
 			digitalWrite(STEP_IN3, HIGH);
 			digitalWrite(STEP_IN4, LOW);
 			break;
-		case 4: 
+		case 3: 
 			digitalWrite(STEP_IN1, LOW);
 			digitalWrite(STEP_IN2, HIGH);
 			digitalWrite(STEP_IN3, LOW);
 			digitalWrite(STEP_IN4, HIGH);
 			break;
-		case 3: 
+		case 4: 
 			digitalWrite(STEP_IN1, HIGH);
 			digitalWrite(STEP_IN2, HIGH);
 			digitalWrite(STEP_IN3, LOW);
@@ -64,13 +73,167 @@ void step(int stepNum){
 	}
 }
 
+void turn_all_on() {
+	for (byte i = 0; i < NUM_SOLENOIDS; i ++) {
+		digitalWrite(pinSolOn[i], HIGH);
+	}
+}
 
-byte BEGIN_FLAG = 0x00;
-byte FRAME_ID = 0x00;
-byte LENGTH = 0x00;
-byte INCOMING;
-byte MESSAGE_COUNT = 0x00;
-byte CHECKSUM_VALUE = 0x00;
+void turn_all_off() {
+	for (byte i = 0; i < NUM_SOLENOIDS; i ++) {
+		digitalWrite(pinSolOn[i], LOW);
+	}
+}
+
+void set_enables(byte incoming) {
+	if (0x01 && incoming) {
+		analogWrite(pinSolEnbl[0], 123);
+	}
+	else {
+		analogWrite(pinSolEnbl[0], 0);	
+	}
+	if (0x02 && incoming) {
+		analogWrite(pinSolEnbl[1], 123);
+	}
+	else {
+		analogWrite(pinSolEnbl[1], 0);	
+	}
+	if (0x04 && incoming) {
+		analogWrite(pinSolEnbl[2], 123);
+	}
+	else {
+		analogWrite(pinSolEnbl[2], 0);	
+	}
+	if (0x0F && incoming) {
+		analogWrite(pinSolEnbl[3], 123);
+	}
+	else {
+		analogWrite(pinSolEnbl[3], 0);	
+	}
+	if (0x10 && incoming) {
+		analogWrite(pinSolEnbl[4], 123);
+	}
+	else {
+		analogWrite(pinSolEnbl[4], 0);	
+	}
+	if (0x20 && incoming) {
+		analogWrite(pinSolEnbl[5], 123);
+	}
+	else {
+		analogWrite(pinSolEnbl[5], 0);	
+	}
+}
+
+void set_single_on(byte incoming) {
+	if (0 < incoming && incoming < NUM_SOLENOIDS) {
+		digitalWrite(pinSolOn[incoming], HIGH); 
+	}
+}
+
+void set_single_off(byte incoming) {
+	if (0 < incoming && incoming < NUM_SOLENOIDS) {
+		digitalWrite(pinSolOn[incoming], LOW);
+	}
+}
+
+void set_solenoids_on() {
+	for (int i = 0; i < MESSAGE_COUNT-1; i++) {
+		digitalWrite(pinSolOn[message_bytes[i]], HIGH);
+	}
+}
+
+void set_solenoids_off() {
+	for (int i = 0; i < MESSAGE_COUNT-1; i++) {
+		digitalWrite(pinSolOn[message_bytes[i]], LOW);
+	}
+}
+
+void stepper_move(int steps) {
+	step_position += steps;
+  	if (steps < 0) {
+		steps = -1 * steps;
+		for (int i = 0; i < steps; i ++) {
+			for (byte j = 4; j > 0; j--) {
+				step(j);
+			}
+			delay(STEPPER_DELAY);
+		}
+	}
+	else {
+		for (int i = 0; i < steps; i ++) {
+			for (int j = 1; j <= 4; j++) {
+				step(j);
+			}
+			delay(STEPPER_DELAY);
+		}
+	}
+
+}
+
+void process_checksum(byte incoming, byte checksum_value) {
+	if (incoming == 0xFF - checksum_value) {
+		Wire.write(ACKNOWLEDGEMENT);
+	}
+	else {
+		Wire.write(CHECKSUM_ERROR);
+	}
+}
+
+void process_message(byte incoming, byte frame_id, byte final) {
+	switch (frame_id) {
+		case SOLENOID_ENABLE:
+			set_enables(incoming);
+			break;
+		case SOLENOID_MULTIPLE_ON:
+			if (final) {
+				message_bytes[MESSAGE_COUNT-1] = incoming;
+				set_solenoids_on();
+			}
+			else {
+				message_bytes[MESSAGE_COUNT-1] = incoming;
+			}
+			break;
+		case SOLENOID_SINGLE_ON:
+			set_single_on(incoming);
+			break;
+		case SOLENOID_ALL_ON:
+			turn_all_on();
+			break;
+		case SOLENOID_MULTIPLE_OFF:
+			if (final) {
+				message_bytes[MESSAGE_COUNT-1] = incoming;
+				set_solenoids_off();
+			}
+			else {
+				message_bytes[MESSAGE_COUNT-1] = incoming;
+			}
+			break;
+		case SOLENOID_SINGLE_OFF:
+			set_single_off(incoming);
+			break;
+		case SOLENOID_ALL_OFF:
+			turn_all_off();
+			break;
+		case STEPPER_MOVE:
+			if (final) {
+				stepper_move( ( ( (int) message_bytes[0] ) << 8 ) + incoming - step_position );
+			}
+			else {
+				message_bytes[0] = incoming;
+			}
+			break;
+		case STEPPER_MODE:
+			if (incoming == 0x01) {
+				STEPPER_MODE_FLAG = ALWAYS_ENABLED;
+			}
+			if (incoming == 0x02) {
+				STEPPER_MODE_FLAG = ENABLED_WHILE_MOVING;
+			}
+			break;
+		default:
+			break;
+	}
+}
 
 void process_I2C() {
 	INCOMING = Wire.read();
@@ -92,40 +255,19 @@ void process_I2C() {
 				CHECKSUM_VALUE += INCOMING;
 				break;
 			default:
-				if (MESSAGE_COUNT <= LENGTH) {
-					process_message(INCOMING, FRAME_ID);
+				if (MESSAGE_COUNT < LENGTH) {
+					process_message(INCOMING, FRAME_ID, 0);
 					CHECKSUM_VALUE += INCOMING;
 				}	
+				if (MESSAGE_COUNT == LENGTH) {
+					process_message(INCOMING, FRAME_ID, 1);
+				}
 				else {
 					process_checksum(INCOMING, CHECKSUM_VALUE);
 				}
 				MESSAGE_COUNT++;
 				break;
 		}
-	}
-}
-
-
-void process_message(byte incoming, byte frame_id) {
-	switch (frame_id) {
-		case SOLENOID_ENABLE:
-			break;
-		case SOLENOID_MULTIPLE_ON:
-			break;
-		case SOLENOID_SINGLE_ON:
-			break;
-		case SOLENOID_ALL_ON:
-			break;
-		case SOLENOID_MULTIPLE_OFF:
-			break;
-		case SOLENOID_SINGLE_OFF:
-			break;
-		case SOLENOID_ALL_OFF:
-			break;
-		case STEPPER_MODE:
-			break;
-		case STEPPER_MODE:
-			break;
 	}
 }
 
@@ -185,17 +327,3 @@ void loop(){
 		process_I2C();
 	}
 }
-
-
-	delay(100); // Determines Time Between Events
-	/* Reset Solenoid Tracker if Reached End of List */
-	iSolOn = 
-		(iSolOn >= sizeof(pinSolOn)/sizeof(int))? 0 : iSolOn + 1;
-	/* Toggle All Solenoids and OK LED */
-	digitalWrite(pinSolOn[iSolOn], !digitalRead(pinSolOn[iSolOn]));
-
-	/* Reset Step TRacker if Reached 4 */
-	iStep = (iStep >= 4)? 1 : iStep + 1;
-	/* Toggle All Solenoids and OK LED */
-	/* Step the Stepper Driver */
-	step(iStep);
