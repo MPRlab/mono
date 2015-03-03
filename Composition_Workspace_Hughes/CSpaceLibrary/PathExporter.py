@@ -49,7 +49,6 @@ class PathExporter:
             for configuration in path:
                 durations = configuration.get_all_coordinates()[configuration.get_voices():]
                 pitches = configuration.get_all_coordinates()[:configuration.get_voices()]
-                print configuration
                 curr_time_0 = 0
                 curr_index_0 = 0
                 curr_index_1 = 0
@@ -105,7 +104,6 @@ class PathExporter:
             for configuration in path:
                 durations = configuration.get_all_coordinates()[configuration.get_voices():]
                 pitches = configuration.get_all_coordinates()[:configuration.get_voices()]
-                print configuration
                 curr_time_0 = 0
                 curr_index_0 = 0
                 curr_index_1 = 0
