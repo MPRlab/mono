@@ -98,3 +98,58 @@ class PathExporter:
                         curr_time_0 += 1
                         time += duration_0
 
+    @staticmethod
+    def export_path_multiple_notes_with_voices(path, filename):
+        with open(filename, 'w') as f:
+            time = 0
+            for configuration in path:
+                durations = configuration.get_all_coordinates()[configuration.get_voices():]
+                pitches = configuration.get_all_coordinates()[:configuration.get_voices()]
+                print configuration
+                curr_time_0 = 0
+                curr_index_0 = 0
+                curr_index_1 = 0
+                curr_time_1 = 0
+                while curr_index_0 < len(durations[0]) and curr_index_1 < len(durations[1]):
+                    if curr_time_1 == curr_time_0:
+                        pitch_0 = pitches[0][curr_index_0]
+                        pitch_1 = pitches[1][curr_index_1]
+                        duration_0 = durations[0][curr_index_0]
+                        duration_1 = durations[1][curr_index_1]
+
+                        line = "%d %d %d 0\n" % (time, pitch_0, duration_0)
+                        f.write(line)
+
+                        line = "%d %d %d 1\n" % (time, pitch_1, duration_1)
+                        f.write(line)
+
+                        curr_time_0 += duration_0
+                        curr_time_1 += duration_1
+                        curr_index_0 += 1
+                        curr_index_1 += 1
+                        if duration_0 < duration_1:
+                            time += duration_0
+                        else:
+                            time += duration_1
+                    elif curr_time_1 > curr_time_0:
+                        pitch_1 = pitches[1][curr_index_1]
+                        duration_1 = durations[1][curr_index_1]
+
+                        line = "%d %d %d 1\n" % (time, pitch_1, duration_1)
+                        f.write(line)
+
+                        curr_time_1 += duration_1
+                        curr_time_1 += 1
+                        curr_index_1 += 1
+                        time += duration_1
+                    else:
+                        pitch_0 = pitches[0][curr_index_0]
+                        duration_0 = durations[0][curr_index_0]
+
+                        line = "%d %d %d 0\n" % (time, pitch_0, duration_0)
+                        f.write(line)
+
+                        curr_index_0 += 1
+                        curr_time_0 += duration_0
+                        curr_time_0 += 1
+                        time += duration_0
