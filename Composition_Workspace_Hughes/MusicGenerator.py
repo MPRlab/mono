@@ -55,6 +55,7 @@ def main(outfile1, outfile2):
     collision_checker = CollisionChecker(pitch_checker, duration_checker, [1, 1], 1)
     roadmap_builder = CSpaceSampler.from_configuration_generator(generator, collision_checker)
     prm = roadmap_builder.build_prm(5, 100)
+    generator.print_number_of_themes()
     largest_connected_component = sorted(nx.connected_components(prm), key=len, reverse=True)[0]
     connected_prm = prm.subgraph(largest_connected_component)
     planner = PathPlanner(connected_prm)
