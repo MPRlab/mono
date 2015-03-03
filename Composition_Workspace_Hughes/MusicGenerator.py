@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 """
     Copyright Nathan Hughes 2015
 
@@ -31,31 +32,39 @@ from CSpaceLibrary.PitchRuleChecker import PitchRuleChecker
 from CSpaceLibrary.DurationRuleChecker import DurationRuleChecker
 import random
 import networkx as nx
+import sys
 
 
-"""
-Main file to generate a composition
-"""
-d_means = [1000, 300]
-d_variances = [200, 500]
-p_means = [60, 43]
-p_variances = [5, 3]
-n_means = [2, 5]
-n_variances = [1, 1]
-r_probabilities = [0.2, 0.1]
-pitch_rule_checker = PitchRuleChecker(5, [0.05, 0.05, 0.05, 0.05])
-duration_rule_checker = DurationRuleChecker(3, [0.05])
-generator = ComplexConfigurationGenerator(d_means, d_variances, p_means, p_variances, n_means, n_variances,
-                                          r_probabilities, pitch_rule_checker, duration_rule_checker,
-                                          (50, 10000), (29, 89), (1, 200))
-pitch_checker = PitchChecker.from_configuration_generator(generator)
-duration_checker = DurationChecker.from_configuration_generator(generator)
-collision_checker = CollisionChecker(pitch_checker, duration_checker, [1, 1], 1)
-roadmap_builder = CSpaceSampler.from_configuration_generator(generator, collision_checker)
-prm = roadmap_builder.build_prm(5, 100)
-largest_connected_component = sorted(nx.connected_components(prm), key=len, reverse=True)[0]
-connected_prm = prm.subgraph(largest_connected_component)
-planner = PathPlanner(connected_prm)
-path = planner.generate_path(random.choice(connected_prm.nodes()), random.choice(connected_prm.nodes()))
-exporter = PathExporter()
-exporter.export_path_multiple_notes(path, "../Composition_Results/run3_code.org")
+def main(outfile1, outfile2):
+    """
+    Main file to generate a composition
+    """
+    d_means = [1000, 300]
+    d_variances = [200, 500]
+    keys = ['e', 'g']
+    octaves = [0, -2]
+    n_means = [2, 5]
+    n_variances = [1, 1]
+    r_probabilities = [0.2, 0.1]
+    pitch_rule_checker = PitchRuleChecker(5, [0.05, 0.05, 0.05, 0.05])
+    duration_rule_checker = DurationRuleChecker(3, [0.05])
+    generator = ComplexConfigurationGenerator(d_means, d_variances, keys, octaves, n_means, n_variances,
+                                              r_probabilities, pitch_rule_checker, duration_rule_checker)
+    pitch_checker = PitchChecker.from_configuration_generator(generator)
+    duration_checker = DurationChecker.from_configuration_generator(generator)
+    collision_checker = CollisionChecker(pitch_checker, duration_checker, [1, 1], 1)
+    roadmap_builder = CSpaceSampler.from_configuration_generator(generator, collision_checker)
+    prm = roadmap_builder.build_prm(5, 100)
+    largest_connected_component = sorted(nx.connected_components(prm), key=len, reverse=True)[0]
+    connected_prm = prm.subgraph(largest_connected_component)
+    planner = PathPlanner(connected_prm)
+    path = planner.generate_path(random.choice(connected_prm.nodes()), random.choice(connected_prm.nodes()))
+    exporter = PathExporter()
+    exporter.export_path_multiple_notes(path, outfile1)
+    exporter.export_path_multiple_notes_with_voices(path, outfile2)
+
+if __name__ == "__main__":
+    if len(sys.argv) == 3:
+        main(sys.argv[1], sys.argv[2])
+    else:
+        print "Wrong Command Line Arguments!"

@@ -1,7 +1,11 @@
+#! /usr/bin/env python
+
 __author__ = 'nathan'
 
 import matplotlib.pyplot as plt
 import sys
+import numpy as np
+
 
 class SongVisualizer:
 
@@ -19,36 +23,26 @@ class SongVisualizer:
             else:
                 color = (1., 1., 1.)
             colors.append(color)
-        plt.barh([pos]*len(line), durations, left=times, color=colors, edgecolor="none", height=0.5)
-        # plt.gca().set_ylim([0, 1.5])
-        # plt.show()
+        pitch_heights = np.array(line) % 12 / 24. + pos
+        plt.barh(pitch_heights, durations, left=times, color=colors, edgecolor="none", height=1/24.)
 
     @staticmethod
-    def create_lines_from_file_contents(times, pitches, durations):
-        pitch_lines = [[pitches[0]]]
-        time_lines = [[times[0]]]
-        duration_lines = [[durations[0]]]
-        line_count = 0
+    def create_lines_from_file_contents(times, pitches, durations, voices):
+        pitch_lines = [[pitches[0]], [pitches[1]]]
+        time_lines = [[times[0]], [times[1]]]
+        duration_lines = [[durations[0]], [durations[1]]]
         for i in range(1, len(times)):
-            if times[i] == times[i-1]:
-                line_count += 1
-                if len(duration_lines) <= line_count:
-                    duration_lines.append([])
-                if len(time_lines) <= line_count:
-                    time_lines.append([])
-                if len(pitch_lines) <= line_count:
-                    pitch_lines.append([])
-            else:
-                line_count = 0
-            pitch_lines[line_count].append(pitches[i])
-            duration_lines[line_count].append(durations[i])
-            time_lines[line_count].append(times[i])
+            if voices[i] == 1:
+                pitch_lines[1].append(pitches[i])
+                duration_lines[1].append(durations[i])
+                time_lines[1].append(times[i])
+            if voices[i] == 0:
+                pitch_lines[0].append(pitches[i])
+                duration_lines[0].append(durations[i])
+                time_lines[0].append(times[i])
         return pitch_lines, time_lines, duration_lines
 
     def plot_lines(self, pitches, times, durations):
-        # print pitches
-        # print times
-        # print durations
         for i in range(len(pitches)):
             self.output_line(pitches[i], times[i], durations[i], i)
         plt.gca().set_ylim(-1, len(pitches))
@@ -59,14 +53,15 @@ class SongVisualizer:
         pitches = []
         times = []
         durations = []
+        voices = []
         with open(file_path, "r") as f:
             for line in f:
                 temp = re.findall('-*\d+', line)
                 pitches.append(int(temp[1]))
                 times.append(int(temp[0]))
                 durations.append(int(temp[2]))
-
-        results = self.create_lines_from_file_contents(times, pitches, durations)
+                voices.append(int(temp[3]))
+        results = self.create_lines_from_file_contents(times, pitches, durations, voices)
         self.plot_lines(*results)
 
 
@@ -75,12 +70,3 @@ if __name__ == "__main__":
     visualizer.do_everything(sys.argv[1])
 
 
-# visualizer.output_line([60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, -1],
-#                        [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000],
-#                        [500]*13)
-# test_times = [0, 0, 0, 2, 3, 4, 4, 5]
-# test_pitches = [1, 2, 3, 1, 1, 1, 5, 2]
-# test_durations = [1, 3, 7, 1, 1, 1, 5, 1]
-#
-# results = visualizer.create_lines_from_file_contents(test_times, test_pitches, test_durations)
-# visualizer.plot_lines(results[0], results[1], results[2])
