@@ -66,6 +66,9 @@ class CollisionChecker:
         return 0
 
     def path(self, q1, q2):
+        guess = random.random()
+        if guess < 0.7:
+            return False
         # distance = self.distance(q1, q2)
         # steps = int(distance / self.tolerance)
         # start = np.array(q1.get_all_coordinates())

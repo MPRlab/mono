@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 288.0, 79.0, 712.0, 774.0 ],
+		"rect" : [ 288.0, 79.0, 806.0, 774.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,19 +38,6 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-69",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 429.25, 157.0, 35.0, 22.0 ],
-					"style" : "",
-					"text" : "read"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-58",
 					"maxclass" : "button",
 					"numinlets" : 1,
@@ -68,9 +55,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "bang", "int" ],
-					"patching_rect" : [ 278.0, 214.0, 40.0, 22.0 ],
+					"patching_rect" : [ 278.0, 214.0, 483.0, 22.0 ],
 					"style" : "",
-					"text" : "text"
+					"text" : "text /Users/Paulo/Documents/HU3910/MPR-lab/CSP_Composer_V2/testOutputFileV3.txt"
 				}
 
 			}
@@ -141,7 +128,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 403.25, 426.0, 50.0, 22.0 ],
+					"patching_rect" : [ 397.25, 426.0, 50.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -238,14 +225,14 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-39",
-					"linecount" : 4,
+					"linecount" : 3,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 273.25, 268.0, 43.0, 62.0 ],
+					"patching_rect" : [ 273.25, 268.0, 43.0, 49.0 ],
 					"style" : "",
-					"text" : "200 34400 49 732"
+					"text" : "250 9750 2 552"
 				}
 
 			}
@@ -522,24 +509,6 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-60", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-56", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-69", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-51", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-87", 0 ]
 				}
 
 			}
