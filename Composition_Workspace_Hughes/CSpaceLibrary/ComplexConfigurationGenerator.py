@@ -31,7 +31,7 @@ import numpy as np
 class ComplexConfigurationGenerator(ConfigurationGenerator):
 
     def __init__(self, d_means, d_variances, p_means, p_variances, n_means, n_variances, r_probabilities,
-                 pitch_rule_checker, duration_rule_checker):
+                 pitch_rule_checker, duration_rule_checker, duration_tolerances, pitch_tolerances, note_tolerances):
         ConfigurationGenerator.__init__(self)
         self.d_means = d_means
         self.d_variances = d_variances
@@ -43,6 +43,9 @@ class ComplexConfigurationGenerator(ConfigurationGenerator):
         self.voices = len(self.d_means)
         self.pitch_rule_checker = pitch_rule_checker
         self.duration_rule_checker = duration_rule_checker
+        self.duration_tolerances = duration_tolerances
+        self.pitch_tolerances = pitch_tolerances
+        self.note_tolerances = note_tolerances
 
     def get_pitch_score(self, configuration):
         pitches = configuration.get_all_coordinates()[configuration.get_voices():]
@@ -84,8 +87,8 @@ class ComplexConfigurationGenerator(ConfigurationGenerator):
             time_filled = 0
             while time_filled < time_to_fill:
                 new_duration = int(np.clip(random.normalvariate(self.d_means[voice], self.d_variances[voice]),
-                                           1,
-                                           200))
+                                           self.duration_tolerances[0],
+                                           self.duration_tolerances[1]))
                 time_filled += new_duration
                 if time_filled > time_to_fill:
                     new_duration -= time_filled - time_to_fill
@@ -96,8 +99,8 @@ class ComplexConfigurationGenerator(ConfigurationGenerator):
                 else:
                     v_smoothed_pitches.append(int(np.clip(random.normalvariate(self.p_means[voice],
                                                                                self.p_variances[voice]),
-                                                          0,
-                                                          200)))
+                                                          self.pitch_tolerances[0],
+                                                          self.pitch_tolerances[1])))
                 v_smoothed_durations.append(new_duration)
             smoothed_durations[voice] = v_smoothed_durations
             smoothed_pitches[voice] = v_smoothed_pitches
@@ -110,19 +113,19 @@ class ComplexConfigurationGenerator(ConfigurationGenerator):
             v_pitches = []
             v_durations = []
             num_notes = int(np.clip(int(random.normalvariate(self.n_means[voice], self.n_variances[voice])),
-                                    1,
-                                    200))
+                                    self.note_tolerances[0],
+                                    self.note_tolerances[1]))
             for _ in range(num_notes):
                 rest_prob = random.random()
                 v_durations.append(int(np.clip(random.normalvariate(self.d_means[voice], self.d_variances[voice]),
-                                               1,
-                                               200)))
+                                               self.duration_tolerances[0],
+                                               self.duration_tolerances[1])))
                 if rest_prob < self.r_probabilities[voice]:
                     v_pitches.append(-1)
                 else:
                     v_pitches.append(int(np.clip(random.normalvariate(self.p_means[voice], self.p_variances[voice]),
-                                                 0,
-                                                 200)))
+                                                 self.pitch_tolerances[0],
+                                                 self.pitch_tolerances[1])))
             pitches.append(v_pitches)
             durations.append(v_durations)
         return self._perform_smoothing(Configuration(self.voices, pitches, durations))
