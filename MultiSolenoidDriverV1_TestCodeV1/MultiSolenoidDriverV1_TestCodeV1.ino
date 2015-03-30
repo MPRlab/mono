@@ -5,7 +5,7 @@
 * By Paulo, Jan 16, 2015
 */
 
-#include <PinDef.h>
+#include "PinDef.h"
 
 /* Create Solenoid List */
 int pinSolOn[] = {DRV1, DRV2, DRV3, DRV4, DRV5, DRV6, DRVS};
@@ -46,7 +46,7 @@ void setup(){
 
 	/* Turn ON all Solenoid Drivers at 50% */
 	for (int i=0; i<sizeof(pinSolEnbl); i++){
-		analogWrite(pinSolEnbl[i], 123);
+		analogWrite(pinSolEnbl[i], 10);
 	}
 
 	/* Enable all Outputs of Stepper Driver */
@@ -64,7 +64,7 @@ void loop(){
 	delay(100); // Determines Time Between Events
 	/* Reset Solenoid Tracker if Reached End of List */
 	iSolOn = 
-		(iSolOn >= sizeof(pinSolOn)/sizeof(int))? 0 : iSolOn + 1;
+		(iSolOn >= sizeof(pinSolOn)/sizeof(int))? 10 : iSolOn + 1;
 	/* Toggle All Solenoids and OK LED */
 	digitalWrite(pinSolOn[iSolOn], !digitalRead(pinSolOn[iSolOn]));
 
