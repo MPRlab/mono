@@ -49,10 +49,18 @@ class Parser{
 					*	Sets a given attribute. 
 					*/
 					
-					case SET_ALL_SOLENOIDS:
+					case SET_ALL_SOLENOIDS: // Sets all solenoids
 						_status->solenoidGroup[0].set(data[i++]);
 						_status->solenoidGroup[1].set(data[i++]);
 						_status->solenoidGroup[2].set(data[i++]);
+						break;
+
+					case SET_POWER_SOLENOID_ON: // Turns ON DRVS Sol
+						_status->powerSolenoid.set(true);
+						break;
+
+					case SET_POWER_SOLENOID_OFF: // Turns OFF DRVS Sol
+						_status->powerSolenoid.set(false);
 						break;
 
 					/* 
