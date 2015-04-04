@@ -33,7 +33,7 @@ class Status{
 		TData<byte> solenoidGroup[3];
 		TData<bool> powerSolenoid;
 		// Solenoid Parameter Related
-		TData<unsigned int> driverPulseHoldTime[6];
+		TData<unsigned int> driverPulseHoldTime[7];
 		TData<byte> pulsePWM[7];
 		TData<byte> holdPWM[7];
 		// Serial Related 
