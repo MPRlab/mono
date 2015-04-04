@@ -9,7 +9,11 @@
 			"modernui" : 1
 		}
 ,
+<<<<<<< HEAD
 		"rect" : [ 405.0, 79.0, 806.0, 774.0 ],
+=======
+		"rect" : [ 288.0, 79.0, 806.0, 774.0 ],
+>>>>>>> cbbf78a82561c3d9e9d6e752b678f5eed468d838
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,6 +42,7 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+<<<<<<< HEAD
 					"id" : "obj-76",
 					"int" : 1,
 					"maxclass" : "gswitch2",
@@ -80,6 +85,8 @@
 			}
 , 			{
 				"box" : 				{
+=======
+>>>>>>> cbbf78a82561c3d9e9d6e752b678f5eed468d838
 					"id" : "obj-58",
 					"maxclass" : "button",
 					"numinlets" : 1,
@@ -97,9 +104,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "bang", "int" ],
-					"patching_rect" : [ 278.0, 214.0, 40.0, 22.0 ],
+					"patching_rect" : [ 278.0, 214.0, 483.0, 22.0 ],
 					"style" : "",
-					"text" : "text"
+					"text" : "text /Users/Paulo/Documents/HU3910/MPR-lab/CSP_Composer_V2/testOutputFileV3.txt"
 				}
 
 			}
@@ -170,7 +177,11 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
+<<<<<<< HEAD
 					"patching_rect" : [ 399.25, 426.0, 50.0, 22.0 ],
+=======
+					"patching_rect" : [ 397.25, 426.0, 50.0, 22.0 ],
+>>>>>>> cbbf78a82561c3d9e9d6e752b678f5eed468d838
 					"style" : ""
 				}
 
@@ -267,14 +278,18 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-39",
-					"linecount" : 4,
+					"linecount" : 3,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 273.25, 268.0, 43.0, 62.0 ],
+					"patching_rect" : [ 273.25, 268.0, 43.0, 49.0 ],
 					"style" : "",
+<<<<<<< HEAD
 					"text" : "150 30600 41 1196"
+=======
+					"text" : "250 9750 2 552"
+>>>>>>> cbbf78a82561c3d9e9d6e752b678f5eed468d838
 				}
 
 			}
@@ -563,6 +578,7 @@
 				}
 
 			}
+<<<<<<< HEAD
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-56", 0 ],
@@ -590,6 +606,8 @@
 				}
 
 			}
+=======
+>>>>>>> cbbf78a82561c3d9e9d6e752b678f5eed468d838
  ],
 		"dependency_cache" : [  ],
 		"embedsnapshot" : 0
