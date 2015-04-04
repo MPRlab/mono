@@ -46,7 +46,7 @@ void setup(){
 
 	/* Turn ON all Solenoid Drivers at 50% */
 	for (int i=0; i<sizeof(pinSolEnbl); i++){
-		analogWrite(pinSolEnbl[i], 123);
+		analogWrite(pinSolEnbl[i], 30);
 	}
 
 	/* Enable all Outputs of Stepper Driver */

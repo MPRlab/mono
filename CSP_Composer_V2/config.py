@@ -31,7 +31,7 @@ class Config:
 			if arg == '-i': # Number of iterations allowed
 				iteIsNext = True
 			elif iteIsNext:
-				self.numIterations = int(numIterations)
+				self.numIterations = int(arg)
 				iteIsNext = False
 			
 			elif arg == '-l': # Enable Logging and Next argument is file
