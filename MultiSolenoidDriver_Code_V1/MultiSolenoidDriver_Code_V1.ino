@@ -10,6 +10,7 @@
 #include "Comm.h"
 #include "PinDef.h"
 #include "SolenoidController.h"
+#include "PowerSolenoidController.h"
 
 #define BOARD_ID 0x01
 
@@ -32,6 +33,7 @@ SolenoidController driver3(&status, DRV3, int(enblPins[2]), int(faultPins[2]), 2
 SolenoidController driver4(&status, DRV4, int(enblPins[3]), int(faultPins[3]), 3);
 SolenoidController driver5(&status, DRV5, int(enblPins[4]), int(faultPins[4]), 4);
 SolenoidController driver6(&status, DRV6, int(enblPins[5]), int(faultPins[5]), 5);
+PowerSolenoidController driverP(&status, DRVS, int(enblPins[6]), int(faultPins[6]));
 
 void setup(){
 	/* Start-Up Delay */
@@ -47,6 +49,7 @@ void setup(){
 	driver4.begin();
 	driver5.begin();
 	driver6.begin();
+	driverP.begin();
 }
 
 void loop(){
@@ -62,6 +65,7 @@ void loop(){
 	driver4.update();
 	driver5.update();
 	driver6.update();
+	driverP.update();
 	
 	// Save the loop time in status structure
 	status.loopTime.set(micros() - loopTime);
