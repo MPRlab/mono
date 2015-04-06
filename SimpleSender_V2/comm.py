@@ -13,7 +13,7 @@ class Comm:
 			raise NameError("Serial could not connect")
 		
 		# Make pointer to status class accessible in class.
-		self.status = data
+		self.status = status
 
 		# Stores the past state of the solenoids
 		self.pastState = None
@@ -31,7 +31,7 @@ class Comm:
 
 		# Compare the two dictionaries for every board (key). If
 		# something has changed. Send serial to that board.
-		for board,bytes in newActiveSolenoids:
+		for board,bytes in newActiveSolenoids.items():
 			# If new value is different
 			if not bytes == activeSolenoids[board]:
 				activeSolenoids[board] = bytes
@@ -64,7 +64,7 @@ class Comm:
 		if len(message) is not 0:
 			# Send message
 			self.writeSerial(chr(0xfd)) # Start Byte
-			self.writeSerial(chr(board)) # Send Board ID
+			self.writeSerial(chr(int(board))) # Send Board ID
 			self.writeSerial(chr(len(message))) # Length of message
 			for i in range(len(message)):
 				self.writeSerial(chr(message[i])) # Message
@@ -85,7 +85,8 @@ class Comm:
 		summary = 0
 
 		for sol in data:
-			summary |= 1 << (sol-1)
+			sol = int(sol)
+			summary |= (1 << (sol-1))
 
 		return summary
 
@@ -106,6 +107,8 @@ class Comm:
 			message += [0x11]
 		else:
 			message += [0x12]
+
+		return message
 
 
 

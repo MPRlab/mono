@@ -11,7 +11,7 @@
 #############################################
 ############ SERIAL PORT NAME ###############
 #############################################
-PORT = '/dev/tty.Bluetooth-Modem' #'/dev/cu.usbserial-A603RPHO'
+PORT = '/dev/cu.usbserial-AJ02WFNV'#'/dev/cu.usbserial-A603RPHO'
 
 from time import time, sleep
 from sys import argv
@@ -30,10 +30,7 @@ def main():
 	status = Status(mapParser.mapping)
 
 	# Instantiate Communication Class (Open Serial)
-	comm = None
-	def commInit():
-		comm = Comm(status, PORT)
-	commInit()
+	comm = Comm(status, PORT)
 
 
 	# Loops through the entire song
