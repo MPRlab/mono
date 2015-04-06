@@ -11,7 +11,7 @@
 #############################################
 ############ SERIAL PORT NAME ###############
 #############################################
-PORT = '/dev/cu.usbserial-AJ02WFNV'#'/dev/cu.usbserial-A603RPHO'
+PORT = '/dev/cu.usbserial-A603RPHO'
 
 from time import time, sleep
 from sys import argv
