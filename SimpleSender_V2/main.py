@@ -8,13 +8,18 @@
 	Version 2
 '''
 
+#############################################
+############ SERIAL PORT NAME ###############
+#############################################
+PORT = '/dev/tty.Bluetooth-Modem' #'/dev/cu.usbserial-A603RPHO'
+
+from time import time, sleep
 from sys import argv
 
 from argParser import ArgParser
 from fileParser import MapParser, SongParser
 from status import Status
-
-from time import time, sleep
+from comm import Comm
 
 def main():
 	argParser = ArgParser(argv)
@@ -23,6 +28,13 @@ def main():
 
 	# Create Status Class
 	status = Status(mapParser.mapping)
+
+	# Instantiate Communication Class (Open Serial)
+	comm = None
+	def commInit():
+		comm = Comm(status, PORT)
+	commInit()
+
 
 	# Loops through the entire song
 	onsetDelay = 0 # Time to next note, 0 means concurrent
@@ -54,10 +66,14 @@ def main():
 			durationDelay = status.update()
 			lastStatusUpdate = time()
 
-		# TODO: Have a varying sleep time to use less CPU!!
+		# Send updates over serial if solenoid state has changed
+		comm.update()
+
+		# TODO: Implement a varying sleep time to use less CPU!!
 		sleep(0.1)
 
-		print status.findActive()
+
+		
 
 	print '*****************************************'
 	print 'Song is complete! The burrito cat awaits!'
@@ -67,3 +83,6 @@ def main():
 
 if __name__ == '__main__':
 	main()
+
+
+

@@ -4,7 +4,6 @@
 '''
 
 import serial
-from parser import *
 
 class Comm:
 	def __init__(self, status, port, baudrate = 500000):
@@ -15,6 +14,28 @@ class Comm:
 		
 		# Make pointer to status class accessible in class.
 		self.status = data
+
+		# Stores the past state of the solenoids
+		self.pastState = None
+
+	'''
+		Send state changes to PCBs where solenoids have changed
+	'''
+	def update(self):
+		activeSolenoids = self.status.findActive()
+
+		# Loop through board and solenoid pairs
+		newActiveSolenoids = {}
+		for board,solenoids in activeSolenoids.items():
+			newActiveSolenoids[board] = self.combineBytes(solenoids)
+
+		# Compare the two dictionaries for every board (key). If
+		# something has changed. Send serial to that board.
+		for board,bytes in newActiveSolenoids:
+			# If new value is different
+			if not bytes == activeSolenoids[board]:
+				activeSolenoids[board] = bytes
+				self.sendPacket(board, bytes)
 
 	# Compute Checksum based on CRC-8
 	def checkSum(self,packet,length):
@@ -36,13 +57,14 @@ class Comm:
 	# This method will call the parser to create the messsage
 	# given the passed arguments. Will then encapsulate message
 	# and send over serial.
-	def sendPacket(self, headersToSend):
+	def sendPacket(self, board, bytes):
 		# Create a packet from headers
-		message = createPacket(headersToSend, self.status)
+		message = self.createPacket(bytes)
 		# If a message was returned
 		if len(message) is not 0:
 			# Send message
 			self.writeSerial(chr(0xfd)) # Start Byte
+			self.writeSerial(chr(board)) # Send Board ID
 			self.writeSerial(chr(len(message))) # Length of message
 			for i in range(len(message)):
 				self.writeSerial(chr(message[i])) # Message
@@ -55,6 +77,35 @@ class Comm:
 	def writeSerial(self,byte):
 		self.ser.write(byte)
 
+	'''
+		Combines solenoids 1-25 into a sequence of 25 bits.
+		data is an array of solenoid numbers.
+	'''
+	def combineBytes(self, data):
+		summary = 0
+
+		for sol in data:
+			summary |= 1 << (sol-1)
+
+		return summary
+
+	'''
+		Create a message from the solenoid bits
+			0x10 followed by 3 bytes of solenoids 1-24
+			0x11 Powers solenoid 25 ON
+			ox12 Power solenoid 25 OFF
+	'''
+	def createPacket(self, bytes):
+		message = []
+
+		message += [0x10] # Low current Solenoid Header
+		for i in range(3):
+			message += [(bytes >> i*8) & 0xff]
+
+		if (bytes & (0x01 << 24)): # Power Solenoid
+			message += [0x11]
+		else:
+			message += [0x12]
 
 
 
@@ -62,4 +113,6 @@ class Comm:
 
 
 
-		
+
+
+
