@@ -4,6 +4,7 @@
 '''
 
 import serial
+from copy import deepcopy
 
 class Comm:
 	def __init__(self, status, port, baudrate = 500000):
@@ -22,6 +23,11 @@ class Comm:
 		Send state changes to PCBs where solenoids have changed
 	'''
 	def update(self):
+		# If past state is none, initialize to current state
+		if self.pastState == None:
+			self.pastState = self.status.findActive()
+
+		# Gets the current active solenoids
 		activeSolenoids = self.status.findActive()
 
 		# Loop through board and solenoid pairs
@@ -32,10 +38,13 @@ class Comm:
 		# Compare the two dictionaries for every board (key). If
 		# something has changed. Send serial to that board.
 		for board,bytes in newActiveSolenoids.items():
-			# If new value is different
-			if not bytes == activeSolenoids[board]:
+			# If new value is different FIX THIS HERE!!!
+			if not bytes == "bla":#self.combineBytes(self.pastState[board]):
 				activeSolenoids[board] = bytes
 				self.sendPacket(board, bytes)
+
+		# Save Current Solenoid State
+		self.pastState = newActiveSolenoids
 
 	# Compute Checksum based on CRC-8
 	def checkSum(self,packet,length):
