@@ -69,8 +69,6 @@ def main():
 		sleep(0.01)
 
 	# Ensure all solenoids are turned OFF upon song completion
-	status.populate()
-	status.setToSend = True
 	comm.update()
 
 	# Close Serial Port
