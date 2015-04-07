@@ -32,7 +32,6 @@ def main():
 	# Instantiate Communication Class (Open Serial)
 	comm = Comm(status, PORT)
 
-
 	# Loops through the entire song
 	onsetDelay = 0 # Time to next note, 0 means concurrent
 	lineNum = 0 # Start parsing song from first line
@@ -67,10 +66,15 @@ def main():
 		comm.update()
 
 		# TODO: Implement a varying sleep time to use less CPU!!
-		sleep(0.1)
+		sleep(0.01)
 
+	# Ensure all solenoids are turned OFF upon song completion
+	status.populate()
+	status.setToSend = True
+	comm.update()
 
-		
+	# Close Serial Port
+	comm.close()
 
 	print '*****************************************'
 	print 'Song is complete! The burrito cat awaits!'

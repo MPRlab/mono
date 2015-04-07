@@ -17,6 +17,11 @@ class Status:
 		# First run of update
 		self.update()
 
+		# Variable that indicates something has changed in
+		# the status and thus serial packet should be sent
+		# to the prototype.
+		self.setToSend = False
+
 	'''
 		Creates a dictionary to keep track of time remaining per
 		note.
@@ -67,6 +72,9 @@ class Status:
 			if (time() - value[1])*1000 > value[0]:
 				self.notesPlaying[key] = (0,0)
 
+				# Since note was removed send over serial
+				self.setToSend = True
+
 			tempTime = (value[0] - (time() - value[1])*1000)
 			if tempTime < minTime and tempTime > 0:
 				minTime = tempTime
@@ -79,6 +87,9 @@ class Status:
 	'''
 	def markNote(self, noteToPlay, noteDuration):
 		self.notesPlaying[noteToPlay] = (noteDuration, time())
+
+		# Since note was added send over serial
+		self.setToSend = True
 
 		return self.update()
 
