@@ -20,7 +20,7 @@ class Comm:
 		Send state changes to PCBs where solenoids have changed
 	'''
 	def update(self):
-		if self.setToSend:
+		if self.status.setToSend:
 			# Gets the current active solenoids
 			activeSolenoids = self.status.findActive()
 
@@ -30,12 +30,19 @@ class Comm:
 				newActiveSolenoids[board] = self.combineBytes(solenoids)
 
 			# Send serial to all boards.
-			for board,bytes in newActiveSolenoids.items():
-				activeSolenoids[board] = bytes
-				self.sendPacket(board, bytes)
+			if len(newActiveSolenoids): # Dict not empty
+				for board,bytes in newActiveSolenoids.items():
+					self.sendPacket(board, bytes)
+			else: # Dict is empty
+				self.sendPacket(0xff, 0)
 
 			# Mark message as sent
-			self.setToSend = False
+			self.status.setToSend = False
+
+			# Return active solenoids 
+			return newActiveSolenoids
+
+		return None
 
 	# Compute Checksum based on CRC-8
 	def checkSum(self,packet,length):
@@ -109,6 +116,12 @@ class Comm:
 			message += [0x12]
 
 		return message
+
+	'''
+		Close the serial port
+	'''
+	def close(self):
+		self.ser.close()
 
 
 
