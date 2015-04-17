@@ -49,7 +49,7 @@ def main():
 			noteDuration = int(songParser.song[lineNum][2])
 
 			# Save to status class
-			status.markNote(noteToPlay, noteDuration)
+			durationDelay = status.markNote(noteToPlay, noteDuration)
 
 			# Increment line number
 			lineNum += 1
@@ -58,7 +58,7 @@ def main():
 			lastNoteUpdate = time()
 
 		# Update the status class to reflect note progression
-		if (time() - lastStatusUpdate)*1000 > 10: # Should be durationDelay instead of 10!!!!
+		if (time() - lastStatusUpdate)*1000 > durationDelay:
 			durationDelay = status.update()
 			lastStatusUpdate = time()
 
