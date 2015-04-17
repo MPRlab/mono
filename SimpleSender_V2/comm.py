@@ -23,7 +23,7 @@ class Comm:
 		if self.status.setToSend:
 			# Gets the current active solenoids
 			activeSolenoids = self.status.findActive()
-
+			
 			# Loop through board and solenoid pairs
 			newActiveSolenoids = {}
 			for board,solenoids in activeSolenoids.items():

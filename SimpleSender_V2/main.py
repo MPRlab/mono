@@ -41,7 +41,7 @@ def main():
 	while lineNum < len(songParser.song) or (durationDelay > 0 \
 				and durationDelay < float('infinity')):
 		# Check of onset delay and read song
-		while (time() - lastNoteUpdate)*1000 >= onsetDelay and \
+		while (time() - lastNoteUpdate)*1000 > onsetDelay and \
 					lineNum < len(songParser.song):
 			# Update with information from new line
 			onsetDelay = int(songParser.song[lineNum][0])
@@ -58,7 +58,7 @@ def main():
 			lastNoteUpdate = time()
 
 		# Update the status class to reflect note progression
-		if (time() - lastStatusUpdate)*1000 >= durationDelay:
+		if (time() - lastStatusUpdate)*1000 > 10: # Should be durationDelay instead of 10!!!!
 			durationDelay = status.update()
 			lastStatusUpdate = time()
 
@@ -69,6 +69,7 @@ def main():
 		sleep(0.01)
 
 	# Ensure all solenoids are turned OFF upon song completion
+	status.resetStatus()
 	comm.update()
 
 	# Close Serial Port
@@ -82,6 +83,7 @@ def main():
 
 if __name__ == '__main__':
 	main()
+
 
 
 

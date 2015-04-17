@@ -79,6 +79,12 @@ class Status:
 			if tempTime < minTime and tempTime > 0:
 				minTime = tempTime
 
+
+		print "***********************"
+		print self.notesPlaying
+		print minTime
+		print "***********************"
+
 		return minTime
 
 	''' 
@@ -93,6 +99,16 @@ class Status:
 
 		return self.update()
 
+	'''
+		Resets all solenoids to OFF and marks to send
+	'''
+	def resetStatus(self):
+		for key in self.notesPlaying:
+			self.notesPlaying[key] = (0,0)
+
+		self.setToSend = True
+
+		return True
 
 
 
