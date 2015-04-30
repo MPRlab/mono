@@ -1,34 +1,37 @@
 int MappingBase = 70; 
 int drumMapping[] = {27, 25, 28, 29, 26, 24, 52, 53};
+byte drumNum;
+byte drumVel;
  
 void setup() {
     for(int i = 0; i < 8; i++) {
      pinMode(drumMapping[i], OUTPUT);
      digitalWrite(drumMapping[i], LOW);
     } 
-    Serial.begin(9600);
+    Serial.begin(57600);
 }
 
-void drumOnOff(drumNum, drumVel) {
-    if ((drumNum-Mapping Base) >= 0 && (drumNum-Mapping Base) <= 7  && (drumVel > 0)) {
+void drumOnOff(byte drumNum, byte drumVel) {
+    if ((drumNum-MappingBase) >= 0 && (drumNum-MappingBase) <= 7  && (drumVel > 0)) {
       digitalWrite(drumMapping[drumNum], HIGH);
-      else
+    }
+    else{
       digitalWrite(drumMapping[drumNum], LOW);
     }
   }
   
 void readSerial() {
-  if(mySerial.available() > 0){
+  if(Serial.available() > 0){
     
     //grab our header byte
-    byte inbyte = mySerial.read();
+    byte inbyte = Serial.read();
     while(inbyte != 255){
-        inbyte = mySerial.read();
+        inbyte = Serial.read();
     }
     
     //we now hav a frame
-    while(mySerial.available() == 0);// <- wait for serial if our buffer is empty
-    drumNum = mySerial.read();
+    while(Serial.available() == 0);// <- wait for serial if our buffer is empty
+    drumNum = Serial.read();
     
     //check if we have an error
     if (drumNum == 255) readSerial();
@@ -36,8 +39,8 @@ void readSerial() {
     //first message byte checked out
     else {
       //read the second message byte
-      while(mySerial.available() == 0);// <- wait for serial if our buffer is empty
-      drumVel = mySerial.read();
+      while(Serial.available() == 0);// <- wait for serial if our buffer is empty
+      drumVel = Serial.read();
       
       //see if our second message byte is valid
       if (drumVel == 255) readSerial();
