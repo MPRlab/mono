@@ -9,18 +9,45 @@ void setup() {
     Serial.begin(9600);
 }
 
-void drumGo() {
-  if (Serial.available() > 0) {
-    int inByte = Serial.read();
-    int paNum = (inByte - MappingBase);
-    if (paNum >= 0 && paNum <= 7) {
-      digitalWrite(drumMapping[paNum], HIGH);
-      delay(47);
-      digitalWrite(drumMapping[paNum], LOW);
+void drumOnOff(drumNum, drumVel) {
+    if ((drumNum-Mapping Base) >= 0 && (drumNum-Mapping Base) <= 7  && (drumVel > 0)) {
+      digitalWrite(drumMapping[drumNum], HIGH);
+      else
+      digitalWrite(drumMapping[drumNum], LOW);
+    }
+  }
+  
+void readSerial() {
+  if(mySerial.available() > 0){
+    
+    //grab our header byte
+    byte inbyte = mySerial.read();
+    while(inbyte != 255){
+        inbyte = mySerial.read();
+    }
+    
+    //we now hav a frame
+    while(mySerial.available() == 0);// <- wait for serial if our buffer is empty
+    drumNum = mySerial.read();
+    
+    //check if we have an error
+    if (drumNum == 255) readSerial();
+    
+    //first message byte checked out
+    else {
+      //read the second message byte
+      while(mySerial.available() == 0);// <- wait for serial if our buffer is empty
+      drumVel = mySerial.read();
+      
+      //see if our second message byte is valid
+      if (drumVel == 255) readSerial();
+      
+      //we don't have an error
+      else drumOnOff(drumNum, drumVel);
     }
   }
 }
 
-void loop() { 
-  drumGo();
+void loop() {
+  readSerial();
 }
