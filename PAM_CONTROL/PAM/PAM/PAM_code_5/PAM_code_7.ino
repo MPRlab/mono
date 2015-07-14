@@ -1,9 +1,7 @@
 
-
-//created by Scott Barton May 29-30 2013
+//created by Scott Barton May 29-30 2013, modified 7/14/2015
 
 #include <Shifter.h>
-#include <MIDI.h>
 #include <SoftwareSerial.h>
 
 #define SER_Pin 2 //SER_IN
@@ -16,15 +14,13 @@ SoftwareSerial mySerial(6, 7);
 const int debugPin = 14;
 const int openString = 73;
 int tangentMapping[] = {0, 1, 2, 3, 4, 5, 6, 7, 15, 14, 13, 12, 11, 10, 9, 8, 16, 17, 18, 19, 20, 21, 22, 23};
-int PAM_channel = 1; //MIDI channel for PAM
-int PAM_picker = 100; //control change number to turn the picker on and off
-int PAM_damper = 101; //control change number to turn the damper on and off
 
-#define STEPRS_PER_REV 400
+#define STEPS_PER_REV 400
 #define NUMBER_PICKS 8
 #define STEPPER_DELAY_US 1000
 
 int stepperDelay = STEPPER_DELAY_US;
+int stepsPerPick = STEPS_PER_REV/NUMBER_PICKS;
 
 byte tangentNum;
 byte tangentVelocity;
@@ -35,9 +31,22 @@ Shifter shifter(SER_Pin, RCLK_Pin, SRCLK_Pin, NUM_REGISTERS);
 
 #define STEPPER_PIN MISO
 
+void setup(){
+  pinMode(debugPin, OUTPUT);
+  shifter.clear(); //set all pins on the shift register chain to LOW
+  shifter.write(); //send changes to the chain and display them
+  
+  pinMode(6, INPUT);
+  pinMode(7, OUTPUT);
+  pinMode(14, OUTPUT);
+  pinMode(15, OUTPUT);
+  pinMode(MISO, OUTPUT);
+  mySerial.begin(115200);
+}
+
 void pick() {
   int i;
-  for(i=0; i < STEPRS_PER_REV/NUMBER_PICKS; i++ ){
+  for(i=0; i < stepsPerPick; i++ ){
     digitalWrite(MISO, HIGH);
     delayMicroseconds(stepperDelay/2);
     digitalWrite(MISO, LOW);
@@ -45,21 +54,14 @@ void pick() {
   }
 }
 
-void setup(){
-  pinMode(debugPin, OUTPUT);
-  MIDI.begin(PAM_channel);
-  MIDI.setHandleNoteOn(handle_NoteOn);
-  MIDI.setHandleNoteOff(handle_NoteOff);
-  MIDI.setHandleControlChange(handle_ControlChange); 
-  shifter.clear(); //set all pins on the shift register chain to LOW
-  shifter.write(); //send changes to the chain and display them
-  
-  pinMode(6, INPUT);
-  pinMode(7, OUTPUT);
-  mySerial.begin(57600);
-  pinMode(14, OUTPUT);
-  pinMode(15, OUTPUT);
-  pinMode(MISO, OUTPUT);
+void pickAdjust() {
+  int j;
+  for(j=0; j < 25; j++ ){
+    digitalWrite(MISO, HIGH);
+    delayMicroseconds(stepperDelay/2);
+    digitalWrite(MISO, LOW);
+    delayMicroseconds(stepperDelay/2);
+  }
 }
 
 void tangentOnOff (byte tangentNum, byte tangentVelocity) {
@@ -75,73 +77,21 @@ void tangentOnOff (byte tangentNum, byte tangentVelocity) {
     shifter.setPin(tangentMapping[tangentNum], LOW);
     shifter.write();
   }
-  if (tangentNum == 17 && tangentVelocity > 0) {
+  if (tangentNum == 17 && tangentVelocity > 0) { //damper
     shifter.setPin(tangentMapping[tangentNum], HIGH);
     shifter.write();
   }
-  if (tangentNum < 0 || tangentNum > 23) {
+  if (tangentNum < 0 || tangentNum > 23) { //turn tangents and damper off
     for (int i = 0; i < 22; i++) {
       shifter.setPin(i, LOW);
       shifter.write();
     }
   }
-  if (tangentNum == 18) pick();
+  if (tangentNum == 18 && tangentVelocity > 0) pick(); //picker on
+  if (tangentNum == 19 && tangentVelocity > 0) pick(); //adjust picker
 }
 
 
-void handle_NoteOn (byte channel, byte note, byte velocity) {
-  int tangentOn = note - openString;
-  
-  //pick for note below open strint
-  if (tangentOn == 18) pick();
-  
-  if (tangentOn >= 0 && tangentOn < 16 && velocity > 0) {
-    shifter.setPin(tangentMapping[tangentOn], HIGH);
-    shifter.write();
-    /*if (PAM_picker_on == true) {
-      stepperStatus = 1;  
-    }
-    else {
-      stepperStatus = 0;
-    }*/
-  }
-  //if (tangentOn == 18) { //turn the picker on with a NoteOn message
-    //stepperStatus = 1;
-  //}
-  if (tangentOn == 17 && velocity > 0) {  //turn the damper on with a NoteOn message
-    shifter.setPin(17, HIGH);
-    shifter.write();
-  }
-  if (velocity == 0) {
-    shifter.setPin(tangentMapping[tangentOn], LOW);
-    shifter.write();
-  }
-}
-
-void handle_NoteOff (byte channel, byte note, byte velocity) {
-  int tangentOff = note - openString;
-  if (tangentOff >= 0 && tangentOff < 18) { 
-  shifter.setPin(tangentMapping[tangentOff], LOW);
-  shifter.write();
-  }
-}
-  
-void handle_ControlChange (byte channel, byte number, byte value) {
-  if (number == PAM_damper && value == 127) {
-    shifter.setPin(17, HIGH);
-    shifter.write();
-  }
-  if (number = PAM_damper && value == 0) {
-    shifter.setPin(17, LOW);
-    shifter.write();
-  }
-  if (number == 110 && value == 0) {
-    for (int i=0; i < 24; i++) {
-      shifter.setPin(i, LOW);
-      shifter.write();
-    }
-  }   
-}
 
 void readSerial() {
   if(mySerial.available() > 0){
@@ -175,6 +125,5 @@ void readSerial() {
 }
 
 void loop() {
-  //MIDI.read();
   readSerial();
 }
