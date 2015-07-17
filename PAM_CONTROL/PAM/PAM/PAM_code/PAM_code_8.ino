@@ -25,6 +25,7 @@ int stepsPerPick = STEPS_PER_REV/NUMBER_PICKS;
 byte tangentNum;
 byte tangentVelocity;
 byte prevTan;
+byte checkSum;
 
 //initaize shifter using the Shifter library
 Shifter shifter(SER_Pin, RCLK_Pin, SRCLK_Pin, NUM_REGISTERS); 
@@ -98,28 +99,17 @@ void readSerial() {
     
     //grab our header byte
     byte inbyte = mySerial.read();
-    while(inbyte != 255){
-        inbyte = mySerial.read();
+    // if the header byte doesn't equal 255, read the next byte
+    if(inbyte != 255) {
+      inbyte = mySerial.read();
     }
-    
-    //we now hav a frame
-    while(mySerial.available() == 0);// <- wait for serial if our buffer is empty
-    tangentNum = mySerial.read();
-    
-    //check if we have an error
-    if (tangentNum == 255) readSerial();
-    
-    //first message byte checked out
     else {
-      //read the second message byte
-      while(mySerial.available() == 0);// <- wait for serial if our buffer is empty
-      tangentVelocity = mySerial.read();
-      
-      //see if our second message byte is valid
-      if (tangentVelocity == 255) readSerial();
-      
-      //we don't have an error
-      else tangentOnOff(tangentNum, tangentVelocity);
+      tangentNum = mySerial.read(); //read the second byte 
+      tangentVelocity = mySerial.read(); //read the third byte
+      checkSum = mySerial.read(); //read the fourth byte
+      if (checkSum == (255 - tangentNum - tangentVelocity)) {
+        tangentOnOff(tangentNum, tangentVelocity);
+      }
     }
   }
 }
