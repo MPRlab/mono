@@ -1,4 +1,3 @@
-
 //created by Scott Barton May 29-30 2013, modified 7/14/2015
 
 #include <Shifter.h>
@@ -57,7 +56,7 @@ void pick() {
 
 void pickAdjust() {
   int j;
-  for(j=0; j < 25; j++ ){
+  for(j=0; j < 14; j++ ){
     digitalWrite(MISO, HIGH);
     delayMicroseconds(stepperDelay/2);
     digitalWrite(MISO, LOW);
@@ -89,7 +88,7 @@ void tangentOnOff (byte tangentNum, byte tangentVelocity) {
     }
   }
   if (tangentNum == 18 && tangentVelocity > 0) pick(); //picker on
-  if (tangentNum == 19 && tangentVelocity > 0) pick(); //adjust picker
+  if (tangentNum == 19 && tangentVelocity > 0) pickAdjust(); //adjust picker
 }
 
 
@@ -99,16 +98,30 @@ void readSerial() {
     
     //grab our header byte
     byte inbyte = mySerial.read();
+    mySerial.print(inbyte);
+    mySerial.print(" ");
     // if the header byte doesn't equal 255, read the next byte
     if(inbyte != 255) {
       inbyte = mySerial.read();
     }
     else {
-      tangentNum = mySerial.read(); //read the second byte 
+      tangentNum = mySerial.read(); //read the second byte
+      mySerial.print(tangentNum);
+      mySerial.print(" "); 
       tangentVelocity = mySerial.read(); //read the third byte
+      mySerial.print(tangentVelocity);
+      mySerial.print(" ");
       checkSum = mySerial.read(); //read the fourth byte
+      mySerial.print(checkSum);
+      mySerial.print(" ");
+      mySerial.println();
       if (checkSum == (255 - tangentNum - tangentVelocity)) {
         tangentOnOff(tangentNum, tangentVelocity);
+      }
+      else {
+        mySerial.print("noCheck");
+        mySerial.print(" ");
+        mySerial.println();
       }
     }
   }
