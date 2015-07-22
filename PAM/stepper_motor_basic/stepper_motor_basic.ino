@@ -1,12 +1,12 @@
 int StepPin = 7;
 //int Dir = 8;
-int StepDelay = 400;
-int pause = 125;
+int StepDelay = 700;
+//int pause = 100;
 
 void setup() {
   pinMode(StepPin, OUTPUT);
   digitalWrite(StepPin, LOW);
-  Serial.begin(115200);
+  //Serial.begin(115200);
   //pinMode(Dir, OUTPUT);
   //digitalWrite(Dir, LOW);
 }
@@ -18,35 +18,35 @@ void loop() {
     }
   delay(125);
 */
-  int initial = 0;
-  int final = 0;
-  initial = millis();
+  //int initial = 0;
+  //int final = 0;
+  //initial = millis();
   for(int i = 0; i < 50; i++)
   {
     digitalWrite(StepPin, HIGH);
-    delayMicroseconds(StepDelay);
+    delayMicroseconds(StepDelay/2);
     digitalWrite(StepPin, LOW);
-    delayMicroseconds(StepDelay);
+    delayMicroseconds(StepDelay/2);
   }
-  final = millis();
-  Serial.print("Time for digitalWrite(): ");
-  Serial.print(final-initial);
-  Serial.println("");
-  delay(pause);
-  initial = millis();
-  for(int i = 0; i < 50; i++)
-  {
-    PORTD |= _BV(PD7);
-    delayMicroseconds(StepDelay);
-    PORTD &= ~_BV(PD7);
-    delayMicroseconds(StepDelay);
-  }
-  final = millis();
-  Serial.print("Time for true c command: ");
-  Serial.print(final-initial);
-  Serial.println("");
-  delay(pause);
-  //while(1);
+  //final = millis();
+  //Serial.print("Time for digitalWrite(): ");
+  //Serial.print(final-initial);
+  //Serial.println("");
+  //delay(pause);
+  //initial = millis();
+  //for(int i = 0; i < 50; i++)
+  //{
+    //PORTD |= _BV(PD7);
+    //delayMicroseconds(StepDelay);
+    //PORTD &= ~_BV(PD7);
+    //delayMicroseconds(StepDelay);
+  //}
+  //final = millis();
+  //Serial.print("Time for true c command: ");
+  //Serial.print(final-initial);
+  //Serial.println("");
+  //delay(pause);
+  while(1);
 } 
 
  

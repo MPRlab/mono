@@ -102,11 +102,11 @@ void tangentOnOff (byte tangentNum, byte tangentVelocity) {
 boolean getSerialString(){
   static byte dataBufferIndex = 0;
   static boolean storeString = false;
-  while(Serial.available()>0){
-    char incomingbyte = Serial.read();
+  while(mySerial.available()>0){
+    char incomingbyte = mySerial.read();
     if(incomingbyte==startChar){
         dataBufferIndex = 0;  //Initialize our dataBufferIndex variable
-        storeString = true;
+        storeString = true;        
     }
     if(storeString){
       //check to see if outside buffer size
@@ -118,13 +118,14 @@ boolean getSerialString(){
       }
       if(incomingbyte==endChar){
         //Our data string is complete.  return true
+        dataBuffer[dataBufferIndex] = 0; //null terminate the C string
         storeString = false;
         dataBufferIndex = 0;
-        dataBuffer[dataBufferIndex] = 0; //null terminate the C string
         return true;
       }
       else{
         dataBuffer[dataBufferIndex++] = incomingbyte;
+        dataBuffer[dataBufferIndex] = 0; //null terminate the C string
       }
     }
   }
@@ -134,10 +135,8 @@ boolean getSerialString(){
 
 void loop() {
   if(getSerialString()){
-    for(int i=0; i < 3; i++) {
-      tangentNum = dataBuffer[1];
-      tangentVelocity = dataBuffer[2];
-      tangentOnOff(tangentNum, tangentVelocity);
-    }
+    tangentNum = dataBuffer[1];
+    tangentVelocity = dataBuffer[2];
+    tangentOnOff(tangentNum, tangentVelocity);
   }
 }
