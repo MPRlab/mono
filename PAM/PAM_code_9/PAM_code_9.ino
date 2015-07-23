@@ -106,7 +106,7 @@ boolean getSerialString(){
     char incomingbyte = mySerial.read();
     if(incomingbyte==startChar){
         dataBufferIndex = 0;  //Initialize our dataBufferIndex variable
-        storeString = true;        
+        storeString = true;
     }
     if(storeString){
       //check to see if outside buffer size
