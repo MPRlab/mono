@@ -94,7 +94,7 @@ uint8_t read_buffer(Comm * comm) {
 
 }
 
-uint8_t sendBuffer(Comm * comm, uint8_t length) {
+uint8_t send_buffer(Comm * comm, uint8_t length) {
 
 	if (length) {
 		
@@ -123,7 +123,7 @@ void init_comm(Comm * comm, HardwareSerial * serial, Status * status, Parser * p
 
 }
 
-uint8_t update(Comm * comm){
+uint8_t update_comm(Comm * comm){
 	
 	if(read_buffer(comm)){ 
 

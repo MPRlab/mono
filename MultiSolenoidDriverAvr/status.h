@@ -9,6 +9,7 @@
 
 #include "t_data.h"
 #include "t_array.h"
+#include <avr/stdint.h>
 
 #define PULSE_HOLD_TIME 800 // ms between pulse and hold
 #define HOLD_PWM 30 // pw at pulse

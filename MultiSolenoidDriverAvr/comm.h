@@ -34,7 +34,7 @@ struct Comm{
 typedef struct Comm Comm;
 
 void make_comm(Comm * comm, HardwareSerial * serial, Status * status, Parser * parser, uint8_t boardID);
-uint8_t update(void);
+uint8_t update_comm(void);
 
 long good_packet_count;
 unsigned long time_last_good_packet;
