@@ -16,35 +16,40 @@
 #define PULSE_PWM 0 // pw at hold
 
 struct Status {
-	TData solenoid_group[3];
-	TData power_solenoid;
-	// Solenoid Parameter Related
-	TData driver_pulse_hold_time[7];
-	TData pulse_pwm[7];
-	TData hold_pwm[7];
+	
+	Data solenoid_group[3];
+	Data power_solenoid;
+	
+	Data driver_pulse_hold_time[7];
+	Data pulse_pwm[7];
+	Data hold_pwm[7];
 
+	Array commNumStartDelimFail; // Start Delim Fail
+	Array commNumHeaderFail; // Header Fails
+	Array commNumChecksumFail; // Checksum Fails
+	Array commNumChecksumPass; // Checksum Passed
+	Array commPacketPerSecond;
+	Array commLastChecksum;
+	Array commAck;
 
-	// TData<unsigned long> loopTime;	TBD	
+	// Data<unsigned long> loopTime;	TBD	
 };
 
 typedef struct Status Status;
 
 
-/******* Create all necessary ******/
+void set_comm_last_checksum(Status * status, uint8_t checksum);
 
-// Variables that stores the state of all solenoids
-// Each 8 solenoid group makes up one variable
-// Serial Related 
-TArray<unsigned int> commNumStartDelimFail; // Start Delim Fail
-TArray<unsigned int> commNumHeaderFail; // Header Fails
-TArray<unsigned int> commNumChecksumFail; // Checksum Fails
-TArray<unsigned int> commNumChecksumPass; // Checksum Passed
-TArray<unsigned int> commPacketPerSecond;
-TArray<byte> commLastChecksum;
-TArray<bool> commAck;
-// Debugging Related
+uint8_t get_checksum(Status * status);
 
+void increment_valid_checksums(Status * status);
 
+void increment_invalid_checksums(Status * status);
 
+void set_comm_packet_per_second_status(Status * status, uint8_t packets_per_second);
+
+void tag_status_comm_acknowledge(Status * status);
+
+void increment_comm_num_start_delim_fail(Status * status);
 
 #endif

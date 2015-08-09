@@ -7,13 +7,8 @@
 #ifndef SolenoidController_H
 #define SolenoidController_H
 
-#include "Status.h"
+#include "status.h"
 
-/*
-*	APPLICATION NOTE
-*	
-*	ADD HERE
-*/
 
 class SolenoidController{
 	public:
@@ -141,9 +136,3 @@ class SolenoidController{
 };
 
 #endif
-
-
-
-
-
-
