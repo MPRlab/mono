@@ -3,50 +3,47 @@
 *	attributes.
 */
 
-#ifndef Status_H
-#define Status_H
+#ifndef __STATUS_H__
+#define __STATUS_H__
 
-#include <Arduino.h>
-#include "TData.h"
-#include "TArray.h"
+
+#include "t_data.h"
+#include "t_array.h"
 
 #define PULSE_HOLD_TIME 800 // ms between pulse and hold
 #define HOLD_PWM 30 // pw at pulse
 #define PULSE_PWM 0 // pw at hold
 
-class Status{
-	public:
-		// Constructor
-		Status(){
-			// Set the default pulse hold time for the drivers
-			for (int i=0; i<6; i++){
-				driverPulseHoldTime[i].set(PULSE_HOLD_TIME);
-				holdPWM[i].set(HOLD_PWM);
-				pulsePWM[i].set(PULSE_PWM);
-			}
-		}
+struct Status {
+	TData solenoid_group[3];
+	TData power_solenoid;
+	// Solenoid Parameter Related
+	TData driver_pulse_hold_time[7];
+	TData pulse_pwm[7];
+	TData hold_pwm[7];
 
-		/******* Create all necessary ******/
-		
-		// Variables that stores the state of all solenoids
-		// Each 8 solenoid group makes up one variable
-		TData<byte> solenoidGroup[3];
-		TData<bool> powerSolenoid;
-		// Solenoid Parameter Related
-		TData<unsigned int> driverPulseHoldTime[7];
-		TData<byte> pulsePWM[7];
-		TData<byte> holdPWM[7];
-		// Serial Related 
-		TArray<unsigned int> commNumStartDelimFail; // Start Delim Fail
-		TArray<unsigned int> commNumHeaderFail; // Header Fails
-		TArray<unsigned int> commNumChecksumFail; // Checksum Fails
-		TArray<unsigned int> commNumChecksumPass; // Checksum Passed
-		TArray<unsigned int> commPacketPerSecond;
-		TArray<byte> commLastChecksum;
-		TArray<bool> commAck;
-		// Debugging Related
-		TData<unsigned long> loopTime;
+
+	// TData<unsigned long> loopTime;	TBD	
 };
+
+typedef struct Status Status;
+
+
+/******* Create all necessary ******/
+
+// Variables that stores the state of all solenoids
+// Each 8 solenoid group makes up one variable
+// Serial Related 
+TArray<unsigned int> commNumStartDelimFail; // Start Delim Fail
+TArray<unsigned int> commNumHeaderFail; // Header Fails
+TArray<unsigned int> commNumChecksumFail; // Checksum Fails
+TArray<unsigned int> commNumChecksumPass; // Checksum Passed
+TArray<unsigned int> commPacketPerSecond;
+TArray<byte> commLastChecksum;
+TArray<bool> commAck;
+// Debugging Related
+
+
 
 
 #endif
