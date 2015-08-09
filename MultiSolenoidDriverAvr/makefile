@@ -8,3 +8,6 @@ comm.o: comm.h comm.c
 
 parser.o: parser.h parser.c
 	avr-gcc -c -mmcu=atmega2560 parser.c 
+
+data.o: data.h data.c
+	avr-gcc -c -mmcu=atmega2560 data.c

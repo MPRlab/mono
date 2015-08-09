@@ -1,6 +1,7 @@
 #ifndef __DATA_H__
 #define __DATA_H__
 
+#include <avr/stdint.h>
 
 struct Data {
 	uint8_t data;

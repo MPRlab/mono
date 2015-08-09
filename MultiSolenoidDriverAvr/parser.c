@@ -1,13 +1,18 @@
 #include "parser.h"
 
 void init_parser(Parser * parser, Status * status) {
+	
 	parser->status = status;
+	
 }
 
-uint32_t parse(Paser * parser, uint8_t * data, uint8_t length){
+uint32_t parse(Paser * parser, uint8_t * data, uint8_t length) {
+	
 	uint8_t i=0; // Iterator variable
+
 	while (i < length) {
-		switch (data[i++]){
+
+		switch (data[i++]) {
 			/************* REQUEST RELATED **************/
 			/* 	
 			*	Requests are send by devices to request
@@ -44,9 +49,11 @@ uint32_t parse(Paser * parser, uint8_t * data, uint8_t length){
 				return 0x00;
 			
 		}
+
 	}
 
 	return 0x01;
+
 }
 
 /******************************************************/
@@ -57,7 +64,8 @@ uint32_t parse(Paser * parser, uint8_t * data, uint8_t length){
 *	Checks all the requests and tags and adds the 
 *	related headers and content to the passed array
 */
-uint8_t construct_message(Parser * parser, uint8_t * data, uint8_t * length){
+uint8_t construct_message(Parser * parser, uint8_t * data, uint8_t * length) {
+	
 	uint8_t i = 0;
 
 	/*************** TAG RELATED ****************/
@@ -70,4 +78,5 @@ uint8_t construct_message(Parser * parser, uint8_t * data, uint8_t * length){
 	*length = i; // Return length of message
 
 	return 0x01;
+
 }
