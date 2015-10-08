@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 190.0, 147.0, 1696.0, 815.0 ],
+		"rect" : [ 34.0, 79.0, 956.0, 607.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -149,7 +149,6 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 954.0, 72.0, 66.0, 22.0 ],
-					"presentation_rect" : [ 1201.0, 41.0, 0.0, 0.0 ],
 					"saved_object_attributes" : 					{
 						"embed" : 1
 					}
@@ -168,7 +167,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1081.0, 93.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "9 0"
+					"text" : "1 0"
 				}
 
 			}
@@ -1447,7 +1446,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-15",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-AL00FQDR" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-fd134" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -1529,7 +1528,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 438.0, 391.0, 134.0, 22.0 ],
 					"style" : "",
-					"text" : "253 1 4 16 0 0 0 239"
+					"text" : "253 1 4 18 0 0 0 237"
 				}
 
 			}
@@ -1773,7 +1772,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 231.5, 430.0, 137.0, 22.0 ],
 					"style" : "",
-					"text" : "FD 1 4 10 0 0 0 EF"
+					"text" : "FD 1 4 12 0 0 0 ED"
 				}
 
 			}
@@ -2035,6 +2034,19 @@
 					"patching_rect" : [ 863.0, 509.0, 91.0, 22.0 ],
 					"style" : "",
 					"text" : "serial c 115200"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-21",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 8.0, 229.0, 50.0, 22.0 ],
+					"style" : "",
+					"text" : "refresh"
 				}
 
 			}
@@ -2793,6 +2805,15 @@
 					"hidden" : 0,
 					"midpoints" : [ 447.5, 441.0, 378.0, 441.0, 378.0, 345.0, 252.0, 345.0, 252.0, 336.0, 241.0, 336.0 ],
 					"source" : [ "obj-2", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-21", 0 ]
 				}
 
 			}
