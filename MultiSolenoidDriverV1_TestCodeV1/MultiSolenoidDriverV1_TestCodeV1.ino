@@ -5,7 +5,7 @@
 * By Paulo, Jan 16, 2015
 */
 
-#include <PinDef.h>
+#include "PinDef.h"
 
 /* Create Solenoid List */
 int pinSolOn[] = {DRV1, DRV2, DRV3, DRV4, DRV5, DRV6, DRVS};
@@ -110,5 +110,4 @@ void step(int stepNum){
 			break;
 	}
 }
-
 
