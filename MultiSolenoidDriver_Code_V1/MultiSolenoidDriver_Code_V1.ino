@@ -40,7 +40,7 @@ void setup(){
 	delay(1000);
 
 	/* Begin Serial Communication */
-	Serial.begin(500000); // FTDI Port
+	Serial.begin(115200); // FTDI Port
 
 	/* Set Up all Solenoid Drivers */
 	driver1.begin();
