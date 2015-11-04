@@ -1,35 +1,33 @@
 
-int pitch = 0;         // incoming serial byte
-int vel = 0;
-int LED = 13;
+int pitch = 0; // incoming serial byte
+int vel = 0; // incoming serial byte
+int solenoid = 7;
 
 void setup()
 {
   // start serial port at 9600 bps:
-  Serial.begin(115200);
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for Leonardo only
-  }
-
-  pinMode(13, OUTPUT);   // digital sensor is on digital pin 2
+  Serial.begin(9600); // open the arduino serial port
+  pinMode(7, OUTPUT);   // pin connected to solenoid
 }
 
 void readSerial() {
-  // if we get a valid byte, read input:
-  if (Serial.available() > 0) {
-    // get incoming byte:
-    pitch = Serial.read();
-    // read first analog input, divide by 4 to make the range 0-255:
-    vel = Serial.read();
-    digitalWrite(LED, HIGH);
-    delay (100);
-    digitalWrite(LED, LOW);
+  while(Serial.available() == 0); //loop until there is serial data in the buffer
+    pitch = Serial.read(); // get incoming byte
+  while(Serial.available() == 0); //loop until there is serial data in the buffer
+    vel = Serial.read(); // get next byte
+    solenoidOnOff(pitch, vel);
     Serial.print(pitch);
-    Serial.println();
-    Serial.print(vel);
-  }
+    Serial.print(" ");
+    Serial.println(vel);
 }
 
+void solenoidOnOff(int pitch, int vel) {
+  if (pitch == 72 && vel > 0) {
+    digitalWrite(solenoid, HIGH);
+    delay(50);
+    digitalWrite(solenoid, LOW);
+  }
+}
 
 void loop() {
 readSerial();  
