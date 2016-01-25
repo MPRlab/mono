@@ -3,13 +3,13 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 7,
-			"minor" : 0,
-			"revision" : 5,
+			"minor" : 1,
+			"revision" : 0,
 			"architecture" : "x86",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 79.0, 956.0, 607.0 ],
+		"rect" : [ 426.0, 128.0, 1233.0, 679.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -167,7 +167,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1081.0, 93.0, 50.0, 22.0 ],
 					"style" : "",
-					"text" : "1 0"
+					"text" : "3 0"
 				}
 
 			}
@@ -191,7 +191,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 1030.0, 9.5, 42.0, 22.0 ],
+					"patching_rect" : [ 1031.0, 10.5, 42.0, 22.0 ],
 					"style" : "",
 					"text" : "midiin"
 				}
@@ -1528,7 +1528,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 438.0, 391.0, 134.0, 22.0 ],
 					"style" : "",
-					"text" : "253 1 4 18 0 0 0 237"
+					"text" : "253 1 4 16 0 0 0 239"
 				}
 
 			}
@@ -1772,7 +1772,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 231.5, 430.0, 137.0, 22.0 ],
 					"style" : "",
-					"text" : "FD 1 4 12 0 0 0 ED"
+					"text" : "FD 1 4 10 0 0 0 EF"
 				}
 
 			}
@@ -3793,7 +3793,7 @@
 				"type" : "iLaX"
 			}
  ],
-		"embedsnapshot" : 0,
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "newobjBlue-1",
 				"default" : 				{
