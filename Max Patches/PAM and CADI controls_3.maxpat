@@ -3,13 +3,13 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 7,
-			"minor" : 0,
-			"revision" : 6,
+			"minor" : 1,
+			"revision" : 0,
 			"architecture" : "x86",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 190.0, 125.0, 810.0, 480.0 ],
+		"rect" : [ 113.0, 182.0, 958.0, 551.0 ],
 		"bgcolor" : [ 0.353966, 1.0, 0.795763, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -2934,7 +2934,7 @@
 			}
  ],
 		"dependency_cache" : [  ],
-		"embedsnapshot" : 0,
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "newobjBlue-1",
 				"default" : 				{
