@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 426.0, 128.0, 1233.0, 679.0 ],
+		"rect" : [ 165.0, 115.0, 1233.0, 679.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -37,6 +37,19 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-23",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 859.75, 9.5, 81.0, 22.0 ],
+					"style" : "",
+					"text" : "r cyther_note"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"coll_data" : 					{
 						"count" : 25,
@@ -382,7 +395,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 880.0, 103.5, 29.5, 22.0 ],
+					"patching_rect" : [ 859.75, 113.5, 29.5, 22.0 ],
 					"style" : "",
 					"text" : "int"
 				}
@@ -395,7 +408,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 880.0, 68.0, 36.0, 22.0 ],
+					"patching_rect" : [ 859.75, 78.0, 36.0, 22.0 ],
 					"style" : "",
 					"text" : "sel 1"
 				}
@@ -447,7 +460,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 880.0, 131.5, 36.0, 22.0 ],
+					"patching_rect" : [ 859.75, 141.5, 36.0, 22.0 ],
 					"style" : "",
 					"text" : "sel 0"
 				}
@@ -473,7 +486,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
-					"patching_rect" : [ 880.0, 31.0, 69.0, 22.0 ],
+					"patching_rect" : [ 859.75, 41.0, 69.0, 22.0 ],
 					"style" : "",
 					"text" : "unpack 0 0"
 				}
@@ -1446,7 +1459,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-15",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-fd134" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-AL00FQDR" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -2829,6 +2842,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-324", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-23", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-344", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -3815,8 +3837,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
