@@ -9,7 +9,11 @@
 			"modernui" : 1
 		}
 ,
+<<<<<<< Updated upstream
 		"rect" : [ 518.0, 163.0, 958.0, 551.0 ],
+=======
+		"rect" : [ 286.0, 139.0, 972.0, 505.0 ],
+>>>>>>> Stashed changes
 		"bgcolor" : [ 0.353966, 1.0, 0.795763, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -38,6 +42,19 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-39",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 487.0, 18.0, 50.0, 22.0 ],
+					"style" : "",
+					"text" : "76"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"hidden" : 1,
 					"id" : "obj-135",
@@ -208,7 +225,11 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 239.5, 18.0, 50.0, 22.0 ],
 					"style" : "",
+<<<<<<< Updated upstream
 					"text" : "86"
+=======
+					"text" : "75"
+>>>>>>> Stashed changes
 				}
 
 			}
@@ -219,9 +240,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
-					"patching_rect" : [ 542.0, 18.0, 53.0, 22.0 ],
+					"patching_rect" : [ 542.0, 18.0, 63.0, 22.0 ],
 					"style" : "",
-					"text" : "notein 2"
+					"text" : "notein a 2"
 				}
 
 			}
@@ -232,37 +253,9 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
-					"patching_rect" : [ 291.5, 18.0, 53.0, 22.0 ],
+					"patching_rect" : [ 291.5, 18.0, 63.0, 22.0 ],
 					"style" : "",
-					"text" : "notein 1"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"hidden" : 1,
-					"id" : "obj-42",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 846.0, 283.0, 29.5, 22.0 ],
-					"style" : "",
-					"text" : "70"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"hidden" : 1,
-					"id" : "obj-7",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 846.0, 252.0, 43.0, 22.0 ],
-					"style" : "",
-					"text" : "sel 71"
+					"text" : "notein a 1"
 				}
 
 			}
@@ -330,19 +323,6 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 379.0, 176.0, 24.0, 24.0 ],
 					"style" : ""
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"hidden" : 1,
-					"id" : "obj-145",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 596.0, 618.0, 44.0, 22.0 ],
-					"style" : "",
-					"text" : "print b"
 				}
 
 			}
@@ -535,19 +515,6 @@
 					"patching_rect" : [ 17.5, 573.0, 59.0, 22.0 ],
 					"style" : "",
 					"text" : "sel 13 10"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"hidden" : 1,
-					"id" : "obj-100",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 14.5, 687.359741, 44.0, 22.0 ],
-					"style" : "",
-					"text" : "print a"
 				}
 
 			}
@@ -1381,7 +1348,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-70",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbmodemfd1341", ",", "usbmodemfd1331" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbmodemFD131" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -1869,16 +1836,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-100", 0 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"midpoints" : [ 24.0, 678.0, 24.0, 678.0 ],
-					"source" : [ "obj-102", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-102", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
@@ -2072,7 +2029,11 @@
 					"destination" : [ "obj-40", 1 ],
 					"disabled" : 0,
 					"hidden" : 1,
+<<<<<<< Updated upstream
 					"midpoints" : [ 335.0, 156.0, 363.0, 156.0, 363.0, 471.0, 223.5, 471.0 ],
+=======
+					"midpoints" : [ 345.0, 156.0, 312.0, 156.0, 312.0, 168.0, 255.0, 168.0, 255.0, 195.0, 267.0, 195.0, 267.0, 327.0, 279.0, 327.0, 279.0, 426.0, 223.5, 426.0 ],
+>>>>>>> Stashed changes
 					"source" : [ "obj-130", 1 ]
 				}
 
@@ -2102,7 +2063,11 @@
 					"destination" : [ "obj-95", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
+<<<<<<< Updated upstream
 					"midpoints" : [ 335.0, 156.0, 366.0, 156.0, 366.0, 402.0, 474.0, 402.0, 474.0, 396.0, 496.5, 396.0 ],
+=======
+					"midpoints" : [ 345.0, 141.0, 417.0, 141.0, 417.0, 204.0, 456.0, 204.0, 456.0, 279.0, 510.0, 279.0, 510.0, 354.0, 483.0, 354.0, 483.0, 393.0, 496.5, 393.0 ],
+>>>>>>> Stashed changes
 					"source" : [ "obj-130", 1 ]
 				}
 
@@ -2119,7 +2084,17 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-142", 0 ],
+					"destination" : [ "obj-141", 1 ],
+					"disabled" : 0,
+					"hidden" : 1,
+					"midpoints" : [ 595.5, 51.0, 591.0, 51.0, 591.0, 195.0, 573.0, 195.0, 573.0, 378.0, 693.0, 378.0, 693.0, 456.0, 696.5, 456.0 ],
+					"source" : [ "obj-131", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-141", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
 					"midpoints" : [ 551.5, 42.0, 528.0, 42.0, 528.0, 3.0, 606.0, 3.0, 606.0, 195.0, 573.0, 195.0, 573.0, 423.0, 605.5, 423.0 ],
@@ -2129,11 +2104,29 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-39", 1 ],
+					"disabled" : 0,
+					"hidden" : 1,
+<<<<<<< Updated upstream
+					"midpoints" : [ 343.0, 216.0, 363.0, 216.0, 363.0, 255.0, 301.0, 255.0 ],
+					"source" : [ "obj-135", 1 ]
+=======
+					"source" : [ "obj-131", 0 ]
+>>>>>>> Stashed changes
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-119", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
-					"midpoints" : [ 343.0, 216.0, 363.0, 216.0, 363.0, 255.0, 301.0, 255.0 ],
+<<<<<<< Updated upstream
+					"midpoints" : [ 206.5, 165.0, 219.0, 165.0, 219.0, 168.0, 237.0, 168.0, 237.0, 186.0, 296.0, 186.0 ],
+					"source" : [ "obj-14", 0 ]
+=======
 					"source" : [ "obj-135", 1 ]
+>>>>>>> Stashed changes
 				}
 
 			}
@@ -2142,18 +2135,13 @@
 					"destination" : [ "obj-9", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
-					"midpoints" : [ 206.5, 165.0, 219.0, 165.0, 219.0, 168.0, 237.0, 168.0, 237.0, 186.0, 296.0, 186.0 ],
-					"source" : [ "obj-14", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-32", 0 ],
-					"disabled" : 0,
-					"hidden" : 1,
+<<<<<<< Updated upstream
 					"midpoints" : [ 605.5, 483.0, 540.0, 483.0, 540.0, 243.0, 363.0, 243.0, 363.0, 126.0, 348.0, 126.0, 348.0, 51.0, 357.0, 51.0, 357.0, 24.0, 380.5, 24.0 ],
 					"source" : [ "obj-141", 0 ]
+=======
+					"midpoints" : [ 206.5, 165.0, 219.0, 165.0, 219.0, 168.0, 255.0, 168.0, 255.0, 195.0, 296.0, 195.0 ],
+					"source" : [ "obj-14", 0 ]
+>>>>>>> Stashed changes
 				}
 
 			}
@@ -2183,16 +2171,6 @@
 					"disabled" : 0,
 					"hidden" : 1,
 					"midpoints" : [ 605.5, 453.0, 605.5, 453.0 ],
-					"source" : [ "obj-142", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-7", 0 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"midpoints" : [ 605.5, 453.0, 582.0, 453.0, 582.0, 360.0, 693.0, 360.0, 693.0, 339.0, 735.0, 339.0, 735.0, 246.0, 855.5, 246.0 ],
 					"source" : [ "obj-142", 0 ]
 				}
 
@@ -2479,16 +2457,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-141", 0 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"midpoints" : [ 855.5, 351.0, 852.0, 351.0, 852.0, 399.0, 693.0, 399.0, 693.0, 447.0, 666.0, 447.0, 666.0, 456.0, 605.5, 456.0 ],
-					"source" : [ "obj-42", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-38", 2 ],
 					"disabled" : 0,
 					"hidden" : 1,
@@ -2679,20 +2647,20 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-145", 0 ],
+					"destination" : [ "obj-148", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
-					"midpoints" : [ 605.5, 534.0, 605.5, 534.0 ],
+					"midpoints" : [ 605.5, 546.0, 639.5, 546.0 ],
 					"source" : [ "obj-67", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-148", 0 ],
+					"destination" : [ "obj-32", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
-					"midpoints" : [ 605.5, 546.0, 639.5, 546.0 ],
+					"midpoints" : [ 605.5, 543.0, 573.0, 543.0, 573.0, 165.0, 606.0, 165.0, 606.0, 3.0, 465.0, 3.0, 465.0, 9.0, 380.5, 9.0 ],
 					"source" : [ "obj-67", 0 ]
 				}
 
@@ -2724,16 +2692,6 @@
 					"hidden" : 1,
 					"midpoints" : [ 596.5, 351.0, 510.0, 351.0, 510.0, 243.0, 363.0, 243.0, 363.0, 126.0, 348.0, 126.0, 348.0, 60.0, 380.5, 60.0 ],
 					"source" : [ "obj-69", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-42", 0 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"midpoints" : [ 855.5, 276.0, 855.5, 276.0 ],
-					"source" : [ "obj-7", 0 ]
 				}
 
 			}
@@ -2922,7 +2880,11 @@
 					"destination" : [ "obj-113", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
+<<<<<<< Updated upstream
 					"midpoints" : [ 301.0, 255.0, 279.0, 255.0, 279.0, 222.0, 132.5, 222.0 ],
+=======
+					"midpoints" : [ 301.0, 342.0, 267.0, 342.0, 267.0, 192.0, 255.0, 192.0, 255.0, 196.0, 132.5, 196.0 ],
+>>>>>>> Stashed changes
 					"source" : [ "obj-98", 0 ]
 				}
 
@@ -2961,8 +2923,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
