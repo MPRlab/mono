@@ -212,128 +212,6 @@
 			}
 , 			{
 				"box" : 				{
-					"coll_data" : 					{
-						"count" : 25,
-						"data" : [ 							{
-								"key" : 0,
-								"value" : [ 0 ]
-							}
-, 							{
-								"key" : 1,
-								"value" : [ 1 ]
-							}
-, 							{
-								"key" : 2,
-								"value" : [ 3 ]
-							}
-, 							{
-								"key" : 3,
-								"value" : [ 4 ]
-							}
-, 							{
-								"key" : 4,
-								"value" : [ 5 ]
-							}
-, 							{
-								"key" : 5,
-								"value" : [ 6 ]
-							}
-, 							{
-								"key" : 6,
-								"value" : [ 7 ]
-							}
-, 							{
-								"key" : 7,
-								"value" : [ 8 ]
-							}
-, 							{
-								"key" : 8,
-								"value" : [ 9 ]
-							}
-, 							{
-								"key" : 9,
-								"value" : [ 10 ]
-							}
-, 							{
-								"key" : 10,
-								"value" : [ 11 ]
-							}
-, 							{
-								"key" : 11,
-								"value" : [ 12 ]
-							}
-, 							{
-								"key" : 12,
-								"value" : [ 13 ]
-							}
-, 							{
-								"key" : 13,
-								"value" : [ 19 ]
-							}
-, 							{
-								"key" : 14,
-								"value" : [ 18 ]
-							}
-, 							{
-								"key" : 15,
-								"value" : [ 17 ]
-							}
-, 							{
-								"key" : 16,
-								"value" : [ 16 ]
-							}
-, 							{
-								"key" : 17,
-								"value" : [ 15 ]
-							}
-, 							{
-								"key" : 18,
-								"value" : [ 14 ]
-							}
-, 							{
-								"key" : 19,
-								"value" : [ 20 ]
-							}
-, 							{
-								"key" : 20,
-								"value" : [ 21 ]
-							}
-, 							{
-								"key" : 21,
-								"value" : [ 22 ]
-							}
-, 							{
-								"key" : 22,
-								"value" : [ 23 ]
-							}
-, 							{
-								"key" : 23,
-								"value" : [ 24 ]
-							}
-, 							{
-								"key" : 24,
-								"value" : [ 25 ]
-							}
- ]
-					}
-,
-					"id" : "obj-17",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 8.0, 50.0, 66.0, 22.0 ],
-					"saved_object_attributes" : 					{
-						"embed" : 1
-					}
-,
-					"style" : "",
-					"text" : "coll remap"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-4",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -1459,7 +1337,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-15",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-AL00FQDR" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQDR" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -2524,24 +2402,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-3", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-17", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-309", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-17", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-79", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -2986,7 +2846,16 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-17", 0 ],
+					"destination" : [ "obj-3", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-342", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-309", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-342", 0 ]
