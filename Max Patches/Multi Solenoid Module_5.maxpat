@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 79.0, 993.0, 287.0 ],
+		"rect" : [ 34.0, 79.0, 1212.0, 368.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -37,6 +37,20 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-20",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 852.0, 121.0, 150.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 834.0, 112.0, 68.0, 20.0 ],
+					"style" : "",
+					"text" : "dur (msec)"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-212",
 					"maxclass" : "newobj",
@@ -97,9 +111,9 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1152.0, 122.0, 73.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 837.0, 112.0, 73.0, 22.0 ],
+					"presentation_rect" : [ 974.0, 112.0, 73.0, 22.0 ],
 					"style" : "",
-					"text" : "64 0 3"
+					"text" : "1 0 3"
 				}
 
 			}
@@ -1706,6 +1720,8 @@
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1092.75, 122.0, 50.0, 22.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 911.0, 112.0, 50.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -2822,7 +2838,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 288.0, 481.0, 134.0, 22.0 ],
 					"style" : "",
-					"text" : "253 1 4 16 0 0 0 239"
+					"text" : "253 3 4 18 0 0 0 237"
 				}
 
 			}
@@ -3058,7 +3074,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 81.5, 565.0, 137.0, 22.0 ],
 					"style" : "",
-					"text" : "FD 1 4 10 0 0 0 EF"
+					"text" : "FD 3 4 12 0 0 0 ED"
 				}
 
 			}
