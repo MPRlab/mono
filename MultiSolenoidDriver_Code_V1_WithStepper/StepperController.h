@@ -1,6 +1,5 @@
 /*
-*	Updates all solenoids to reflect the current state in the
-*	Status class.
+*	Moves the stepper motor
 * 	By Paulo and Katie
 */
 
@@ -154,6 +153,7 @@ class StepperController{
 				_currentStep = 3;
 			}
 
+			// Sequence of steps for full stepping
 			if (_currentStep == 0) {
 				digitalWrite(_in1, HIGH);
 				digitalWrite(_in2, LOW);
