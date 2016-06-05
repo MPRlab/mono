@@ -11,6 +11,8 @@
 
 #define FORWARD 1
 #define REVERSE -1
+// Number of milliseconds between two consecutive steps 
+#define TIME_BETWEEN_STEPS 40
 
 /*
 *	APPLICATION NOTE
@@ -46,6 +48,7 @@ class StepperController{
 
 			// Saves the current step index of the motor
 			_currentStep = 0;
+			_timeOfLastStep = millis();
 		}
 
 		/*
@@ -54,13 +57,25 @@ class StepperController{
 		*	and if so, moves it.
 		*/
 		bool update(){
-			// If there are steps left steps the motor once
-			if (_status->stepperStepsLeft.get() > 0) {
-				_step(FORWARD);
-			} else if (_status->stepperStepsLeft.get() < 0) {
-				_step(REVERSE);
-			} // else if stepsLeft is zero do nothing.
-			
+			if ((_timeOfLastStep - millis()) > TIME_BETWEEN_STEPS) {
+				// If there are steps left steps the motor once
+				int stepsLeft = _status->stepperStepsLeft.get();
+
+				if (stepsLeft > 0) {
+					_step(FORWARD);
+					_status->stepperStepsLeft.set(stepsLeft - 1);
+				} else if (stepsLeft < 0) {
+					_step(REVERSE);
+					_status->stepperStepsLeft.set(stepsLeft + 1);
+				} // else if stepsLeft is zero do nothing.
+				
+				// Save time of this step
+				_timeOfLastStep = millis();
+
+				return true;
+			}
+
+			return false;
 		}
 
 		/*
@@ -113,6 +128,7 @@ class StepperController{
 		Status *_status;
 		// Keeps track of the current step index of the motor
 		int _currentStep;
+		unsigned long _timeOfLastStep;
 
 		/*
 		*	Steps the motor in the correct direction
@@ -122,6 +138,8 @@ class StepperController{
 			_currentStep += direction;
 
 			_setPhases();
+
+			return true;
 		}
 
 		/*
@@ -157,6 +175,8 @@ class StepperController{
 				digitalWrite(_in3, LOW);
 				digitalWrite(_in4, HIGH);				
 			}
+
+			return true;
 		}
 };
 
