@@ -13,7 +13,7 @@
 #include "PowerSolenoidController.h"
 #include "StepperController.h"
 
-#define BOARD_ID 0x01
+#define BOARD_ID 0x02
 
 // Create Required Variables
 unsigned long loopTime = 0;

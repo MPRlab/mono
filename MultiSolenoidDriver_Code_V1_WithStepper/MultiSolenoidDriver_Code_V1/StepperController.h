@@ -11,7 +11,7 @@
 #define FORWARD 1
 #define REVERSE -1
 // Number of milliseconds between two consecutive steps 
-#define TIME_BETWEEN_STEPS 40
+#define TIME_BETWEEN_STEPS 5
 
 /*
 *	APPLICATION NOTE
