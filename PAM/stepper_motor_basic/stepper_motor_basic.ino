@@ -1,14 +1,15 @@
-int StepPin = 7;
-//int Dir = 8;
-int StepDelay = 700;
+int StepPin = 2;
+int Dir = 3;
+int StepDelay = 1350;
 //int pause = 100;
 
 void setup() {
   pinMode(StepPin, OUTPUT);
   digitalWrite(StepPin, LOW);
-  //Serial.begin(115200);
+  digitalWrite(Dir, LOW);
+  Serial.begin(115200);
   //pinMode(Dir, OUTPUT);
-  //digitalWrite(Dir, LOW);
+  
 }
 
 void loop() {
@@ -21,8 +22,7 @@ void loop() {
   //int initial = 0;
   //int final = 0;
   //initial = millis();
-  for(int i = 0; i < 50; i++)
-  {
+  for(int i = 0; i < 50; i++) {
     digitalWrite(StepPin, HIGH);
     delayMicroseconds(StepDelay/2);
     digitalWrite(StepPin, LOW);
@@ -46,7 +46,7 @@ void loop() {
   //Serial.print(final-initial);
   //Serial.println("");
   //delay(pause);
-  while(1);
+  //while(1);
 } 
 
  
