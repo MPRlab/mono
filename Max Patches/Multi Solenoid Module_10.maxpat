@@ -1582,7 +1582,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 261.5, 423.0, 134.0, 22.0 ],
 									"style" : "",
-									"text" : "253 1 4 18 0 0 0 237"
+									"text" : "253 1 4 16 0 0 0 239"
 								}
 
 							}
@@ -1740,7 +1740,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 55.0, 507.0, 137.0, 22.0 ],
 									"style" : "",
-									"text" : "FD 1 4 12 0 0 0 ED"
+									"text" : "FD 1 4 10 0 0 0 EF"
 								}
 
 							}
@@ -4924,7 +4924,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 261.5, 423.0, 134.0, 22.0 ],
 									"style" : "",
-									"text" : "253 3 4 18 0 0 0 237"
+									"text" : "253 3 4 16 0 0 0 239"
 								}
 
 							}
@@ -5082,7 +5082,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 55.0, 507.0, 137.0, 22.0 ],
 									"style" : "",
-									"text" : "FD 3 4 12 0 0 0 ED"
+									"text" : "FD 3 4 10 0 0 0 EF"
 								}
 
 							}
@@ -8798,7 +8798,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 261.5, 423.0, 134.0, 22.0 ],
 									"style" : "",
-									"text" : "253 2 4 18 0 0 0 237"
+									"text" : "253 2 4 16 0 0 0 239"
 								}
 
 							}
@@ -8956,7 +8956,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 55.0, 507.0, 137.0, 22.0 ],
 									"style" : "",
-									"text" : "FD 2 4 12 0 0 0 ED"
+									"text" : "FD 2 4 10 0 0 0 EF"
 								}
 
 							}
@@ -10924,7 +10924,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-7",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI", ",", "usbmodem14221" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQDR", ",", "usbserial-A104JSQI", ",", "usbmodem14221", ",", "usbserial-AL00FQ7X" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -11025,7 +11025,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-26",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI", ",", "usbmodem14221" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQDR", ",", "usbserial-A104JSQI", ",", "usbmodem14221", ",", "usbserial-AL00FQ7X" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -11042,7 +11042,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-3",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI", ",", "usbmodem14221" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQDR", ",", "usbserial-A104JSQI", ",", "usbmodem14221", ",", "usbserial-AL00FQ7X" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -12585,7 +12585,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-15",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI", ",", "usbmodem14221" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQDR", ",", "usbserial-A104JSQI", ",", "usbmodem14221", ",", "usbserial-AL00FQ7X" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
