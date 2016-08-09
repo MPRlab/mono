@@ -38,6 +38,101 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-38",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 808.0, 255.0, 150.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 802.0, 241.0, 75.0, 20.0 ],
+					"style" : "",
+					"text" : "picker delay"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-36",
+					"maxclass" : "number",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1077.0, 315.0, 50.0, 22.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 747.0, 240.0, 50.0, 22.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-32",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1035.0, 345.0, 108.0, 22.0 ],
+					"style" : "",
+					"text" : "s PAM_pick_delay"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-33",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1413.0, 251.0, 61.0, 22.0 ],
+					"style" : "",
+					"text" : "17 0"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-21",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 751.0, 348.0, 29.5, 22.0 ],
+					"style" : "",
+					"text" : "50"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-16",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 657.0, 314.0, 24.0, 24.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 442.25, 239.0, 24.0, 24.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 439.0, 281.0, 150.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 527.25, 241.0, 97.0, 20.0 ],
+					"style" : "",
+					"text" : "number of steps"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-18",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -7286,6 +7381,19 @@
 										"subpatcher_template" : "",
 										"boxes" : [ 											{
 												"box" : 												{
+													"id" : "obj-4",
+													"maxclass" : "message",
+													"numinlets" : 2,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 157.0, 349.0, 50.0, 22.0 ],
+													"style" : "",
+													"text" : "18 0"
+												}
+
+											}
+, 											{
+												"box" : 												{
 													"id" : "obj-18",
 													"maxclass" : "newobj",
 													"numinlets" : 0,
@@ -7705,6 +7813,15 @@
 													"disabled" : 0,
 													"hidden" : 0,
 													"source" : [ "obj-60", 1 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-4", 1 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-62", 0 ]
 												}
 
 											}
@@ -10832,7 +10949,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 685.5, 383.0, 82.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 528.0, 240.0, 82.0, 20.0 ],
+					"presentation_rect" : [ 656.0, 241.0, 82.0, 20.0 ],
 					"style" : "",
 					"text" : "picker on / off"
 				}
@@ -10860,7 +10977,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1192.0, 171.0, 24.0, 24.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 501.0, 238.0, 24.0, 24.0 ],
+					"presentation_rect" : [ 629.0, 239.0, 24.0, 24.0 ],
 					"style" : ""
 				}
 
@@ -10889,7 +11006,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 699.5, 314.0, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 442.25, 238.0, 50.0, 22.0 ],
+					"presentation_rect" : [ 475.25, 240.0, 50.0, 22.0 ],
 					"style" : ""
 				}
 
@@ -10924,7 +11041,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-7",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQDR", ",", "usbserial-A104JSQI", ",", "usbmodem14221", ",", "usbserial-AL00FQ7X" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X", ",", "usbmodem1A12431" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -11025,7 +11142,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-26",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQDR", ",", "usbserial-A104JSQI", ",", "usbmodem14221", ",", "usbserial-AL00FQ7X" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X", ",", "usbmodem1A12431" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -11042,7 +11159,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-3",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQDR", ",", "usbserial-A104JSQI", ",", "usbmodem14221", ",", "usbserial-AL00FQ7X" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X", ",", "usbmodem1A12431" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -11368,6 +11485,32 @@
 						"subpatcher_template" : "",
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-32",
+									"maxclass" : "newobj",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 763.5, 10.0, 106.0, 22.0 ],
+									"style" : "",
+									"text" : "r PAM_pick_delay"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-29",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 749.5, 90.0, 33.0, 22.0 ],
+									"style" : "",
+									"text" : "pipe"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-7",
 									"maxclass" : "newobj",
 									"numinlets" : 0,
@@ -11399,7 +11542,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 671.5, 104.0, 71.0, 22.0 ],
+									"patching_rect" : [ 749.5, 43.0, 71.0, 22.0 ],
 									"style" : "",
 									"text" : "r PAM_pick"
 								}
@@ -11727,7 +11870,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 870.0, 26.0, 61.0, 20.0 ],
+									"patching_rect" : [ 900.0, 26.0, 61.0, 20.0 ],
 									"style" : "",
 									"text" : "baud rate"
 								}
@@ -11743,7 +11886,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 861.0, 57.0, 90.0, 22.0 ],
+									"patching_rect" : [ 891.0, 57.0, 90.0, 22.0 ],
 									"style" : ""
 								}
 
@@ -11832,7 +11975,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 861.0, 90.0, 54.0, 22.0 ],
+									"patching_rect" : [ 891.0, 90.0, 54.0, 22.0 ],
 									"style" : "",
 									"text" : "baud $1"
 								}
@@ -11918,7 +12061,7 @@
 									"destination" : [ "obj-1", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 870.5, 114.0, 741.0, 114.0, 741.0, 6.0, 219.0, 6.0, 219.0, 120.0, 243.5, 120.0 ],
+									"midpoints" : [ 900.5, 114.0, 741.0, 114.0, 741.0, 6.0, 219.0, 6.0, 219.0, 120.0, 243.5, 120.0 ],
 									"source" : [ "obj-12", 0 ]
 								}
 
@@ -11928,7 +12071,7 @@
 									"destination" : [ "obj-3", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 870.5, 168.0, 447.0, 168.0, 447.0, 129.0, 355.0, 129.0 ],
+									"midpoints" : [ 900.5, 168.0, 447.0, 168.0, 447.0, 129.0, 355.0, 129.0 ],
 									"source" : [ "obj-12", 0 ]
 								}
 
@@ -11938,7 +12081,7 @@
 									"destination" : [ "obj-37", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 870.5, 129.0, 661.0, 129.0 ],
+									"midpoints" : [ 900.5, 129.0, 661.0, 129.0 ],
 									"source" : [ "obj-12", 0 ]
 								}
 
@@ -11948,7 +12091,7 @@
 									"destination" : [ "obj-4", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 870.5, 129.0, 509.5, 129.0 ],
+									"midpoints" : [ 900.5, 129.0, 509.5, 129.0 ],
 									"source" : [ "obj-12", 0 ]
 								}
 
@@ -11988,7 +12131,7 @@
 									"destination" : [ "obj-12", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 870.5, 81.0, 870.5, 81.0 ],
+									"midpoints" : [ 900.5, 81.0, 900.5, 81.0 ],
 									"source" : [ "obj-14", 0 ]
 								}
 
@@ -12165,6 +12308,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-37", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-29", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-17", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12190,6 +12342,15 @@
 									"hidden" : 0,
 									"midpoints" : [ 509.5, 54.0, 509.5, 54.0 ],
 									"source" : [ "obj-31", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-29", 1 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-32", 0 ]
 								}
 
 							}
@@ -12265,10 +12426,9 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-37", 0 ],
+									"destination" : [ "obj-29", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 681.0, 129.0, 661.0, 129.0 ],
 									"source" : [ "obj-41", 0 ]
 								}
 
@@ -12585,7 +12745,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-15",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQDR", ",", "usbserial-A104JSQI", ",", "usbmodem14221", ",", "usbserial-AL00FQ7X" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X", ",", "usbmodem1A12431" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -12717,6 +12877,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-33", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-14", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-87", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -12792,6 +12961,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-21", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-16", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-192", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -12859,6 +13037,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-206", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-137", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-21", 0 ]
 				}
 
 			}
@@ -12942,6 +13129,15 @@
 					"hidden" : 0,
 					"midpoints" : [ 955.75, 147.0, 997.25, 147.0, 997.25, 120.0, 1012.0, 120.0 ],
 					"source" : [ "obj-342", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-32", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-36", 0 ]
 				}
 
 			}
