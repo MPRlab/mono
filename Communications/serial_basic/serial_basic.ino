@@ -1,13 +1,13 @@
 
 int pitch = 0; // incoming serial byte
 int vel = 0; // incoming serial byte
-int solenoid = 7;
+int solenoid = 13;
 
 void setup()
 {
   // start serial port at 9600 bps:
   Serial.begin(9600); // open the arduino serial port
-  pinMode(7, OUTPUT);   // pin connected to solenoid
+  pinMode(solenoid, OUTPUT);   // pin connected to solenoid
 }
 
 void readSerial() {
@@ -22,7 +22,7 @@ void readSerial() {
 }
 
 void solenoidOnOff(int pitch, int vel) {
-  if (pitch == 72 && vel > 0) {
+  if (vel > 0) {
     digitalWrite(solenoid, HIGH);
     delay(50);
     digitalWrite(solenoid, LOW);
