@@ -4,12 +4,12 @@
 		"appversion" : 		{
 			"major" : 7,
 			"minor" : 2,
-			"revision" : 3,
+			"revision" : 4,
 			"architecture" : "x86",
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 79.0, 1035.0, 468.0 ],
+		"rect" : [ 383.0, 177.0, 1035.0, 468.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -86,7 +86,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1413.0, 251.0, 61.0, 22.0 ],
 					"style" : "",
-					"text" : "17 0"
+					"text" : "4 0"
 				}
 
 			}
@@ -254,7 +254,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1145.25, 292.0, 73.0, 22.0 ],
+					"patching_rect" : [ 1147.25, 301.0, 73.0, 22.0 ],
 					"style" : "",
 					"text" : "s perc_note"
 				}
@@ -309,7 +309,7 @@
 						"appversion" : 						{
 							"major" : 7,
 							"minor" : 2,
-							"revision" : 3,
+							"revision" : 4,
 							"architecture" : "x86",
 							"modernui" : 1
 						}
@@ -365,7 +365,7 @@
 										"appversion" : 										{
 											"major" : 7,
 											"minor" : 2,
-											"revision" : 3,
+											"revision" : 4,
 											"architecture" : "x86",
 											"modernui" : 1
 										}
@@ -1677,7 +1677,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 261.5, 423.0, 134.0, 22.0 ],
 									"style" : "",
-									"text" : "253 1 4 16 0 0 0 239"
+									"text" : "253 1 4 18 0 0 0 237"
 								}
 
 							}
@@ -1835,7 +1835,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 55.0, 507.0, 137.0, 22.0 ],
 									"style" : "",
-									"text" : "FD 1 4 10 0 0 0 EF"
+									"text" : "FD 1 4 12 0 0 0 ED"
 								}
 
 							}
@@ -3702,7 +3702,7 @@
 						"appversion" : 						{
 							"major" : 7,
 							"minor" : 2,
-							"revision" : 3,
+							"revision" : 4,
 							"architecture" : "x86",
 							"modernui" : 1
 						}
@@ -5019,7 +5019,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 261.5, 423.0, 134.0, 22.0 ],
 									"style" : "",
-									"text" : "253 3 4 16 0 0 0 239"
+									"text" : "253 3 4 18 0 0 0 237"
 								}
 
 							}
@@ -5177,7 +5177,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 55.0, 507.0, 137.0, 22.0 ],
 									"style" : "",
-									"text" : "FD 3 4 10 0 0 0 EF"
+									"text" : "FD 3 4 12 0 0 0 ED"
 								}
 
 							}
@@ -7291,7 +7291,7 @@
 						"appversion" : 						{
 							"major" : 7,
 							"minor" : 2,
-							"revision" : 3,
+							"revision" : 4,
 							"architecture" : "x86",
 							"modernui" : 1
 						}
@@ -7347,7 +7347,7 @@
 										"appversion" : 										{
 											"major" : 7,
 											"minor" : 2,
-											"revision" : 3,
+											"revision" : 4,
 											"architecture" : "x86",
 											"modernui" : 1
 										}
@@ -7381,6 +7381,44 @@
 										"subpatcher_template" : "",
 										"boxes" : [ 											{
 												"box" : 												{
+													"id" : "obj-8",
+													"maxclass" : "button",
+													"numinlets" : 1,
+													"numoutlets" : 1,
+													"outlettype" : [ "bang" ],
+													"patching_rect" : [ 327.0, 251.0, 24.0, 24.0 ],
+													"style" : ""
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"id" : "obj-6",
+													"maxclass" : "newobj",
+													"numinlets" : 2,
+													"numoutlets" : 2,
+													"outlettype" : [ "bang", "" ],
+													"patching_rect" : [ 327.0, 214.0, 36.0, 22.0 ],
+													"style" : "",
+													"text" : "sel 1"
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"id" : "obj-1",
+													"maxclass" : "newobj",
+													"numinlets" : 2,
+													"numoutlets" : 1,
+													"outlettype" : [ "int" ],
+													"patching_rect" : [ 327.0, 185.0, 41.0, 22.0 ],
+													"style" : "",
+													"text" : "== 18"
+												}
+
+											}
+, 											{
+												"box" : 												{
 													"id" : "obj-4",
 													"maxclass" : "message",
 													"numinlets" : 2,
@@ -7388,7 +7426,7 @@
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 157.0, 349.0, 50.0, 22.0 ],
 													"style" : "",
-													"text" : "18 0"
+													"text" : "3 0"
 												}
 
 											}
@@ -7665,10 +7703,28 @@
  ],
 										"lines" : [ 											{
 												"patchline" : 												{
+													"destination" : [ "obj-6", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-1", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
 													"destination" : [ "obj-15", 1 ],
 													"disabled" : 0,
 													"hidden" : 0,
 													"source" : [ "obj-13", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-1", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-14", 0 ]
 												}
 
 											}
@@ -7782,6 +7838,15 @@
 											}
 , 											{
 												"patchline" : 												{
+													"destination" : [ "obj-8", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-6", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
 													"destination" : [ "obj-14", 1 ],
 													"disabled" : 0,
 													"hidden" : 0,
@@ -7831,6 +7896,15 @@
 													"disabled" : 0,
 													"hidden" : 0,
 													"source" : [ "obj-62", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-9", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-8", 0 ]
 												}
 
 											}
@@ -11041,7 +11115,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-7",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X", ",", "usbmodem1A12431" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-AL00FQDR", ",", "usbserial-AL00FQ7X", ",", "usbmodem202431", ",", "usbserial-A104JSQI" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -11142,7 +11216,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-26",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X", ",", "usbmodem1A12431" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-AL00FQDR", ",", "usbserial-AL00FQ7X", ",", "usbmodem202431", ",", "usbserial-A104JSQI" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -11159,7 +11233,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-3",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X", ",", "usbmodem1A12431" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-AL00FQDR", ",", "usbserial-AL00FQ7X", ",", "usbmodem202431", ",", "usbserial-A104JSQI" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -11451,7 +11525,7 @@
 						"appversion" : 						{
 							"major" : 7,
 							"minor" : 2,
-							"revision" : 3,
+							"revision" : 4,
 							"architecture" : "x86",
 							"modernui" : 1
 						}
@@ -12745,7 +12819,7 @@
 				"box" : 				{
 					"allowdrag" : 0,
 					"id" : "obj-15",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X", ",", "usbmodem1A12431" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-AL00FQDR", ",", "usbserial-AL00FQ7X", ",", "usbmodem202431", ",", "usbserial-A104JSQI" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
