@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 82.0, 79.0, 1091.0, 560.0 ],
+		"rect" : [ 264.0, 91.0, 1091.0, 560.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -12665,7 +12665,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-7",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQ7X", ",", "usbserial-AL00FQDR" ],
+					"items" : [ "usbserial-A104JSQI", ",", "usbmodem2021", ",", "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -12765,7 +12765,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-26",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQ7X", ",", "usbserial-AL00FQDR" ],
+					"items" : [ "usbserial-A104JSQI", ",", "usbmodem2021", ",", "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -12783,7 +12783,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-3",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQ7X", ",", "usbserial-AL00FQDR" ],
+					"items" : [ "usbserial-A104JSQI", ",", "usbmodem2021", ",", "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -14079,7 +14079,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-15",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-AL00FQ7X", ",", "usbserial-AL00FQDR" ],
+					"items" : [ "usbserial-A104JSQI", ",", "usbmodem2021", ",", "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -14714,20 +14714,6 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "Glocky_remap",
-				"bootpath" : "~/Google Drive/Music/Music Technology/Patches",
-				"patcherrelativepath" : ".",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "noteOn_noteOff.maxpat",
-				"bootpath" : "~/Google Drive/Music/Music Technology/Patches",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "Lhex.mxo",
 				"type" : "iLaX"
 			}
