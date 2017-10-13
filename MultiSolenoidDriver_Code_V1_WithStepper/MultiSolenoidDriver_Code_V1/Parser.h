@@ -100,7 +100,7 @@ class Parser{
 			*	Tags are used to send data 
 			*/
 
-			// ADD MESSAGES FOR SENDING HERE!!!
+			// ADD MESSAGES FOR SENDING HERE!!
 
 			*length = i; // Return length of message
 
