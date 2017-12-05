@@ -36,7 +36,7 @@ SolenoidController driver5(&status, DRV5, int(enblPins[4]), int(faultPins[4]), 4
 SolenoidController driver6(&status, DRV6, int(enblPins[5]), int(faultPins[5]), 5);
 PowerSolenoidController driverP(&status, DRVS, int(enblPins[6]), int(faultPins[6]));
 StepperController stepper(&status, STEP_IN1, STEP_IN2, STEP_IN3, STEP_IN4, 
-						  STEP_EN1, STEP_EN2, STEP_EN3, STEP_EN4, STEP_NSLEEP, STEP_NFAULT);
+						  STEP_EN1, STEP_EN2, STEP_EN3, STEP_EN4, STEP_NSLEEP, STEP_NRES);
 
 void setup(){
 	/* Start-Up Delay */
