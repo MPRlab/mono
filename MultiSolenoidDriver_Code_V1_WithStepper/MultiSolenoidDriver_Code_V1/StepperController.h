@@ -63,11 +63,13 @@ class StepperController{
 				if (stepsLeft > 0) {
 					_step(FORWARD);
 					_status->stepperStepsLeft.set(stepsLeft - 1);
+         Serial.print("Forward StepsLeft: "); Serial.print(stepsLeft); Serial.print(" current_step: "); Serial.println(_currentStep);
 				} else if (stepsLeft < 0) {
 					_step(REVERSE);
 					_status->stepperStepsLeft.set(stepsLeft + 1);
+				  Serial.println("Reverse");
 				} // else if stepsLeft is zero do nothing.
-				
+        
 				// Save time of this step
 				_timeOfLastStep = millis();
 
