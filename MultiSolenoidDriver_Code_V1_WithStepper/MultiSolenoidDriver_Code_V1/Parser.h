@@ -66,7 +66,7 @@ class Parser{
 					case SET_STEPPER_FORWARD: // Moves the stepper forward
             Serial.println(data[i]);
 //						_status->stepperStepsLeft.set(2);
-           _status->stepperStepsLeft.set(data[i++]);
+           _status->stepperStepsLeft.set(_status->stepperStepsLeft.get() + data[i++]);
             break;
 
 					case SET_STEPPER_REVERSE: // Moves the stepper reverse

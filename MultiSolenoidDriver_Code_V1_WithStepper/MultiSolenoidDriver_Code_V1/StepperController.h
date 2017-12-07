@@ -11,7 +11,9 @@
 #define FORWARD 1
 #define REVERSE -1
 // Number of milliseconds between two consecutive steps 
-#define TIME_BETWEEN_STEPS 5
+#define TIME_BETWEEN_STEPS 2
+// Number of ms to wait before sleeping stepper after motion
+#define TIME_UNTIL_SLEEP 1000
 
 /*
 *	APPLICATION NOTE
@@ -48,6 +50,8 @@ class StepperController{
 			// Saves the current step index of the motor
 			_currentStep = 0;
 			_timeOfLastStep = millis();
+      _timeOfLastMovement = millis();
+      sleeping = true;
 		}
 
 		/*
@@ -61,15 +65,22 @@ class StepperController{
 				int stepsLeft = _status->stepperStepsLeft.get();
 
 				if (stepsLeft > 0) {
+          wakeUp();
+          _timeOfLastMovement = millis();
+					
 					_step(FORWARD);
 					_status->stepperStepsLeft.set(stepsLeft - 1);
          Serial.print("Forward StepsLeft: "); Serial.print(stepsLeft); Serial.print(" current_step: "); Serial.println(_currentStep);
 				} else if (stepsLeft < 0) {
+          wakeUp();
+					_timeOfLastMovement = millis();
+          
 					_step(REVERSE);
 					_status->stepperStepsLeft.set(stepsLeft + 1);
 				  Serial.println("Reverse");
-				} // else if stepsLeft is zero do nothing.
-        
+				} else if ((_timeOfLastMovement - millis()) > TIME_UNTIL_SLEEP) { // else if stepsLeft is zero, sleep the stepper.
+//          goToSleep();
+				} else { Serial.println("not time for sleep");}
 				// Save time of this step
 				_timeOfLastStep = millis();
 
@@ -129,7 +140,8 @@ class StepperController{
 		Status *_status;
 		// Keeps track of the current step index of the motor
 		int _currentStep;
-		unsigned long _timeOfLastStep;
+		unsigned long _timeOfLastStep, _timeOfLastMovement;
+    bool sleeping;
 
 		/*
 		*	Steps the motor in the correct direction
@@ -180,6 +192,19 @@ class StepperController{
 
 			return true;
 		}
+
+   void wakeUp(){
+     sleeping = false;
+     digitalWrite(_nsleep, HIGH);
+   }
+
+   void goToSleep(){
+      if (!sleeping) {
+        sleeping = true;
+        Serial.println("Sleepy Time!");
+        digitalWrite(_nsleep, LOW);
+      }
+   }
 };
 
 #endif
