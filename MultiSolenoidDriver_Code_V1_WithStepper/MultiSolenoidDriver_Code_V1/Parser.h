@@ -64,7 +64,7 @@ class Parser{
 						break;
 
 					case SET_STEPPER_FORWARD: // Moves the stepper forward
-            Serial.println(data[i]);
+            //Serial.println(data[i]);
 //						_status->stepperStepsLeft.set(2);
            _status->stepperStepsLeft.set(_status->stepperStepsLeft.get() + data[i++]);
             break;
