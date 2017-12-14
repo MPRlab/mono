@@ -70,16 +70,17 @@ class StepperController{
 					
 					_step(FORWARD);
 					_status->stepperStepsLeft.set(stepsLeft - 1);
-         //Serial.print("Forward StepsLeft: "); Serial.print(stepsLeft); Serial.print(" current_step: "); Serial.println(_currentStep);
+         Serial.print("Forward StepsLeft: "); Serial.print(stepsLeft); Serial.print(" current_step: "); Serial.print(_currentStep);
+         Serial.print(" millis: "); Serial.println(millis());
 				} else if (stepsLeft < 0) {
           wakeUp();
 					_timeOfLastMovement = millis();
           
 					_step(REVERSE);
 					_status->stepperStepsLeft.set(stepsLeft + 1);
-				  //Serial.println("Reverse");
+				  Serial.println("Reverse");
 				} else if ((_timeOfLastMovement - millis()) > TIME_UNTIL_SLEEP) { // else if stepsLeft is zero, sleep the stepper.
-//          goToSleep();
+          goToSleep();
 				} else { /*Serial.println("not time for sleep");*/}
 				// Save time of this step
 				_timeOfLastStep = millis();
@@ -201,7 +202,7 @@ class StepperController{
    void goToSleep(){
       if (!sleeping) {
         sleeping = true;
-        //Serial.println("Sleepy Time!");
+        Serial.println("Sleepy Time!");
         digitalWrite(_nsleep, LOW);
       }
    }
