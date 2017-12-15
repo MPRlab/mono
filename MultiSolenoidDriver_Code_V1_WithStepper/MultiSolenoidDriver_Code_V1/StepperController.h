@@ -11,8 +11,8 @@
 
 #define FORWARD 1
 #define REVERSE -1
-// Number of milliseconds between two consecutive steps 
-#define TIME_BETWEEN_STEPS 1
+// Number of microseconds between two consecutive steps 
+#define TIME_BETWEEN_STEPS 1700
 // Number of ms to wait before sleeping stepper after motion
 #define TIME_UNTIL_SLEEP 2000
 
@@ -50,7 +50,7 @@ class StepperController{
 
 			// Saves the current step index of the motor
 			_currentStep = 0;
-			_timeOfLastStep = millis();
+			_timeOfLastStep = micros();
       _timeOfLastMovement = millis();
       sleeping = true;
 		}
@@ -61,15 +61,18 @@ class StepperController{
 		*	and if so, moves it.
 		*/
 		bool update(){
+      // need to check if micros counter has overflowed
+
+      
       // check greater than to prevent overflow
-			if (millis() >= _timeOfLastStep && (millis() - _timeOfLastStep) > TIME_BETWEEN_STEPS) {
+			if (micros() >= _timeOfLastStep && (micros() - _timeOfLastStep) > TIME_BETWEEN_STEPS) {
 				// If there are steps left steps the motor once
 				int stepsLeft = _status->stepperStepsLeft.get();
 
         if (stepsLeft != 0) {
           // wake up the stepper driver
           if (wakeUp()) {
-            _timeOfLastStep = millis() + 1; // can cause overflow when subtracing at top of loop
+            _timeOfLastStep = micros() + 1000; // can cause overflow when subtracing at top of loop
             return true;
           }
           _timeOfLastMovement = millis();
@@ -90,7 +93,7 @@ class StepperController{
 				}
        
 				// Save time of this step
-				_timeOfLastStep = millis();
+				_timeOfLastStep = micros();
 
 				return true;
 			}
