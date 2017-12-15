@@ -64,8 +64,9 @@ class Parser{
 						break;
 
 					case SET_STEPPER_FORWARD: // Moves the stepper forward
-            Serial.println(data[i]);
-//						_status->stepperStepsLeft.set(2);
+            // keep the number of steps we have left - just add to it.
+            //if(_status->stepperStepsLeft.get() != 0)
+              //Serial.println("Couldn't step fast enough");
            _status->stepperStepsLeft.set(_status->stepperStepsLeft.get() + data[i++]);
             break;
 
