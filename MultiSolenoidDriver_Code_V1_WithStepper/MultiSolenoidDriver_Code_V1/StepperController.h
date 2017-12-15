@@ -1,6 +1,7 @@
 /*
 *	Moves the stepper motor
 * 	By Paulo and Katie
+*   Modified by Chris Bove
 */
 
 #ifndef StepperController_H
@@ -60,18 +61,27 @@ class StepperController{
 		*	and if so, moves it.
 		*/
 		bool update(){
-			if ((millis() - _timeOfLastStep) > TIME_BETWEEN_STEPS) {
+      // check greater than to prevent overflow
+			if (millis() >= _timeOfLastStep && (millis() - _timeOfLastStep) > TIME_BETWEEN_STEPS) {
 				// If there are steps left steps the motor once
 				int stepsLeft = _status->stepperStepsLeft.get();
 
 				if (stepsLeft > 0) {
-          wakeUp();
+          // if waking up, we'll need to come back after 1ms to let drivers wake up
+          if(wakeUp()) {
+            _timeOfLastStep = millis() + 1; // can cause overflow when subtracing at top of loop
+            return true;
+          }
           _timeOfLastMovement = millis();
 					
 					_step(FORWARD);
 					_status->stepperStepsLeft.set(stepsLeft - 1);
 				} else if (stepsLeft < 0) {
-          wakeUp();
+          // if waking up, we'll need to come back after 1ms
+          if(wakeUp()) {
+            _timeOfLastStep = millis() + 1;
+            return true;
+          }
 					_timeOfLastMovement = millis();
           
 					_step(REVERSE);
@@ -191,9 +201,14 @@ class StepperController{
 			return true;
 		}
 
-   void wakeUp(){
-     sleeping = false;
-     digitalWrite(_nsleep, HIGH);
+   bool wakeUp(){
+     if(sleeping){
+       digitalWrite(_nsleep, HIGH);
+       sleeping = false;
+       // it takes 1ms for the driver to wake up. return this flag if we were sleeping
+       return true;
+     }
+     return false;
    }
 
    void goToSleep(){
