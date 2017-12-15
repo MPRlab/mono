@@ -11,9 +11,9 @@
 #define FORWARD 1
 #define REVERSE -1
 // Number of milliseconds between two consecutive steps 
-#define TIME_BETWEEN_STEPS 2
+#define TIME_BETWEEN_STEPS 1
 // Number of ms to wait before sleeping stepper after motion
-#define TIME_UNTIL_SLEEP 1000
+#define TIME_UNTIL_SLEEP 2000
 
 /*
 *	APPLICATION NOTE
@@ -60,7 +60,7 @@ class StepperController{
 		*	and if so, moves it.
 		*/
 		bool update(){
-			if ((_timeOfLastStep - millis()) > TIME_BETWEEN_STEPS) {
+			if ((millis() - _timeOfLastStep) > TIME_BETWEEN_STEPS) {
 				// If there are steps left steps the motor once
 				int stepsLeft = _status->stepperStepsLeft.get();
 
@@ -79,7 +79,7 @@ class StepperController{
 					_step(REVERSE);
 					_status->stepperStepsLeft.set(stepsLeft + 1);
 				  Serial.println("Reverse");
-				} else if ((_timeOfLastMovement - millis()) > TIME_UNTIL_SLEEP) { // else if stepsLeft is zero, sleep the stepper.
+				} else if ((millis() - _timeOfLastMovement) > TIME_UNTIL_SLEEP) { // else if stepsLeft is zero, sleep the stepper.
           goToSleep();
 				} else { /*Serial.println("not time for sleep");*/}
 				// Save time of this step
