@@ -66,29 +66,29 @@ class StepperController{
 				// If there are steps left steps the motor once
 				int stepsLeft = _status->stepperStepsLeft.get();
 
-				if (stepsLeft > 0) {
-          // if waking up, we'll need to come back after 1ms to let drivers wake up
-          if(wakeUp()) {
+        if (stepsLeft != 0) {
+          // wake up the stepper driver
+          if (wakeUp()) {
             _timeOfLastStep = millis() + 1; // can cause overflow when subtracing at top of loop
             return true;
           }
           _timeOfLastMovement = millis();
-					
-					_step(FORWARD);
-					_status->stepperStepsLeft.set(stepsLeft - 1);
-				} else if (stepsLeft < 0) {
-          // if waking up, we'll need to come back after 1ms
-          if(wakeUp()) {
-            _timeOfLastStep = millis() + 1;
-            return true;
+
+          // depending on the direction...
+          if (stepsLeft > 0) {
+            _step(FORWARD);
+            _status->stepperStepsLeft.set(stepsLeft - 1);
           }
-					_timeOfLastMovement = millis();
-          
-					_step(REVERSE);
-					_status->stepperStepsLeft.set(stepsLeft + 1);
-				} else if ((millis() - _timeOfLastMovement) > TIME_UNTIL_SLEEP) { // else if stepsLeft is zero, sleep the stepper.
+          else if (stepsLeft < 0) {
+            _step(REVERSE);
+            _status->stepperStepsLeft.set(stepsLeft + 1);
+          }
+        }
+        else if ((millis() - _timeOfLastMovement) > TIME_UNTIL_SLEEP) {
+          // else if stepsLeft is zero and time has passed, sleep the stepper.
           goToSleep();
 				}
+       
 				// Save time of this step
 				_timeOfLastStep = millis();
 
