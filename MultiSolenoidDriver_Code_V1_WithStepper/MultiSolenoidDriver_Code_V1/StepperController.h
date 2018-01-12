@@ -1,6 +1,10 @@
 /*
 *	Moves the stepper motor
 * 	By Paulo and Katie
+<<<<<<< HEAD
+=======
+*   Modified by Chris Bove
+>>>>>>> origin/master
 */
 
 #ifndef StepperController_H
@@ -10,8 +14,15 @@
 
 #define FORWARD 1
 #define REVERSE -1
+<<<<<<< HEAD
 // Number of milliseconds between two consecutive steps 
 #define TIME_BETWEEN_STEPS 5
+=======
+// Number of microseconds between two consecutive steps 
+#define TIME_BETWEEN_STEPS 1700
+// Number of ms to wait before sleeping stepper after motion
+#define TIME_UNTIL_SLEEP 2000
+>>>>>>> origin/master
 
 /*
 *	APPLICATION NOTE
@@ -47,7 +58,13 @@ class StepperController{
 
 			// Saves the current step index of the motor
 			_currentStep = 0;
+<<<<<<< HEAD
 			_timeOfLastStep = millis();
+=======
+			_timeOfLastStep = micros();
+      _timeOfLastMovement = millis();
+      sleeping = true;
+>>>>>>> origin/master
 		}
 
 		/*
@@ -56,6 +73,7 @@ class StepperController{
 		*	and if so, moves it.
 		*/
 		bool update(){
+<<<<<<< HEAD
 			if ((_timeOfLastStep - millis()) > TIME_BETWEEN_STEPS) {
 				// If there are steps left steps the motor once
 				int stepsLeft = _status->stepperStepsLeft.get();
@@ -70,6 +88,41 @@ class StepperController{
 				
 				// Save time of this step
 				_timeOfLastStep = millis();
+=======
+      // need to check if micros counter has overflowed
+
+      
+      // check greater than to prevent overflow
+			if (micros() >= _timeOfLastStep && (micros() - _timeOfLastStep) > TIME_BETWEEN_STEPS) {
+				// If there are steps left steps the motor once
+				int stepsLeft = _status->stepperStepsLeft.get();
+
+        if (stepsLeft != 0) {
+          // wake up the stepper driver
+          if (wakeUp()) {
+            _timeOfLastStep = micros() + 1000; // can cause overflow when subtracing at top of loop
+            return true;
+          }
+          _timeOfLastMovement = millis();
+
+          // depending on the direction...
+          if (stepsLeft > 0) {
+            _step(FORWARD);
+            _status->stepperStepsLeft.set(stepsLeft - 1);
+          }
+          else if (stepsLeft < 0) {
+            _step(REVERSE);
+            _status->stepperStepsLeft.set(stepsLeft + 1);
+          }
+        }
+        else if ((millis() - _timeOfLastMovement) > TIME_UNTIL_SLEEP) {
+          // else if stepsLeft is zero and time has passed, sleep the stepper.
+          goToSleep();
+				}
+       
+				// Save time of this step
+				_timeOfLastStep = micros();
+>>>>>>> origin/master
 
 				return true;
 			}
@@ -127,7 +180,12 @@ class StepperController{
 		Status *_status;
 		// Keeps track of the current step index of the motor
 		int _currentStep;
+<<<<<<< HEAD
 		unsigned long _timeOfLastStep;
+=======
+		unsigned long _timeOfLastStep, _timeOfLastMovement;
+    bool sleeping;
+>>>>>>> origin/master
 
 		/*
 		*	Steps the motor in the correct direction
@@ -178,6 +236,26 @@ class StepperController{
 
 			return true;
 		}
+<<<<<<< HEAD
+=======
+
+   bool wakeUp(){
+     if(sleeping){
+       digitalWrite(_nsleep, HIGH);
+       sleeping = false;
+       // it takes 1ms for the driver to wake up. return this flag if we were sleeping
+       return true;
+     }
+     return false;
+   }
+
+   void goToSleep(){
+      if (!sleeping) {
+        sleeping = true;
+        digitalWrite(_nsleep, LOW);
+      }
+   }
+>>>>>>> origin/master
 };
 
 #endif

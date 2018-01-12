@@ -9,7 +9,11 @@
 			"modernui" : 1
 		}
 ,
+<<<<<<< HEAD
 		"rect" : [ 140.0, 149.0, 213.0, 244.0 ],
+=======
+		"rect" : [ 875.0, 264.0, 213.0, 244.0 ],
+>>>>>>> origin/master
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,6 +42,24 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+<<<<<<< HEAD
+=======
+					"comment" : "",
+					"id" : "obj-2",
+					"index" : 3,
+					"maxclass" : "inlet",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 163.0, 17.0, 30.0, 30.0 ],
+					"presentation_rect" : [ 163.0, 17.0, 0.0, 0.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+>>>>>>> origin/master
 					"id" : "obj-18",
 					"maxclass" : "number",
 					"numinlets" : 1,
@@ -189,6 +211,16 @@
 			}
 , 			{
 				"patchline" : 				{
+<<<<<<< HEAD
+=======
+					"destination" : [ "obj-14", 1 ],
+					"source" : [ "obj-2", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+>>>>>>> origin/master
 					"destination" : [ "obj-8", 0 ],
 					"source" : [ "obj-5", 0 ]
 				}
