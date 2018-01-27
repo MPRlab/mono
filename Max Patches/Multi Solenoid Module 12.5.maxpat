@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 69.0, 90.0, 1126.0, 526.0 ],
+		"rect" : [ 69.0, 90.0, 1544.0, 780.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -865,7 +865,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 429.0, 403.607147, 61.0, 22.0 ],
 					"style" : "",
-					"text" : "3 77 0"
+					"text" : "3 4 0"
 				}
 
 			}
@@ -2421,7 +2421,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 261.5, 423.0, 134.0, 22.0 ],
 									"style" : "",
-									"text" : "253 1 4 16 0 0 0 239"
+									"text" : "253 1 4 18 0 0 0 237"
 								}
 
 							}
@@ -2579,7 +2579,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 55.0, 507.0, 137.0, 22.0 ],
 									"style" : "",
-									"text" : "FD 1 4 10 0 0 0 EF"
+									"text" : "FD 1 4 12 0 0 0 ED"
 								}
 
 							}
@@ -9508,7 +9508,6 @@
 													"numoutlets" : 3,
 													"outlettype" : [ "int", "int", "int" ],
 													"patching_rect" : [ 100.0, 100.0, 40.0, 22.0 ],
-													"presentation_rect" : [ 174.0, 54.0, 0.0, 0.0 ],
 													"style" : "",
 													"text" : "t i i i"
 												}
@@ -13583,7 +13582,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-26",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A104JSQI" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-AL00FQDR", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -13601,7 +13600,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-3",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A104JSQI" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-AL00FQDR", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -14918,7 +14917,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-15",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A104JSQI" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-AL00FQDR", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -15600,13 +15599,6 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "Glocky_remap",
-				"bootpath" : "~/Google Drive/Music/Music Technology/Patches",
-				"patcherrelativepath" : "../../../Google Drive/Music/Music Technology/Patches",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "noteOn_noteOff.maxpat",
 				"bootpath" : "~/Documents/MPR-lab/Max Patches",
 				"patcherrelativepath" : ".",
