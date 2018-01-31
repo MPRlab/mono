@@ -68,16 +68,22 @@ class Parser{
             //if(_status->stepperStepsLeft.get() != 0)
               //Serial.println("Couldn't step fast enough");
            _status->stepperStepsLeft.set(_status->stepperStepsLeft.get() + data[i++]);
+           // increment the counter to clear the buffer since this message has 3 bytes
+           i++;
+           i++;
             break;
 
 					case SET_STEPPER_REVERSE: // Moves the stepper reverse
 						_status->stepperStepsLeft.set(-data[i++]);
+            i++;
+            i++;
 						break;
 
 					/* 
 					*	In case the header is not found
 					*/
 					default: // Header has failed Message Break
+            Serial.println("Header has failed message break");
 						_status->commNumHeaderFail.increment(_id);
 						return false;
 					
