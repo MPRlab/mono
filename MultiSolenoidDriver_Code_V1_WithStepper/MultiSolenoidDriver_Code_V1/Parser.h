@@ -83,7 +83,7 @@ class Parser{
 					*	In case the header is not found
 					*/
 					default: // Header has failed Message Break
-            Serial.println("Header has failed message break");
+            //Serial.println("Header has failed message break");
 						_status->commNumHeaderFail.increment(_id);
 						return false;
 					
