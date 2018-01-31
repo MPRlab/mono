@@ -1,10 +1,7 @@
 /*
 *	Moves the stepper motor
 * 	By Paulo and Katie
-<<<<<<< HEAD
-=======
 *   Modified by Chris Bove
->>>>>>> origin/master
 */
 
 #ifndef StepperController_H
@@ -14,15 +11,10 @@
 
 #define FORWARD 1
 #define REVERSE -1
-<<<<<<< HEAD
-// Number of milliseconds between two consecutive steps 
-#define TIME_BETWEEN_STEPS 5
-=======
 // Number of microseconds between two consecutive steps 
 #define TIME_BETWEEN_STEPS 1700
 // Number of ms to wait before sleeping stepper after motion
 #define TIME_UNTIL_SLEEP 2000
->>>>>>> origin/master
 
 /*
 *	APPLICATION NOTE
@@ -58,13 +50,9 @@ class StepperController{
 
 			// Saves the current step index of the motor
 			_currentStep = 0;
-<<<<<<< HEAD
-			_timeOfLastStep = millis();
-=======
 			_timeOfLastStep = micros();
       _timeOfLastMovement = millis();
       sleeping = true;
->>>>>>> origin/master
 		}
 
 		/*
@@ -73,22 +61,6 @@ class StepperController{
 		*	and if so, moves it.
 		*/
 		bool update(){
-<<<<<<< HEAD
-			if ((_timeOfLastStep - millis()) > TIME_BETWEEN_STEPS) {
-				// If there are steps left steps the motor once
-				int stepsLeft = _status->stepperStepsLeft.get();
-
-				if (stepsLeft > 0) {
-					_step(FORWARD);
-					_status->stepperStepsLeft.set(stepsLeft - 1);
-				} else if (stepsLeft < 0) {
-					_step(REVERSE);
-					_status->stepperStepsLeft.set(stepsLeft + 1);
-				} // else if stepsLeft is zero do nothing.
-				
-				// Save time of this step
-				_timeOfLastStep = millis();
-=======
       // need to check if micros counter has overflowed
 
       
@@ -122,7 +94,6 @@ class StepperController{
        
 				// Save time of this step
 				_timeOfLastStep = micros();
->>>>>>> origin/master
 
 				return true;
 			}
@@ -180,12 +151,8 @@ class StepperController{
 		Status *_status;
 		// Keeps track of the current step index of the motor
 		int _currentStep;
-<<<<<<< HEAD
-		unsigned long _timeOfLastStep;
-=======
 		unsigned long _timeOfLastStep, _timeOfLastMovement;
     bool sleeping;
->>>>>>> origin/master
 
 		/*
 		*	Steps the motor in the correct direction
@@ -236,8 +203,6 @@ class StepperController{
 
 			return true;
 		}
-<<<<<<< HEAD
-=======
 
    bool wakeUp(){
      if(sleeping){
@@ -255,7 +220,6 @@ class StepperController{
         digitalWrite(_nsleep, LOW);
       }
    }
->>>>>>> origin/master
 };
 
 #endif
