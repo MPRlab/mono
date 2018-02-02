@@ -57,10 +57,12 @@ class Parser{
 
 					case SET_POWER_SOLENOID_ON: // Turns ON DRVS Sol
 						_status->powerSolenoid.set(true);
+            i++; i++; i++; // increment to fix getting 3 bytes for this message
 						break;
 
 					case SET_POWER_SOLENOID_OFF: // Turns OFF DRVS Sol
 						_status->powerSolenoid.set(false);
+            i++; i++; i++; // increment to fix getting 3 bytes for this message
 						break;
 
 					case SET_STEPPER_FORWARD: // Moves the stepper forward
@@ -83,7 +85,6 @@ class Parser{
 					*	In case the header is not found
 					*/
 					default: // Header has failed Message Break
-            //Serial.println("Header has failed message break");
 						_status->commNumHeaderFail.increment(_id);
 						return false;
 					
