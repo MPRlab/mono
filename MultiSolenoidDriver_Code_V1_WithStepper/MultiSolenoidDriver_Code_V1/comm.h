@@ -146,8 +146,8 @@ class Comm{
 					// Only return true if message is intended to this board
 					if (_idIsValid){
 						// FOR DEBUGGING! REMOVE!!
-						pinMode(42, OUTPUT);
-						digitalWrite(42, HIGH);
+						//pinMode(42, OUTPUT);
+						//digitalWrite(42, HIGH);
 						return true;
 					} else {
 						return false;
