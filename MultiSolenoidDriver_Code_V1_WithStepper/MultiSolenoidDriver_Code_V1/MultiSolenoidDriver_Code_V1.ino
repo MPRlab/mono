@@ -46,6 +46,11 @@ void setup(){
 	Serial.begin(115200); // FTDI Port
 
 	/* Set Up all Solenoid Drivers */
+  // set solenoid PWM timer frequencies to 31.374 KHz
+  // http://sobisource.com/arduino-mega-pwm-pin-and-frequency-timer-control/
+  TCCR1B = (TCCR1B & 0xF8) | 0x01 ; // set last 3 bits to 0 and or with 1
+  TCCR2B = (TCCR2B & 0xF8) | 0x01 ;
+  TCCR4B = (TCCR4B & 0xF8) | 0x01 ;
 	driver1.begin();
 	driver2.begin();
 	driver3.begin();
