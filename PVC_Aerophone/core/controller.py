@@ -17,7 +17,7 @@ from core import writers, outputs, shared
 if __name__ == "__main__":
     print("Loading the music...", end="", flush=True)
     buffer = shared.PlaybackBuffer()
-    output = outputs.DebugOutput()
+    output = outputs.DriverBoardOutput()
 
     # Initialize and start writers
     writers = [
