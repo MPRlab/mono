@@ -10,12 +10,13 @@ Changelog:
 1.0 Initial commit
 """
 
-from threading import Thread
-from mido import MidiFile
+import threading
+import mido
 from core import shared
+from time import sleep as wait
 
 # Read in from file and populate the playback buffer
-class MidiFileWriter(Thread):
+class MidiFileWriter(threading.Thread):
     def __init__(self, filename):
         super(MidiFileWriter, self).__init__()
 
@@ -25,7 +26,7 @@ class MidiFileWriter(Thread):
         # Grab the notes to be added
         self._notes = filter(
             lambda n : n.type == "note_on",
-            list(MidiFile(
+            list(mido.MidiFile(
                 path.midi(filename)
             ))
         )
@@ -45,16 +46,29 @@ class MidiFileWriter(Thread):
             self._buffer.put(note_on)
 
 # Generate improvisational tracks and populate the playback buffer
-class ImprovWriter(Thread):
-    def __init__(self, generator):
+class ImprovWriter(threading.Thread):
+    def __init__(self, usec_per_beat, generator):
+        """
+        Constructor
+
+        :param usec_per_beat:   The tempo of the piece, used to ensure improv is in time
+        :param generator:       The generator to use to create the improvised music
+        """
         super(ImprovWriter, self).__init__()
-        self.generator = generator
+        self._stop_event = threading.Event()
+
+        self._usec_per_beat = usec_per_beat
+        self._generator = generator
 
         # Grab the singleton instance of the playback buffer
         self._buffer = shared.PlaybackBuffer()
 
     def run(self):
         now = 0
-        for note in self.generator.generate():
-            now += note.time; note.time = now
-            self._buffer.put(note)
+        while not self._stop_event.is_set():
+            for note in self._generator.generate():
+                now += (self._usec_per_beat / 1000) * note.time; note.time = now
+                self._buffer.put(note)
+
+    def end(self):
+        self._stop_event.set()

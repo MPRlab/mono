@@ -44,6 +44,7 @@ class PlaybackBuffer(HiveMind):
 
     def next(self):
         with self._lock:
+            # Better hope the list is nearly sorted, which it should be
             self._buffer.sort(key=lambda msg: msg.time)
 
             # Grab all notes to be played next - these will all have the same time
@@ -88,3 +89,12 @@ class CompositionMetaData:
             if meta.type == "time_signature": self._time_signature = (meta.numerator, meta.denominator)
             if meta.type == "key_signature": self._key_descriptor = key_descriptors[meta.key]
             if meta.type == "set_tempo": self._usec_per_beat = meta.tempo
+
+    def get_time_sig(self):
+        return self._time_signature
+
+    def get_key_sig(self):
+        return self._key_descriptor
+
+    def get_tempo(self):
+        return self._usec_per_beat()

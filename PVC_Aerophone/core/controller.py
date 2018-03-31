@@ -12,16 +12,23 @@ Changelog:
 
 from time import sleep as wait
 from core import writers, outputs, shared
+from dev.improv import generators
+import signal
 
 # Main
 if __name__ == "__main__":
     print("Loading the music...", end="", flush=True)
     buffer = shared.PlaybackBuffer()
-    output = outputs.DriverBoardOutput()
+    output = outputs.DebugOutput()
+
+    # Intercept the interrupt signal and clean up the GPIO directory
+    signal.signal(signal.SIGINT, lambda *args: output.close())
 
     # Initialize and start writers
     writers = [
-        writers.MidiFileWriter("speak-now.mid")
+        #writers.MidiFileWriter("speak-now.mid")
+        writers.ImprovWriter(500, generators.EuclideanRhythmGenerator(60, 5, 13)),
+        writers.ImprovWriter(500, generators.EuclideanRhythmGenerator(72, 3, 8))
     ]
     for writer in writers: writer.start()
 
@@ -31,7 +38,7 @@ if __name__ == "__main__":
 
     now = 0
     while buffer.size() != 0:
-        # Pop the next set of notes to be played
+        # Pop the generate set of notes to be played
         notes = buffer.next()
 
         # Update the global timer
