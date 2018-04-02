@@ -966,7 +966,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 429.0, 403.607147, 61.0, 22.0 ],
 					"style" : "",
-					"text" : "3 8 0"
+					"text" : "2 90 0"
 				}
 
 			}
@@ -7216,7 +7216,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 261.5, 423.0, 134.0, 22.0 ],
 									"style" : "",
-									"text" : "253 3 4 16 0 0 0 239"
+									"text" : "253 3 4 18 0 0 0 237"
 								}
 
 							}
@@ -7374,7 +7374,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 55.0, 507.0, 137.0, 22.0 ],
 									"style" : "",
-									"text" : "FD 3 4 10 0 0 0 EF"
+									"text" : "FD 3 4 12 0 0 0 ED"
 								}
 
 							}
@@ -9155,7 +9155,7 @@
 							"modernui" : 1
 						}
 ,
-						"rect" : [ 378.0, 115.0, 1302.0, 629.0 ],
+						"rect" : [ 34.0, 79.0, 1212.0, 641.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -9393,6 +9393,19 @@
 										"subpatcher_template" : "",
 										"boxes" : [ 											{
 												"box" : 												{
+													"id" : "obj-2",
+													"maxclass" : "newobj",
+													"numinlets" : 2,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 187.0, 230.0, 34.0, 22.0 ],
+													"style" : "",
+													"text" : "gate"
+												}
+
+											}
+, 											{
+												"box" : 												{
 													"id" : "obj-49",
 													"maxclass" : "comment",
 													"numinlets" : 1,
@@ -9575,7 +9588,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 185.0, 169.0, 29.5, 22.0 ],
+													"patching_rect" : [ 202.0, 174.5, 29.5, 22.0 ],
 													"style" : "",
 													"text" : "50"
 												}
@@ -9587,7 +9600,7 @@
 													"maxclass" : "newobj",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 185.0, 280.0, 73.0, 22.0 ],
+													"patching_rect" : [ 187.0, 270.0, 73.0, 22.0 ],
 													"style" : "",
 													"text" : "s PAM_pick"
 												}
@@ -9753,6 +9766,13 @@
 											}
 , 											{
 												"patchline" : 												{
+													"destination" : [ "obj-1", 0 ],
+													"source" : [ "obj-2", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
 													"destination" : [ "obj-12", 0 ],
 													"source" : [ "obj-20", 0 ]
 												}
@@ -9781,7 +9801,7 @@
 											}
 , 											{
 												"patchline" : 												{
-													"destination" : [ "obj-1", 0 ],
+													"destination" : [ "obj-2", 1 ],
 													"source" : [ "obj-4", 0 ]
 												}
 
@@ -9832,6 +9852,14 @@
 											}
 , 											{
 												"patchline" : 												{
+													"destination" : [ "obj-2", 0 ],
+													"order" : 2,
+													"source" : [ "obj-60", 1 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
 													"destination" : [ "obj-40", 0 ],
 													"source" : [ "obj-60", 0 ]
 												}
@@ -9840,7 +9868,7 @@
 , 											{
 												"patchline" : 												{
 													"destination" : [ "obj-9", 1 ],
-													"order" : 2,
+													"order" : 3,
 													"source" : [ "obj-60", 1 ]
 												}
 
@@ -10599,7 +10627,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 261.5, 423.0, 134.0, 22.0 ],
 									"style" : "",
-									"text" : "253 2 4 16 0 0 0 239"
+									"text" : "253 2 4 33 50 0 0 172"
 								}
 
 							}
@@ -10757,7 +10785,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 55.0, 531.0, 137.0, 22.0 ],
 									"style" : "",
-									"text" : "FD 2 4 10 0 0 0 EF"
+									"text" : "FD 2 4 21 32 0 0 AC"
 								}
 
 							}
@@ -12218,7 +12246,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-26",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -12236,7 +12264,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-3",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -13351,7 +13379,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-15",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -14040,6 +14068,13 @@
 			}
  ],
 		"dependency_cache" : [ 			{
+				"name" : "Glocky_remap",
+				"bootpath" : "~/Google Drive/Music/Music Technology/Patches",
+				"patcherrelativepath" : "../../../Google Drive/Music/Music Technology/Patches",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "noteOn_noteOff.maxpat",
 				"bootpath" : "~/Documents/MPR-lab/Max Patches",
 				"patcherrelativepath" : ".",
