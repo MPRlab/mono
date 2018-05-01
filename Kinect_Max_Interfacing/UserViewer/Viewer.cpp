@@ -19,7 +19,7 @@
         #include <GL/glut.h>
 #endif
 
-#include <NiteSampleUtilities.h>
+#include "NiteSampleUtilities.h"
 
 #define GL_WIN_SIZE_X	1280
 #define GL_WIN_SIZE_Y	1024
