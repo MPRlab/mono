@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 391.0, 186.0, 1096.0, 525.0 ],
+		"rect" : [ 161.0, 167.0, 1103.0, 521.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -889,7 +889,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 429.0, 403.607147, 61.0, 22.0 ],
 					"style" : "",
-					"text" : "3 79 0"
+					"text" : "2 8 0"
 				}
 
 			}
@@ -4763,8 +4763,8 @@
 , 											{
 												"name" : "newobjYellow-1",
 												"default" : 												{
-													"fontsize" : [ 12.059008 ],
-													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+													"fontsize" : [ 12.059008 ]
 												}
 ,
 												"parentstyle" : "",
@@ -5387,8 +5387,8 @@
 , 											{
 												"name" : "newobjYellow-1",
 												"default" : 												{
-													"fontsize" : [ 12.059008 ],
-													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+													"fontsize" : [ 12.059008 ]
 												}
 ,
 												"parentstyle" : "",
@@ -8891,8 +8891,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -9001,7 +9001,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "int" ],
-									"patching_rect" : [ 55.0, 30.0, 47.0, 22.0 ],
+									"patching_rect" : [ 55.0, 24.0, 47.0, 22.0 ],
 									"style" : "",
 									"text" : "t 16 l 0"
 								}
@@ -9209,7 +9209,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 2,
 													"outlettype" : [ "", "" ],
-													"patching_rect" : [ 321.0, 198.5, 72.0, 22.0 ],
+													"patching_rect" : [ 321.0, 205.0, 72.0, 22.0 ],
 													"style" : "",
 													"text" : "substitute 0"
 												}
@@ -9296,7 +9296,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 374.0, 230.0, 29.5, 22.0 ],
+													"patching_rect" : [ 374.0, 236.0, 29.5, 22.0 ],
 													"style" : "",
 													"text" : "50"
 												}
@@ -9725,8 +9725,8 @@
 , 											{
 												"name" : "newobjYellow-1",
 												"default" : 												{
-													"fontsize" : [ 12.059008 ],
-													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+													"fontsize" : [ 12.059008 ]
 												}
 ,
 												"parentstyle" : "",
@@ -11009,7 +11009,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-170", 0 ],
-									"midpoints" : [ 842.0, 591.0, 417.0, 591.0, 417.0, 15.0, 64.5, 15.0 ],
+									"midpoints" : [ 842.0, 598.0, 417.0, 598.0, 417.0, 15.0, 64.5, 15.0 ],
 									"source" : [ "obj-167", 0 ]
 								}
 
@@ -11041,7 +11041,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-61", 0 ],
-									"midpoints" : [ 92.5, 54.0, 159.0, 54.0, 159.0, 150.0, 172.0, 150.0 ],
+									"midpoints" : [ 92.5, 57.0, 159.0, 57.0, 159.0, 150.0, 172.0, 150.0 ],
 									"order" : 1,
 									"source" : [ "obj-170", 2 ]
 								}
@@ -11050,7 +11050,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-63", 0 ],
-									"midpoints" : [ 92.5, 60.0, 54.0, 60.0, 54.0, 117.0, 105.0, 117.0, 105.0, 150.0, 115.5, 150.0 ],
+									"midpoints" : [ 92.5, 57.0, 54.0, 57.0, 54.0, 117.0, 105.0, 117.0, 105.0, 150.0, 115.5, 150.0 ],
 									"order" : 2,
 									"source" : [ "obj-170", 2 ]
 								}
@@ -11067,7 +11067,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-68", 0 ],
-									"midpoints" : [ 92.5, 54.0, 174.0, 54.0, 174.0, 117.0, 213.0, 117.0, 213.0, 150.0, 228.0, 150.0 ],
+									"midpoints" : [ 92.5, 58.0, 174.0, 58.0, 174.0, 117.0, 213.0, 117.0, 213.0, 150.0, 228.0, 150.0 ],
 									"order" : 0,
 									"source" : [ "obj-170", 2 ]
 								}
@@ -11109,7 +11109,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-63", 0 ],
-									"midpoints" : [ 226.5, 117.0, 105.0, 117.0, 105.0, 150.0, 115.5, 150.0 ],
+									"midpoints" : [ 226.5, 111.0, 105.0, 111.0, 105.0, 150.0, 115.5, 150.0 ],
 									"order" : 2,
 									"source" : [ "obj-172", 2 ]
 								}
@@ -11118,7 +11118,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-63", 0 ],
-									"midpoints" : [ 212.5, 117.0, 105.0, 117.0, 105.0, 150.0, 115.5, 150.0 ],
+									"midpoints" : [ 212.5, 112.0, 105.0, 112.0, 105.0, 150.0, 115.5, 150.0 ],
 									"source" : [ "obj-172", 1 ]
 								}
 
@@ -11134,7 +11134,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-68", 0 ],
-									"midpoints" : [ 226.5, 117.0, 213.0, 117.0, 213.0, 150.0, 228.0, 150.0 ],
+									"midpoints" : [ 226.5, 112.0, 213.0, 112.0, 213.0, 150.0, 228.0, 150.0 ],
 									"order" : 0,
 									"source" : [ "obj-172", 2 ]
 								}
@@ -11813,8 +11813,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -12032,7 +12032,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-26",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -12050,7 +12050,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-3",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -13006,8 +13006,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -13109,7 +13109,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 598.0, 227.25, 75.0, 22.0 ],
+					"patching_rect" : [ 598.0, 243.25, 75.0, 22.0 ],
 					"style" : "",
 					"text" : "s PAM_note"
 				}
@@ -13166,7 +13166,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-15",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -13408,7 +13408,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-31", 1 ],
-					"midpoints" : [ 591.5, 675.0, 623.0, 675.0 ],
+					"midpoints" : [ 591.5, 627.0, 623.0, 627.0 ],
 					"order" : 1,
 					"source" : [ "obj-14", 0 ]
 				}
@@ -13505,7 +13505,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-31", 0 ],
-					"midpoints" : [ 657.0, 636.0, 591.5, 636.0 ],
+					"midpoints" : [ 657.0, 647.0, 591.5, 647.0 ],
 					"source" : [ "obj-17", 0 ]
 				}
 
@@ -13577,7 +13577,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
-					"midpoints" : [ 591.5, 726.0, 411.0, 726.0, 411.0, 264.0, 423.5, 264.0 ],
+					"midpoints" : [ 591.5, 721.0, 411.0, 721.0, 411.0, 264.0, 423.5, 264.0 ],
 					"source" : [ "obj-31", 0 ]
 				}
 
@@ -13585,7 +13585,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-112", 0 ],
-					"midpoints" : [ 602.0, 708.0, 567.0, 708.0, 567.0, 231.0, 594.0, 231.0, 594.0, 222.0, 607.5, 222.0 ],
+					"midpoints" : [ 602.0, 716.0, 567.0, 716.0, 567.0, 227.0, 594.0, 227.0, 594.0, 237.0, 607.5, 237.0 ],
 					"source" : [ "obj-31", 1 ]
 				}
 
@@ -13856,7 +13856,7 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "noteOn_noteOff.maxpat",
-				"bootpath" : "~/Documents/MPR-lab/Max Patches",
+				"bootpath" : "~/Documents/GitHub/MPR-lab/Max Patches",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
@@ -13892,8 +13892,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
