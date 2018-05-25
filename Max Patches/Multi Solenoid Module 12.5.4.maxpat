@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 161.0, 167.0, 1103.0, 521.0 ],
+		"rect" : [ 100.0, 168.0, 1488.0, 828.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -889,7 +889,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 429.0, 403.607147, 61.0, 22.0 ],
 					"style" : "",
-					"text" : "2 8 0"
+					"text" : "2 87 0"
 				}
 
 			}
@@ -4763,8 +4763,8 @@
 , 											{
 												"name" : "newobjYellow-1",
 												"default" : 												{
-													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-													"fontsize" : [ 12.059008 ]
+													"fontsize" : [ 12.059008 ],
+													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 												}
 ,
 												"parentstyle" : "",
@@ -5387,8 +5387,8 @@
 , 											{
 												"name" : "newobjYellow-1",
 												"default" : 												{
-													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-													"fontsize" : [ 12.059008 ]
+													"fontsize" : [ 12.059008 ],
+													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 												}
 ,
 												"parentstyle" : "",
@@ -8891,8 +8891,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-									"fontsize" : [ 12.059008 ]
+									"fontsize" : [ 12.059008 ],
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -8970,6 +8970,54 @@
 						"subpatcher_template" : "",
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-3",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 414.5, 464.0, 134.0, 22.0 ],
+									"presentation_rect" : [ 399.5, 457.0, 0.0, 0.0 ],
+									"style" : "",
+									"text" : "253 2 4 16 0 2 0 237"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-2",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 265.5, 502.0, 127.0, 22.0 ],
+									"presentation_rect" : [ 265.5, 503.0, 0.0, 0.0 ],
+									"style" : "",
+									"text" : "253 2 4 16 16 0 0 223"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-1",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 261.5, 464.0, 134.0, 22.0 ],
+									"presentation_rect" : [ 263.5, 464.0, 0.0, 0.0 ],
+									"style" : "",
+									"text" : "253 2 4 16 0 0 0 239"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-172",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
@@ -8999,11 +9047,11 @@
 									"id" : "obj-170",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "int", "", "int" ],
-									"patching_rect" : [ 55.0, 24.0, 47.0, 22.0 ],
+									"numoutlets" : 2,
+									"outlettype" : [ "int", "" ],
+									"patching_rect" : [ 55.0, 24.0, 37.0, 22.0 ],
 									"style" : "",
-									"text" : "t 16 l 0"
+									"text" : "t 16 l"
 								}
 
 							}
@@ -9725,8 +9773,8 @@
 , 											{
 												"name" : "newobjYellow-1",
 												"default" : 												{
-													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-													"fontsize" : [ 12.059008 ]
+													"fontsize" : [ 12.059008 ],
+													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 												}
 ,
 												"parentstyle" : "",
@@ -10778,6 +10826,13 @@
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
+									"destination" : [ "obj-146", 0 ],
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-56", 5 ],
 									"midpoints" : [ 182.5, 330.0, 157.357143, 330.0 ],
 									"source" : [ "obj-100", 1 ]
@@ -11017,7 +11072,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-170", 0 ],
-									"midpoints" : [ 1113.75, 599.0, 589.125, 599.0, 589.125, 19.0, 64.5, 19.0 ],
+									"midpoints" : [ 1113.75, 609.0, 589.125, 609.0, 589.125, 19.0, 64.5, 19.0 ],
 									"source" : [ "obj-168", 0 ]
 								}
 
@@ -11025,7 +11080,7 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-170", 0 ],
-									"midpoints" : [ 1370.75, 599.0, 717.625, 599.0, 717.625, 19.0, 64.5, 19.0 ],
+									"midpoints" : [ 1370.75, 615.0, 717.625, 615.0, 717.625, 19.0, 64.5, 19.0 ],
 									"source" : [ "obj-169", 0 ]
 								}
 
@@ -11033,43 +11088,16 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-171", 0 ],
-									"midpoints" : [ 78.5, 60.0, 77.5, 60.0 ],
+									"midpoints" : [ 82.5, 60.0, 77.5, 60.0 ],
 									"source" : [ "obj-170", 1 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-61", 0 ],
-									"midpoints" : [ 92.5, 57.0, 159.0, 57.0, 159.0, 150.0, 172.0, 150.0 ],
-									"order" : 1,
-									"source" : [ "obj-170", 2 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-63", 0 ],
-									"midpoints" : [ 92.5, 57.0, 54.0, 57.0, 54.0, 117.0, 105.0, 117.0, 105.0, 150.0, 115.5, 150.0 ],
-									"order" : 2,
-									"source" : [ "obj-170", 2 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-65", 0 ],
-									"midpoints" : [ 64.5, 117.0, 42.0, 117.0, 42.0, 150.0, 64.5, 150.0 ],
+									"midpoints" : [ 64.5, 99.5, 64.5, 99.5 ],
 									"source" : [ "obj-170", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-68", 0 ],
-									"midpoints" : [ 92.5, 58.0, 174.0, 58.0, 174.0, 117.0, 213.0, 117.0, 213.0, 150.0, 228.0, 150.0 ],
-									"order" : 0,
-									"source" : [ "obj-170", 2 ]
 								}
 
 							}
@@ -11172,6 +11200,20 @@
 									"destination" : [ "obj-325", 0 ],
 									"midpoints" : [ 842.0, 336.0, 842.0, 336.0 ],
 									"source" : [ "obj-199", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-146", 0 ],
+									"source" : [ "obj-2", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-146", 0 ],
+									"source" : [ "obj-3", 0 ]
 								}
 
 							}
@@ -11813,8 +11855,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-									"fontsize" : [ 12.059008 ]
+									"fontsize" : [ 12.059008 ],
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -12032,7 +12074,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-26",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -12050,7 +12092,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-3",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -13006,8 +13048,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-									"fontsize" : [ 12.059008 ]
+									"fontsize" : [ 12.059008 ],
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 								}
 ,
 								"parentstyle" : "",
@@ -13166,7 +13208,7 @@
 					"allowdrag" : 0,
 					"fontname" : "Big Caslon Medium",
 					"id" : "obj-15",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-AL00FQ7X", ",", "usbserial-A104JSQI" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-A6026P9D", ",", "usbserial-A104JSQI", ",", "usbserial-AL00FQ7X" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -13892,8 +13934,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
-					"fontsize" : [ 12.059008 ]
+					"fontsize" : [ 12.059008 ],
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
 				}
 ,
 				"parentstyle" : "",
