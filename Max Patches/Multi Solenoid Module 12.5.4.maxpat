@@ -889,7 +889,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 429.0, 403.607147, 61.0, 22.0 ],
 					"style" : "",
-					"text" : "3 2 3"
+					"text" : "3 91 1"
 				}
 
 			}
@@ -10379,7 +10379,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 261.5, 423.0, 134.0, 22.0 ],
 									"style" : "",
-									"text" : "253 2 4 33 50 0 0 172"
+									"text" : "253 2 4 16 0 0 0 239"
 								}
 
 							}
@@ -10508,7 +10508,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 55.0, 531.0, 137.0, 22.0 ],
 									"style" : "",
-									"text" : "FD 2 4 21 32 0 0 AC"
+									"text" : "FD 2 4 10 0 0 0 EF"
 								}
 
 							}
