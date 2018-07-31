@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 34.0, 79.0, 1212.0, 641.0 ],
+		"rect" : [ 289.0, 165.0, 1212.0, 641.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,13 +39,44 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Big Caslon Medium",
+					"id" : "obj-72",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1393.0, 69.0, 65.0, 21.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 1124.0, 197.0, 67.0, 21.0 ],
+					"style" : "",
+					"text" : "tube (36-59)"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Big Caslon Medium",
+					"id" : "obj-51",
+					"maxclass" : "number",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1340.0, 69.0, 44.0, 23.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 1068.0, 197.0, 44.0, 23.0 ],
+					"style" : ""
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Big Caslon Medium",
 					"id" : "obj-49",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1167.0, 209.0, 65.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1099.0, 214.0, 63.0, 21.0 ],
+					"presentation_rect" : [ 1099.0, 259.0, 63.0, 21.0 ],
 					"style" : "",
 					"text" : "IP address"
 				}
@@ -60,9 +91,9 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1282.75, 202.5, 125.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1068.0, 237.0, 125.0, 22.0 ],
+					"presentation_rect" : [ 1068.0, 282.0, 125.0, 22.0 ],
 					"style" : "",
-					"text" : "192.168.2.10"
+					"text" : "192.168.2.9"
 				}
 
 			}
@@ -90,7 +121,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1409.0, 140.0, 65.0, 21.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1124.0, 189.0, 45.0, 21.0 ],
+					"presentation_rect" : [ 1124.0, 234.0, 45.0, 21.0 ],
 					"style" : "",
 					"text" : "ontime"
 				}
@@ -108,7 +139,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1348.25, 140.0, 51.0, 23.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 1068.0, 188.0, 51.0, 23.0 ],
+					"presentation_rect" : [ 1068.0, 233.0, 44.0, 23.0 ],
 					"style" : ""
 				}
 
@@ -149,7 +180,7 @@
 				"box" : 				{
 					"id" : "obj-46",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1275.75, 171.0, 86.0, 22.0 ],
@@ -4885,8 +4916,8 @@
 , 											{
 												"name" : "newobjYellow-1",
 												"default" : 												{
-													"fontsize" : [ 12.059008 ],
-													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+													"fontsize" : [ 12.059008 ]
 												}
 ,
 												"parentstyle" : "",
@@ -5509,8 +5540,8 @@
 , 											{
 												"name" : "newobjYellow-1",
 												"default" : 												{
-													"fontsize" : [ 12.059008 ],
-													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+													"fontsize" : [ 12.059008 ]
 												}
 ,
 												"parentstyle" : "",
@@ -9013,8 +9044,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -9987,8 +10018,8 @@
 , 											{
 												"name" : "newobjYellow-1",
 												"default" : 												{
-													"fontsize" : [ 12.059008 ],
-													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+													"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+													"fontsize" : [ 12.059008 ]
 												}
 ,
 												"parentstyle" : "",
@@ -11894,8 +11925,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -13087,8 +13118,8 @@
 , 							{
 								"name" : "newobjYellow-1",
 								"default" : 								{
-									"fontsize" : [ 12.059008 ],
-									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+									"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+									"fontsize" : [ 12.059008 ]
 								}
 ,
 								"parentstyle" : "",
@@ -13808,6 +13839,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-46", 1 ],
+					"source" : [ "obj-51", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
 					"midpoints" : [ 423.5, 252.0, 423.5, 252.0 ],
 					"source" : [ "obj-52", 0 ]
@@ -13905,7 +13943,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-46", 1 ],
+					"destination" : [ "obj-46", 2 ],
 					"source" : [ "obj-69", 0 ]
 				}
 
@@ -13986,22 +14024,15 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "Glocky_remap",
-				"bootpath" : "~/Google Drive/Music/Music Technology/Patches",
-				"patcherrelativepath" : "../../../Google Drive/Music/Music Technology/Patches",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "noteOn_noteOff.maxpat",
-				"bootpath" : "~/Documents/MPR-lab/Max Patches",
+				"bootpath" : "~/Documents/GitHub/MPR-lab/Max Patches",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "OSC-Ethernet.maxpat",
-				"bootpath" : "~/Documents/MPR-lab/Max Patches",
+				"bootpath" : "~/Documents/GitHub/MPR-lab/Max Patches",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
@@ -14037,8 +14068,8 @@
 , 			{
 				"name" : "newobjYellow-1",
 				"default" : 				{
-					"fontsize" : [ 12.059008 ],
-					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ]
+					"accentcolor" : [ 0.82517, 0.78181, 0.059545, 1.0 ],
+					"fontsize" : [ 12.059008 ]
 				}
 ,
 				"parentstyle" : "",
