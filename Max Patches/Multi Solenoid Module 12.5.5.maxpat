@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 289.0, 165.0, 1212.0, 641.0 ],
+		"rect" : [ 289.0, 165.0, 1248.0, 623.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -93,7 +93,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 1068.0, 282.0, 125.0, 22.0 ],
 					"style" : "",
-					"text" : "192.168.2.9"
+					"text" : "192.168.2.10"
 				}
 
 			}
@@ -1042,7 +1042,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 429.0, 403.607147, 61.0, 22.0 ],
 					"style" : "",
-					"text" : "3 74 0"
+					"text" : "4 62 0"
 				}
 
 			}
@@ -10667,7 +10667,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 261.5, 423.0, 134.0, 22.0 ],
 									"style" : "",
-									"text" : "253 2 4 33 50 0 0 172"
+									"text" : "253 2 4 16 0 0 0 239"
 								}
 
 							}
@@ -10796,7 +10796,7 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 55.0, 531.0, 137.0, 22.0 ],
 									"style" : "",
-									"text" : "FD 2 4 21 32 0 0 AC"
+									"text" : "FD 2 4 10 0 0 0 EF"
 								}
 
 							}
@@ -12251,7 +12251,7 @@
 					"presentation_linecount" : 5,
 					"presentation_rect" : [ 26.0, 172.5, 106.0, 90.0 ],
 					"style" : "",
-					"text" : "MIDI channel\n1 Cyther\n2 PAM\n3 Percussion\n4 Glocky"
+					"text" : "MIDI channel\n1 Cyther\n2 PAM\n3 Percussion\n4 Aerophone"
 				}
 
 			}
@@ -13470,7 +13470,7 @@
 					"mode" : 1,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1050.25, 115.0, 181.0, 197.0 ],
+					"patching_rect" : [ 1089.875, 93.5, 181.0, 197.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 1055.0, 114.0, 163.0, 276.0 ],
 					"proportion" : 0.39,
